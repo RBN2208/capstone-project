@@ -1,18 +1,20 @@
 import { useState } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 export default function ServiceCard({ name, costs }) {
   const [isVisible, setIsVisible] = useState(false)
-
+  const handleClick = () => {
+    setIsVisible(!isVisible)
+  }
   return (
-    <CardContainer onClick={() => setIsVisible(!isVisible)}>
+    <CardContainer onClick={handleClick}>
       {name}
       {isVisible && <CardInfo>{costs}€</CardInfo>}
     </CardContainer>
   )
 }
 
-const CardContainer = styled.div`
+const CardContainer = styled.button`
   display: grid;
   gap: 10px;
   background-color: lightblue;

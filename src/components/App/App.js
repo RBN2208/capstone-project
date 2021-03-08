@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 import { serviceData as Data } from '../../serviceData.json'
 import ServiceCard from '../ServiceCard/ServiceCard'
