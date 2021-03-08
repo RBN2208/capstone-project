@@ -23,6 +23,14 @@
     {
       "name": "Reinigen komplett",
       "costs": 300
+    },
+    {
+      "name": "Lackschutz Ladekante",
+      "costs": 90
+    },
+    {
+      "name": "Demontage Türgriffe",
+      "costs": 45
     }
   ]
 }
