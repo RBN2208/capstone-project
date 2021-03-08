@@ -7,10 +7,9 @@ describe('ServiceCard', () => {
     render(<ServiceCard name="Servicecard" />)
     expect(screen.getByText('Servicecard')).toBeInTheDocument()
   })
-  it('Should toggle the visibility of the costs', () => {
+  it('toggles the visibility of the costs when clicked', () => {
     render(<ServiceCard name="Servicecard" costs={500} />)
-
-    fireEvent.click(screen.getByRole('button', { name: 'Servicecard' }))
+    fireEvent.click(screen.getByText('Servicecard'))
     expect(screen.getByText(500 + '€')).toBeVisible()
   })
 })
