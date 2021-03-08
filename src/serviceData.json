@@ -1,0 +1,28 @@
+{
+  "serviceData": [
+    {
+      "name": "Motorhaube folieren",
+      "costs": 90
+    },
+    {
+      "name": "Dach folieren",
+      "costs": 110
+    },
+    {
+      "name": "Stoßstange folieren",
+      "costs": 175
+    },
+    {
+      "name": "Lackschutz Einstiege",
+      "costs": 45
+    },
+    {
+      "name": "Spiegel folieren",
+      "costs": 140
+    },
+    {
+      "name": "Reinigen komplett",
+      "costs": 300
+    }
+  ]
+}
