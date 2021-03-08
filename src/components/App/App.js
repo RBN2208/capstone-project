@@ -1,21 +1,20 @@
-import { useState } from 'react'
-import styled from 'styled-components'
-import { serviceData as Data } from '../../serviceData.json'
+import styled from 'styled-components/macro'
+import { serviceData } from '../../serviceData.json'
 import ServiceCard from '../ServiceCard/ServiceCard'
 
 export default function App() {
   return (
     <>
-      <AppContainer>
-        {Data.map(data => (
+      <AppLayout>
+        {serviceData.map(data => (
           <ServiceCard name={data.name} costs={data.costs} />
         ))}
-      </AppContainer>
+      </AppLayout>
     </>
   )
 }
 
-const AppContainer = styled.div`
+const AppLayout = styled.div`
   display: grid;
   gap: 10px;
   padding: 15px;
