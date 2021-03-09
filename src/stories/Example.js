@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import './button.css'
+import './Example.css'
 
 export const Button = ({ primary, backgroundColor, size, label, ...props }) => {
   const mode = primary
