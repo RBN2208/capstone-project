@@ -6,8 +6,8 @@ import { v4 as uuidv4 } from 'uuid'
 export default function App() {
   return (
     <AppLayout>
-      {serviceData.map(data => (
-        <ServiceCard key={uuidv4()} name={data.name} costs={data.costs} />
+      {serviceData.map(({ name, costs }) => (
+        <ServiceCard key={uuidv4()} name={name} costs={costs} />
       ))}
     </AppLayout>
   )
