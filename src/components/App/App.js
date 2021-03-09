@@ -4,26 +4,31 @@ import styled from 'styled-components/macro'
 import ServiceCard from '../ServiceCard/ServiceCard'
 import Result from '../Result/Result'
 import { useState } from 'react'
+import add from '../../services/Add'
 
 export default function App() {
-  const [results, setResults] = useState()
+  const [sum, setSum] = useState(0)
 
   return (
     <AppLayout>
-      {serviceData.map(({ name, costs }) => (
+      {serviceData.map(({ name, costs }, index) => (
         <ServiceCard
-          key={uuidv4()}
           name={name}
           costs={costs}
           onPlus={handlePlus}
+          onMinus={handleMinus}
         />
       ))}
-      <Result resultValue={results} />
+      <Result resultValue={sum} />
     </AppLayout>
   )
 
   function handlePlus(costs) {
-    console.log(costs)
+    setSum(sum + costs)
+  }
+
+  function handleMinus(costs) {
+    setSum(sum - costs)
   }
 }
 
@@ -34,6 +39,21 @@ const AppLayout = styled.div`
 `
 
 /* 
+
+function handlePlus(index) {
+    const currentPlayer = players[index]
+    setPlayers([
+      ...players.slice(0, index),
+      { ...currentPlayer, score: currentPlayer.score + 1 },
+      ...players.slice(index + 1),
+    ])
+  }
+
+      results.reduce((accumulator, costs) => {
+      return accumulator + costs
+    }, 0)
+
+
 function handleMinus(index) {
   const currentValue = result[index]
   setResult([

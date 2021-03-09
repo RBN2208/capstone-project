@@ -2,7 +2,7 @@ import { useState } from 'react'
 import styled from 'styled-components/macro'
 import Button from '../Button/Button'
 
-export default function ServiceCard({ name, costs, onPlus }) {
+export default function ServiceCard({ name, costs, onPlus, onMinus }) {
   const [isVisible, setIsVisible] = useState(false)
   const [isActive, setIsActive] = useState(false)
 
@@ -24,7 +24,7 @@ export default function ServiceCard({ name, costs, onPlus }) {
           {name}
         </TextBox>
         <ButtonBox>
-          <Button onClick={handleClickMinus} bgColor={{ name: 'red' }}>
+          <Button onClick={handleClickMinus} bgColor={{ name: 'crimson' }}>
             -
           </Button>
           <Button onClick={handleClickPlus} bgColor={{ name: 'green' }}>
@@ -45,10 +45,9 @@ export default function ServiceCard({ name, costs, onPlus }) {
   function handleClickMinus(e) {
     e.stopPropagation()
     setIsActive(false)
-    onPlus(costs)
+    onMinus(costs)
   }
 }
-/* e => e.stopPropagation(setIsActive(true)(onPlus(costs))) */
 
 const CardContainer = styled.div`
   display: grid;
