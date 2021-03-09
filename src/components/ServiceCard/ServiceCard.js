@@ -23,10 +23,18 @@ export default function ServiceCard({ name, costs, onPlus, onMinus }) {
           {name}
         </TextBox>
         <ButtonBox>
-          <Button onClick={handleClickMinus} bgColor={{ name: 'crimson' }}>
+          <Button
+            aria-label="button-minus"
+            onClick={handleClickMinus}
+            bgColor={{ name: 'crimson' }}
+          >
             -
           </Button>
-          <Button onClick={handleClickPlus} bgColor={{ name: 'green' }}>
+          <Button
+            aria-label="button-plus"
+            onClick={handleClickPlus}
+            bgColor={{ name: 'green' }}
+          >
             +
           </Button>
         </ButtonBox>

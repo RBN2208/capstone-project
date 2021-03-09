@@ -4,7 +4,7 @@ import '@testing-library/jest-dom'
 
 describe('Result', () => {
   it('renders the sum of values', () => {
-    render(<Result name="Result" />)
-    expect(screen.getByText('Result')).toBeInTheDocument()
+    render(<Result resultValue={500} />)
+    expect(screen.getByText('Endpreis: ' + 500 + ' €')).toBeInTheDocument()
   })
 })
