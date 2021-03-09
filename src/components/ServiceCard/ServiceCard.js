@@ -4,10 +4,9 @@ import Button from '../Button/Button'
 
 export default function ServiceCard({ name, costs, onPlus, onMinus }) {
   const [isVisible, setIsVisible] = useState(false)
-  const [isActive, setIsActive] = useState(false)
 
   return (
-    <CardContainer isActive={isActive} onClick={() => setIsVisible(!isVisible)}>
+    <CardContainer onClick={() => setIsVisible(!isVisible)}>
       <Servicebox>
         <TextBox>
           <svg
@@ -38,13 +37,11 @@ export default function ServiceCard({ name, costs, onPlus, onMinus }) {
 
   function handleClickPlus(e) {
     e.stopPropagation()
-    setIsActive(true)
     onPlus(costs)
   }
 
   function handleClickMinus(e) {
     e.stopPropagation()
-    setIsActive(false)
     onMinus(costs)
   }
 }
@@ -52,7 +49,7 @@ export default function ServiceCard({ name, costs, onPlus, onMinus }) {
 const CardContainer = styled.div`
   display: grid;
   gap: 10px;
-  background-color: ${props => (props.isActive ? 'lightgreen' : 'white')};
+  background-color: white;
   padding: 10px 15px;
   box-shadow: 0 0 5px #868686;
   border-radius: 7px;
