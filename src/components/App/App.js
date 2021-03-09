@@ -1,16 +1,15 @@
 import styled from 'styled-components/macro'
 import { serviceData } from '../../serviceData.json'
 import ServiceCard from '../ServiceCard/ServiceCard'
+import { v4 as uuidv4 } from 'uuid'
 
 export default function App() {
   return (
-    <>
-      <AppLayout>
-        {serviceData.map(data => (
-          <ServiceCard name={data.name} costs={data.costs} />
-        ))}
-      </AppLayout>
-    </>
+    <AppLayout>
+      {serviceData.map(data => (
+        <ServiceCard key={uuidv4()} name={data.name} costs={data.costs} />
+      ))}
+    </AppLayout>
   )
 }
 
