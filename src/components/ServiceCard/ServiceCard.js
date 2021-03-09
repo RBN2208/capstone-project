@@ -4,6 +4,7 @@ import Button from '../Button/Button'
 
 export default function ServiceCard({ name, costs, onPlus, onMinus }) {
   const [isVisible, setIsVisible] = useState(false)
+  const [counter, setCounter] = useState(0)
 
   return (
     <CardContainer onClick={() => setIsVisible(!isVisible)}>
@@ -23,6 +24,7 @@ export default function ServiceCard({ name, costs, onPlus, onMinus }) {
           {name}
         </TextBox>
         <ButtonBox>
+          <span>{counter}x</span>
           <Button
             aria-label="button-minus"
             onClick={handleClickMinus}
@@ -46,11 +48,13 @@ export default function ServiceCard({ name, costs, onPlus, onMinus }) {
   function handleClickPlus(e) {
     e.stopPropagation()
     onPlus(costs)
+    setCounter(counter + 1)
   }
 
   function handleClickMinus(e) {
     e.stopPropagation()
     onMinus(costs)
+    setCounter(counter - 1)
   }
 }
 
@@ -82,6 +86,7 @@ const Servicebox = styled.div`
 const ButtonBox = styled.div`
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: 10px;
 `
 const TextBox = styled.div`
