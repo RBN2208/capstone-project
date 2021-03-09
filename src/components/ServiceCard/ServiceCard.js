@@ -2,7 +2,7 @@ import { useState } from 'react'
 import styled from 'styled-components/macro'
 import Button from '../Button/Button'
 
-export default function ServiceCard({ name, costs }) {
+export default function ServiceCard({ name, costs, onPlus }) {
   const [isVisible, setIsVisible] = useState(false)
   const [isActive, setIsActive] = useState(false)
 
@@ -24,16 +24,10 @@ export default function ServiceCard({ name, costs }) {
           {name}
         </TextBox>
         <ButtonBox>
-          <Button
-            onClick={e => e.stopPropagation(setIsActive(false))}
-            bgColor={{ name: 'red' }}
-          >
+          <Button onClick={handleClickMinus} bgColor={{ name: 'red' }}>
             -
           </Button>
-          <Button
-            onClick={e => e.stopPropagation(setIsActive(true))}
-            bgColor={{ name: 'green' }}
-          >
+          <Button onClick={handleClickPlus} bgColor={{ name: 'green' }}>
             +
           </Button>
         </ButtonBox>
@@ -41,13 +35,26 @@ export default function ServiceCard({ name, costs }) {
       {isVisible && <CardInfo>{costs}€</CardInfo>}
     </CardContainer>
   )
+
+  function handleClickPlus(e) {
+    e.stopPropagation()
+    setIsActive(true)
+    onPlus(costs)
+  }
+
+  function handleClickMinus(e) {
+    e.stopPropagation()
+    setIsActive(false)
+    onPlus(costs)
+  }
 }
+/* e => e.stopPropagation(setIsActive(true)(onPlus(costs))) */
 
 const CardContainer = styled.div`
   display: grid;
   gap: 10px;
   background-color: ${props => (props.isActive ? 'lightgreen' : 'white')};
-  padding: 15px;
+  padding: 10px 15px;
   box-shadow: 0 0 5px #868686;
   border-radius: 7px;
   overflow: hidden;
