@@ -3,7 +3,7 @@ import React from 'react'
 import Result from '../components/Result/Result'
 
 export default {
-  title: 'Components/Result',
+  title: 'Result',
   component: Result,
 }
 

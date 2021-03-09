@@ -41,7 +41,7 @@ export default function ServiceCard({ name, costs, onPlus, onMinus }) {
           </Button>
         </ButtonBox>
       </Servicebox>
-      {isVisible && <CardInfo>{costs}€</CardInfo>}
+      {isVisible && <CardInfo>Preis: {costs}€</CardInfo>}
     </CardContainer>
   )
 
