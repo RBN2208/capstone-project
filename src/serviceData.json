@@ -1,34 +1,42 @@
 {
   "serviceData": [
     {
+      "id": 1,
       "name": "Motorhaube folieren",
       "costs": 90
     },
     {
+      "id": 2,
       "name": "Dach folieren",
       "costs": 110
     },
     {
+      "id": 3,
       "name": "Stoßstange folieren",
       "costs": 175
     },
     {
+      "id": 4,
       "name": "Lackschutz Einstiege",
       "costs": 45
     },
     {
+      "id": 5,
       "name": "Spiegel folieren",
       "costs": 140
     },
     {
+      "id": 6,
       "name": "Reinigen komplett",
       "costs": 300
     },
     {
+      "id": 7,
       "name": "Lackschutz Ladekante",
       "costs": 90
     },
     {
+      "id": 8,
       "name": "Demontage Türgriffe",
       "costs": 45
     }
