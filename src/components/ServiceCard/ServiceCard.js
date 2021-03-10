@@ -1,8 +1,16 @@
 import { useState } from 'react'
 import styled from 'styled-components/macro'
 import Button from '../Button/Button'
+import ServicecardInfo from '../FormComponents/ServicecardInfo'
 
-export default function ServiceCard({ name, costs, onPlus, onMinus }) {
+export default function ServiceCard({
+  name,
+  costs,
+  onPlus,
+  onMinus,
+  costInput,
+  setCostInput,
+}) {
   const [isVisible, setIsVisible] = useState(false)
   const [counter, setCounter] = useState(0)
 
@@ -24,7 +32,6 @@ export default function ServiceCard({ name, costs, onPlus, onMinus }) {
           {name}
         </TextBox>
         <ButtonBox>
-          <span>{counter}x</span>
           <Button
             disabled={counter === 0}
             aria-label="button-minus"
@@ -42,18 +49,27 @@ export default function ServiceCard({ name, costs, onPlus, onMinus }) {
           </Button>
         </ButtonBox>
       </Servicebox>
-      {isVisible && <CardInfo>Preis: {costs}€</CardInfo>}
+
+      {isVisible && (
+        <CardInfo>
+          <ServicecardInfo
+            counter={counter}
+            costInput={costInput}
+            setCostInput={setCostInput}
+          />
+        </CardInfo>
+      )}
     </CardContainer>
   )
 
-  function handleClickPlus(e) {
-    e.stopPropagation()
+  function handleClickPlus(event) {
+    event.stopPropagation()
     onPlus(costs)
     setCounter(counter + 1)
   }
 
-  function handleClickMinus(e) {
-    e.stopPropagation()
+  function handleClickMinus(event) {
+    event.stopPropagation()
     onMinus(costs)
     setCounter(counter - 1)
   }
@@ -64,6 +80,7 @@ const CardContainer = styled.div`
   gap: 5px;
   background-color: white;
   padding: 10px 15px;
+  margin: 2px;
   box-shadow: 0 0 5px #868686;
   border-radius: 7px;
   overflow: hidden;
