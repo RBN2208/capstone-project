@@ -11,7 +11,7 @@ describe('ServiceCard', () => {
   it('toggles the visibility of the costs when clicked', () => {
     render(<ServiceCard name="Servicecard" costs={500} />)
     userEvent.click(screen.getByText('Servicecard'))
-    expect(screen.getByText(500 + '€')).toBeVisible()
+    expect(screen.getByText('Preis: ' + 500 + '€')).toBeVisible()
   })
   it('contains two buttons', () => {
     render(<ServiceCard name="Servicecard" costs={500} />)
