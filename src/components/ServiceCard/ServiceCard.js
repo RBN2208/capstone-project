@@ -60,7 +60,7 @@ export default function ServiceCard({ name, costs, onPlus, onMinus }) {
 
 const CardContainer = styled.div`
   display: grid;
-  gap: 10px;
+  gap: 5px;
   background-color: white;
   padding: 10px 15px;
   box-shadow: 0 0 5px #868686;
@@ -74,7 +74,7 @@ const CardContainer = styled.div`
 `
 const CardInfo = styled.div`
   background-color: gainsboro;
-  padding: 10px;
+  padding: 15px;
   margin: 5px -15px -15px;
 `
 
