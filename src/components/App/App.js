@@ -28,9 +28,7 @@ export default function App() {
             />
           ))}
         </Content>
-        {newService === 'newService' && (
-          <NewService setNewService={setNewService} />
-        )}
+
         <ButtonBox>
           <ButtonNew
             onClick={() => setNewService('newService')}
@@ -40,6 +38,9 @@ export default function App() {
           </ButtonNew>
           <Result resultValue={sum} />
         </ButtonBox>
+        {newService === 'newService' && (
+          <NewService setNewService={setNewService} />
+        )}
       </AppLayout>
     </>
   )
@@ -60,6 +61,7 @@ const AppLayout = styled.div`
   padding: 15px;
   height: 100vh;
   position: relative;
+  filter: ${props => props.blur};
 `
 
 const ButtonNew = styled(Button)`

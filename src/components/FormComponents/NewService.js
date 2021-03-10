@@ -3,7 +3,7 @@ import styled from 'styled-components/macro'
 export default function NewService({ setNewService }) {
   return (
     <>
-      <Container>
+      <BlurContainer>
         <Form>
           <label>
             Name der Dienstleistung
@@ -15,18 +15,24 @@ export default function NewService({ setNewService }) {
           </label>
           <button onClick={() => setNewService('')}>Hinzufügen</button>
         </Form>
-      </Container>
+      </BlurContainer>
     </>
   )
 }
 
-const Container = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(240, 240, 240, 0.7);
-`
-
 const Form = styled.form`
   display: grid;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 0 10px darkgray;
+  border-radius: 5px;
+`
+const BlurContainer = styled.div`
+  position: absolute;
+  background: rgba(240, 240, 240, 0.9);
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  display: grid;
+  place-content: center;
 `
