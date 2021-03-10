@@ -26,6 +26,7 @@ export default function ServiceCard({ name, costs, onPlus, onMinus }) {
         <ButtonBox>
           <span>{counter}x</span>
           <Button
+            disabled={counter === 0}
             aria-label="button-minus"
             onClick={handleClickMinus}
             bgColor={{ name: 'crimson' }}
