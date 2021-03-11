@@ -52,11 +52,7 @@ export default function ServiceCard({
 
       {isVisible && (
         <CardInfo>
-          <ServicecardInfo
-            counter={counter}
-            costInput={costInput}
-            setCostInput={setCostInput}
-          />
+          <ServicecardInfo counter={counter} />
         </CardInfo>
       )}
     </CardContainer>

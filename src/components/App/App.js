@@ -1,49 +1,70 @@
-// import { v4 as uuidv4 } from 'uuid'
-import { serviceData } from '../../serviceData.json'
+import { v4 as uuidv4 } from 'uuid'
+import { useEffect } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components/macro'
+import loadLocal from '../../lib/loadLocal'
+import saveLocal from '../../lib/saveLocal'
 import ServiceCard from '../ServiceCard/ServiceCard'
 import Result from '../Result/Result'
-import { useState } from 'react'
 import Button from '../Button/Button'
 import NewService from '../FormComponents/NewService'
 
 export default function App() {
+  const [services, setServices] = useState(loadLocal('services') ?? [])
   const [sum, setSum] = useState(0)
-  const [costInput, setCostInput] = useState(50)
-  const [newService, setNewService] = useState('')
+  const [openServiceFrom, setOpenServiceFrom] = useState('home')
+  const [actualCosts, setActualCosts] = useState(50)
+
+  useEffect(() => {
+    saveLocal('services', services)
+  }, [services])
 
   return (
     <>
       <AppLayout>
         <Content>
-          {serviceData.map(({ name, costs, id }, index) => (
+          {services.map(({ name, costs, id }) => (
             <ServiceCard
               key={id}
               name={name}
-              costs={costs || Number(costInput)}
+              costs={costs}
               onPlus={handlePlus}
               onMinus={handleMinus}
-              costInput={costInput}
-              setCostInput={setCostInput}
             />
           ))}
         </Content>
 
         <ButtonBox>
-          <ButtonNew
-            onClick={() => setNewService('newService')}
+          <ButtonNewService
+            onClick={() => setOpenServiceFrom('newService')}
             bgColor={{ name: 'white' }}
           >
             New
-          </ButtonNew>
+          </ButtonNewService>
           <Result resultValue={sum} />
+          <Delete onClick={() => localStorage.removeItem('services')}>
+            clear
+          </Delete>
         </ButtonBox>
-        {newService === 'newService' && (
-          <NewService setNewService={setNewService} />
+        {openServiceFrom === 'newService' && (
+          <NewService
+            onSubmit={addNewService}
+            onAddNewService={setOpenServiceFrom}
+            actualCosts={actualCosts}
+          />
         )}
       </AppLayout>
     </>
   )
+
+  function addNewService({ name, costs }) {
+    const newService = {
+      id: uuidv4(),
+      name,
+      costs,
+    }
+    setServices([newService, ...services])
+  }
 
   function handlePlus(costs) {
     setSum(sum + costs)
@@ -64,7 +85,7 @@ const AppLayout = styled.div`
   filter: ${props => props.blur};
 `
 
-const ButtonNew = styled(Button)`
+const ButtonNewService = styled(Button)`
   width: 100px;
   color: black;
   border: 1px solid darkgray;
@@ -82,4 +103,7 @@ const Content = styled.div`
   margin: 0 auto;
   overflow-y: scroll;
   width: 100%;
+`
+const Delete = styled.button`
+  height: 50px;
 `

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export default function ServicecardInfo({ counter, setCostInput }) {
+export default function ServicecardInfo({ counter }) {
   return (
     <ServiceInfo>
       <div>Zeit: {counter} Stunden</div>
@@ -8,9 +8,8 @@ export default function ServicecardInfo({ counter, setCostInput }) {
         Stundensatz:
         <input
           type="text"
-          placeholder="default: 50 €"
+          placeholder="servicecard info placeholder"
           onClick={event => event.stopPropagation()}
-          onChange={event => setCostInput(event.target.value)}
         />
       </div>
     </ServiceInfo>

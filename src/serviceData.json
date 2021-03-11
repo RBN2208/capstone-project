@@ -2,52 +2,22 @@
   "serviceData": [
     {
       "id": 1,
-      "name": "Motorhaube folieren",
+      "name": "Service 1",
       "costs": null
     },
     {
       "id": 2,
-      "name": "Dach folieren",
+      "name": "Service 2",
       "costs": null
     },
     {
       "id": 3,
-      "name": "Stoßstange folieren",
+      "name": "Service 3",
       "costs": null
     },
     {
       "id": 4,
-      "name": "Lackschutz Einstiege",
-      "costs": null
-    },
-    {
-      "id": 5,
-      "name": "Spiegel folieren",
-      "costs": null
-    },
-    {
-      "id": 6,
-      "name": "Reinigen komplett",
-      "costs": null
-    },
-    {
-      "id": 7,
-      "name": "Lackschutz Ladekante",
-      "costs": null
-    },
-    {
-      "id": 8,
-      "name": "Demontage Türgriffe",
-      "costs": null
-    },
-    {
-      "id": 9,
-      "name": "Test",
-      "costs": null
-    },
-    {
-      "id": 10,
-      "name": "Test",
+      "name": "Service 4",
       "costs": null
     }
   ]
