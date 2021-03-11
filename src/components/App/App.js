@@ -13,7 +13,6 @@ export default function App() {
   const [services, setServices] = useState(loadLocal('services') ?? [])
   const [sum, setSum] = useState(0)
   const [openServiceFrom, setOpenServiceFrom] = useState('home')
-  const [actualCosts, setActualCosts] = useState(50)
 
   useEffect(() => {
     saveLocal('services', services)
@@ -30,7 +29,6 @@ export default function App() {
               costs={costs}
               onPlus={handlePlus}
               onMinus={handleMinus}
-              actualCosts={costs}
             />
           ))}
         </Content>
@@ -51,7 +49,6 @@ export default function App() {
           <NewService
             onSubmit={addNewService}
             onAddNewService={setOpenServiceFrom}
-            actualCosts={actualCosts}
           />
         )}
       </AppLayout>
@@ -68,6 +65,7 @@ export default function App() {
   }
 
   function handlePlus(costs) {
+    console.log(services)
     setSum(sum + costs)
   }
 

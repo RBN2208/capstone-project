@@ -3,15 +3,10 @@ import styled from 'styled-components/macro'
 import Button from '../Button/Button'
 import ServicecardInfo from '../FormComponents/ServicecardInfo'
 
-export default function ServiceCard({
-  name,
-  costs,
-  onPlus,
-  onMinus,
-  actualCosts,
-}) {
+export default function ServiceCard({ name, costs, onPlus, onMinus }) {
   const [isVisible, setIsVisible] = useState(false)
   const [counter, setCounter] = useState(0)
+  const [newCosts, setNewCosts] = useState(costs)
 
   return (
     <CardContainer onClick={() => setIsVisible(!isVisible)}>
@@ -51,7 +46,11 @@ export default function ServiceCard({
 
       {isVisible && (
         <CardInfo>
-          <ServicecardInfo counter={counter} actualCosts={costs} />
+          <ServicecardInfo
+            counter={counter}
+            currentCosts={newCosts}
+            setNewCosts={setNewCosts}
+          />
         </CardInfo>
       )}
     </CardContainer>
@@ -59,7 +58,7 @@ export default function ServiceCard({
 
   function handleClickPlus(event) {
     event.stopPropagation()
-    onPlus(costs)
+    onPlus(newCosts)
     setCounter(counter + 1)
   }
 
@@ -105,4 +104,5 @@ const ButtonBox = styled.div`
 const TextBox = styled.div`
   display: flex;
   align-items: center;
+  font-size: 0.9em;
 `

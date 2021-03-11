@@ -1,22 +1,39 @@
 import styled from 'styled-components'
 
-export default function ServicecardInfo({ counter, actualCosts }) {
+export default function ServicecardInfo({
+  counter,
+  currentCosts,
+  setNewCosts,
+}) {
   return (
-    <ServiceInfo>
+    <ServiceInfoForm>
       <div>Zeit: {counter} Stunden</div>
       <div>
-        Stundensatz:
-        <input
-          type="text"
-          placeholder={actualCosts}
-          onClick={event => event.stopPropagation()}
-        />
+        <label>
+          Stundensatz:
+          <input
+            id="setcosts"
+            name="setcosts"
+            type="text"
+            placeholder={currentCosts}
+            onClick={event => event.stopPropagation()}
+          />
+        </label>
+        <button onClick={handleClick}>Set</button>
       </div>
-    </ServiceInfo>
+    </ServiceInfoForm>
   )
+
+  function handleClick() {
+    const inputValue = document.getElementById('setcosts')
+    const newCosts = Number(inputValue.value)
+    console.log(newCosts)
+    setNewCosts(newCosts)
+    return newCosts
+  }
 }
 
-const ServiceInfo = styled.form`
+const ServiceInfoForm = styled.form`
   display: grid;
   grid-auto-flow: dense;
   input {
