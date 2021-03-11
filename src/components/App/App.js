@@ -29,6 +29,7 @@ export default function App() {
               costs={costs}
               onPlus={handlePlus}
               onMinus={handleMinus}
+              updateLocalServiceValue={updateLocalServiceValue}
             />
           ))}
         </Content>
@@ -54,6 +55,13 @@ export default function App() {
       </AppLayout>
     </>
   )
+
+  function updateLocalServiceValue(name, key, value) {
+    let existing = localStorage.getItem('services')
+    existing = existing ? JSON.parse(existing) : {}
+    existing[key] = value
+    localStorage.setItem(name, JSON.stringify(existing))
+  }
 
   function addNewService({ name, costs }) {
     const newService = {

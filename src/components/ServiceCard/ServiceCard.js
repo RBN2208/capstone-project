@@ -3,10 +3,16 @@ import styled from 'styled-components/macro'
 import Button from '../Button/Button'
 import ServicecardInfo from '../FormComponents/ServicecardInfo'
 
-export default function ServiceCard({ name, costs, onPlus, onMinus }) {
+export default function ServiceCard({
+  name,
+  costs,
+  onPlus,
+  onMinus,
+  updateLocalServiceValue,
+}) {
   const [isVisible, setIsVisible] = useState(false)
   const [counter, setCounter] = useState(0)
-  const [newCosts, setNewCosts] = useState(costs)
+  const [usedCosts, setUsedCosts] = useState(costs)
 
   return (
     <CardContainer onClick={() => setIsVisible(!isVisible)}>
@@ -48,8 +54,9 @@ export default function ServiceCard({ name, costs, onPlus, onMinus }) {
         <CardInfo>
           <ServicecardInfo
             counter={counter}
-            currentCosts={newCosts}
-            setNewCosts={setNewCosts}
+            currentCosts={usedCosts}
+            setNewCosts={setUsedCosts}
+            updateLocalServiceValue={updateLocalServiceValue}
           />
         </CardInfo>
       )}
@@ -58,13 +65,13 @@ export default function ServiceCard({ name, costs, onPlus, onMinus }) {
 
   function handleClickPlus(event) {
     event.stopPropagation()
-    onPlus(newCosts)
+    onPlus(usedCosts)
     setCounter(counter + 1)
   }
 
   function handleClickMinus(event) {
     event.stopPropagation()
-    onMinus(costs)
+    onMinus(usedCosts)
     setCounter(counter - 1)
   }
 }

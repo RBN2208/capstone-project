@@ -4,6 +4,7 @@ export default function ServicecardInfo({
   counter,
   currentCosts,
   setNewCosts,
+  updateLocalServiceValue,
 }) {
   return (
     <ServiceInfoForm>
@@ -19,17 +20,17 @@ export default function ServicecardInfo({
             onClick={event => event.stopPropagation()}
           />
         </label>
-        <button onClick={handleClick}>Set</button>
+        <button onClick={handleSettingNewCosts}>Set</button>
       </div>
     </ServiceInfoForm>
   )
 
-  function handleClick() {
+  function handleSettingNewCosts() {
     const inputValue = document.getElementById('setcosts')
     const newCosts = Number(inputValue.value)
     console.log(newCosts)
     setNewCosts(newCosts)
-    return newCosts
+    updateLocalServiceValue(newCosts)
   }
 }
 
