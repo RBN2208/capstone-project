@@ -30,6 +30,7 @@ export default function App() {
               costs={costs}
               onPlus={handlePlus}
               onMinus={handleMinus}
+              actualCosts={costs}
             />
           ))}
         </Content>

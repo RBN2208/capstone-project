@@ -12,7 +12,7 @@ export default function NewService({ onSubmit, onAddNewService, actualCosts }) {
           </label>
           <label>
             Stundensatz
-            <input name="costs" placeholder="newservice pl" />
+            <input name="costs" placeholder="default: 50€" />
           </label>
           <Button bgColor={{ name: 'green' }}>Hinzufügen</Button>
         </Form>

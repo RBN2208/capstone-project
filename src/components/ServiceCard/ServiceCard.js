@@ -8,8 +8,7 @@ export default function ServiceCard({
   costs,
   onPlus,
   onMinus,
-  costInput,
-  setCostInput,
+  actualCosts,
 }) {
   const [isVisible, setIsVisible] = useState(false)
   const [counter, setCounter] = useState(0)
@@ -52,7 +51,7 @@ export default function ServiceCard({
 
       {isVisible && (
         <CardInfo>
-          <ServicecardInfo counter={counter} />
+          <ServicecardInfo counter={counter} actualCosts={costs} />
         </CardInfo>
       )}
     </CardContainer>
