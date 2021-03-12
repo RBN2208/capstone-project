@@ -3,34 +3,37 @@ import styled from 'styled-components'
 export default function ServicecardInfo({
   counter,
   currentCosts,
-  setNewCosts,
-  updateLocalServiceValue,
+  setUsedCosts,
+  onAddingNewCosts,
+  index,
 }) {
   return (
-    <ServiceInfoForm>
-      <div>Zeit: {counter} Stunden</div>
-      <div>
-        <label>
-          Stundensatz:
-          <input
-            id="setcosts"
-            name="setcosts"
-            type="text"
-            placeholder={currentCosts}
-            onClick={event => event.stopPropagation()}
-          />
-        </label>
-        <button onClick={handleSettingNewCosts}>Set</button>
-      </div>
-    </ServiceInfoForm>
+    <>
+      <ServiceInfoForm onSubmit={event => handleSettingNewCosts(event)}>
+        <div>Zeit: {counter} Stunden</div>
+        <div>
+          <label>
+            Stundensatz:
+            <input
+              id="setcosts"
+              name="setcosts"
+              type="number"
+              placeholder={currentCosts}
+              onClick={event => event.stopPropagation()}
+            />
+          </label>
+          <button onClick={event => event.stopPropagation()}>Set</button>
+        </div>
+      </ServiceInfoForm>
+    </>
   )
-
-  function handleSettingNewCosts() {
-    const inputValue = document.getElementById('setcosts')
-    const newCosts = Number(inputValue.value)
+  function handleSettingNewCosts(event) {
+    event.preventDefault()
+    const formElement = event.target.elements
+    const newCosts = Number(formElement.setcosts.value)
+    setUsedCosts(newCosts)
+    onAddingNewCosts(index, newCosts)
     console.log(newCosts)
-    setNewCosts(newCosts)
-    updateLocalServiceValue(newCosts)
   }
 }
 

@@ -8,6 +8,7 @@ import ServiceCard from '../ServiceCard/ServiceCard'
 import Result from '../Result/Result'
 import Button from '../Button/Button'
 import NewService from '../FormComponents/NewService'
+import Header from '../Header/Header'
 
 export default function App() {
   const [services, setServices] = useState(loadLocal('services') ?? [])
@@ -21,6 +22,7 @@ export default function App() {
   return (
     <>
       <AppLayout>
+        <Header title={'QuickQalc'} />
         <Content>
           {services.map(({ name, costs, id }) => (
             <ServiceCard
@@ -29,7 +31,8 @@ export default function App() {
               costs={costs}
               onPlus={handlePlus}
               onMinus={handleMinus}
-              updateLocalServiceValue={updateLocalServiceValue}
+              services={services}
+              onAddingNewCosts={updateCosts}
             />
           ))}
         </Content>
@@ -42,9 +45,7 @@ export default function App() {
             New
           </ButtonNewService>
           <Result resultValue={sum} />
-          <Delete onClick={() => localStorage.removeItem('services')}>
-            clear
-          </Delete>
+          <Delete onClick={() => localStorage.clear()}>clear</Delete>
         </ButtonBox>
         {openServiceFrom === 'newService' && (
           <NewService
@@ -56,11 +57,13 @@ export default function App() {
     </>
   )
 
-  function updateLocalServiceValue(name, key, value) {
-    let existing = localStorage.getItem('services')
-    existing = existing ? JSON.parse(existing) : {}
-    existing[key] = value
-    localStorage.setItem(name, JSON.stringify(existing))
+  function updateCosts(index, currentCosts) {
+    const currentService = services[index]
+    setServices([
+      ...services.slice(0, index),
+      { ...currentService, costs: currentCosts },
+      ...services.slice(index + 1),
+    ])
   }
 
   function addNewService({ name, costs }) {
@@ -69,7 +72,8 @@ export default function App() {
       name,
       costs,
     }
-    setServices([newService, ...services])
+    setServices([...services, newService])
+    console.log(newService)
   }
 
   function handlePlus(costs) {
@@ -84,9 +88,8 @@ export default function App() {
 
 const AppLayout = styled.div`
   display: grid;
-  grid-template-rows: auto 50px;
+  grid-template-rows: 50px auto 50px;
   gap: 10px;
-  padding: 15px;
   height: 100vh;
   position: relative;
   filter: ${props => props.blur};
@@ -107,6 +110,8 @@ const Content = styled.div`
   display: grid;
   gap: 10px;
   grid-auto-rows: min-content;
+  padding: 15px;
+
   margin: 0 auto;
   overflow-y: scroll;
   width: 100%;

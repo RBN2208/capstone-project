@@ -34,7 +34,6 @@ export default function NewService({ onSubmit, onAddNewService }) {
     }
     onAddNewService('home')
     onSubmit(data)
-    console.log(data)
   }
 }
 

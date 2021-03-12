@@ -8,11 +8,13 @@ export default function ServiceCard({
   costs,
   onPlus,
   onMinus,
-  updateLocalServiceValue,
+  services,
+  onAddingNewCosts,
 }) {
   const [isVisible, setIsVisible] = useState(false)
   const [counter, setCounter] = useState(0)
   const [usedCosts, setUsedCosts] = useState(costs)
+  const index = services.findIndex(p => p.name === name)
 
   return (
     <CardContainer onClick={() => setIsVisible(!isVisible)}>
@@ -54,9 +56,10 @@ export default function ServiceCard({
         <CardInfo>
           <ServicecardInfo
             counter={counter}
+            index={index}
             currentCosts={usedCosts}
-            setNewCosts={setUsedCosts}
-            updateLocalServiceValue={updateLocalServiceValue}
+            setUsedCosts={setUsedCosts}
+            onAddingNewCosts={onAddingNewCosts}
           />
         </CardInfo>
       )}
