@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Button from '../Button/Button'
 
 export default function ServicecardInfo({
   counter,
@@ -9,20 +10,29 @@ export default function ServicecardInfo({
 }) {
   return (
     <>
-      <ServiceInfoForm onSubmit={event => handleSettingNewCosts(event)}>
+      <ServiceInfoForm
+        data-testid="setCostsForm"
+        onSubmit={event => handleSettingNewCosts(event)}
+      >
         <div>Zeit: {counter} Stunden</div>
         <div>
           <label>
             Stundensatz:
-            <input
+            <NoSpinnersInput
+              data-testid="costInput"
               id="setcosts"
               name="setcosts"
               type="number"
-              placeholder={currentCosts}
+              placeholder={currentCosts + '€'}
               onClick={event => event.stopPropagation()}
             />
           </label>
-          <button onClick={event => event.stopPropagation()}>Set</button>
+          <Button
+            bgColor={{ name: 'grey' }}
+            onClick={event => event.stopPropagation()}
+          >
+            Set
+          </Button>
         </div>
       </ServiceInfoForm>
     </>
@@ -33,7 +43,6 @@ export default function ServicecardInfo({
     const newCosts = Number(formElement.setcosts.value)
     setUsedCosts(newCosts)
     onAddingNewCosts(index, newCosts)
-    console.log(newCosts)
   }
 }
 
@@ -43,4 +52,13 @@ const ServiceInfoForm = styled.form`
   input {
     width: 130px;
   }
+`
+
+const NoSpinnersInput = styled.input`
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  -moz-appearance: textfield;
 `

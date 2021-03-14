@@ -14,7 +14,7 @@ export default function ServiceCard({
   const [isVisible, setIsVisible] = useState(false)
   const [counter, setCounter] = useState(0)
   const [usedCosts, setUsedCosts] = useState(costs)
-  const index = services.findIndex(p => p.name === name)
+  const index = services.findIndex(param => param.name === name)
 
   return (
     <CardContainer onClick={() => setIsVisible(!isVisible)}>

@@ -10,4 +10,5 @@ const Header = styled.header`
   font-size: 20px;
   color: cornflowerblue;
   box-shadow: 0 0 10px black;
+  height: 100%;
 `

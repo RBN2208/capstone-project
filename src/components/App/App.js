@@ -73,11 +73,9 @@ export default function App() {
       costs,
     }
     setServices([...services, newService])
-    console.log(newService)
   }
 
   function handlePlus(costs) {
-    console.log(services)
     setSum(sum + costs)
   }
 

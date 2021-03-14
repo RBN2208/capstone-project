@@ -5,13 +5,17 @@ export default function NewService({ onSubmit, onAddNewService }) {
   return (
     <>
       <BlurContainer>
-        <Form onSubmit={event => handleSubmit(event)}>
+        <Form
+          onSubmit={event => handleSubmit(event)}
+          data-testid="newServiceForm"
+        >
           <label>
             Name der Dienstleistung
             <input
+              data-testid="newServiceInput"
               maxLength="20"
               name="service"
-              placeholder="Bohren"
+              placeholder="Dienstleistung"
               required
             />
           </label>
