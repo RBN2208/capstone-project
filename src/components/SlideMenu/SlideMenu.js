@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components/macro'
+import Icon from 'supercons'
 import Button from '../Button/Button'
 
 export default function SlideMenu({ menuIsOpen, setMenuIsOpen }) {
@@ -6,9 +7,7 @@ export default function SlideMenu({ menuIsOpen, setMenuIsOpen }) {
     <MenuBox position={menuIsOpen}>
       <p>Home</p>
       <p>History</p>
-      <Button bgColor={{ name: 'grey' }} onClick={() => setMenuIsOpen(false)}>
-        Close
-      </Button>
+      <Icon glyph="view-close-small" onClick={() => setMenuIsOpen(false)} />
     </MenuBox>
   )
 }

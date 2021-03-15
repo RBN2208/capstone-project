@@ -1,6 +1,8 @@
 import { v4 as uuidv4 } from 'uuid'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
+import Icon from 'supercons'
+
 import loadFromLocal from '../../lib/loadFromLocal'
 import saveToLocal from '../../lib/saveToLocal'
 import ServiceCard from '../ServiceCard/ServiceCard'
@@ -24,11 +26,8 @@ export default function App() {
     <>
       <SlideMenu menuIsOpen={menuIsOpen} setMenuIsOpen={setMenuIsOpen} />
       <AppLayout>
-        <MenuButton
-          bgColor={{ name: 'grey' }}
-          onClick={() => setMenuIsOpen(true)}
-        >
-          Open
+        <MenuButton>
+          <Icon glyph="menu" onClick={() => setMenuIsOpen(true)} />
         </MenuButton>
         <Header title={'QuickQalc'}></Header>
         <Content>
@@ -129,7 +128,9 @@ const Delete = styled.button`
   height: 50px;
 `
 
-const MenuButton = styled(Button)`
+const MenuButton = styled.div`
   position: absolute;
-  right: 5px;
+  right: 0.5em;
+  top: 0.7em;
+  scale: 180%;
 `
