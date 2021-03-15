@@ -10,6 +10,7 @@ export default function ServiceCard({
   onMinus,
   services,
   onAddingNewCosts,
+  adjustCurrentCosts
 }) {
   const [isVisible, setIsVisible] = useState(false)
   const [counter, setCounter] = useState(0)
@@ -60,6 +61,7 @@ export default function ServiceCard({
             currentCosts={usedCosts}
             setUsedCosts={setUsedCosts}
             onAddingNewCosts={onAddingNewCosts}
+            adjustCurrentCosts={adjustCurrentCosts}
           />
         </CardInfo>
       )}

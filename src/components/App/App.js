@@ -31,6 +31,7 @@ export default function App() {
             onMinus={handleMinus}
             services={services}
             onAddingNewCosts={updateCosts}
+            adjustCurrentCosts={adjustCurrentCosts}
           />
         ))}
       </Content>
@@ -58,6 +59,10 @@ export default function App() {
       { ...currentService, costs: currentCosts },
       ...services.slice(index + 1),
     ])
+  }
+
+  function adjustCurrentCosts({ newCosts, counter, currentCosts }) {
+    setSum(sum - (currentCosts - newCosts) * counter)
   }
 
   function onAddNewService({ name, costs }) {

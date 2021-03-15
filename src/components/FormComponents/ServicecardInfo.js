@@ -7,6 +7,7 @@ export default function ServicecardInfo({
   setUsedCosts,
   onAddingNewCosts,
   index,
+  adjustCurrentCosts
 }) {
   return (
     <ServiceInfoForm
@@ -41,6 +42,8 @@ export default function ServicecardInfo({
     const newCosts = Number(formElement.setcosts.value)
     setUsedCosts(newCosts)
     onAddingNewCosts(index, newCosts)
+    const data = { newCosts, currentCosts, counter }
+    adjustCurrentCosts(data)
   }
 }
 
