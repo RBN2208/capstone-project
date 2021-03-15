@@ -1,10 +1,20 @@
 import { useState } from 'react'
 import styled from 'styled-components/macro'
 import Button from '../Button/Button'
+import ServicecardInfo from '../FormComponents/ServicecardInfo'
 
-export default function ServiceCard({ name, costs, onPlus, onMinus }) {
+export default function ServiceCard({
+  name,
+  costs,
+  onPlus,
+  onMinus,
+  services,
+  onAddingNewCosts,
+}) {
   const [isVisible, setIsVisible] = useState(false)
   const [counter, setCounter] = useState(0)
+  const [usedCosts, setUsedCosts] = useState(costs)
+  const index = services.findIndex(param => param.name === name)
 
   return (
     <CardContainer onClick={() => setIsVisible(!isVisible)}>
@@ -24,7 +34,6 @@ export default function ServiceCard({ name, costs, onPlus, onMinus }) {
           {name}
         </TextBox>
         <ButtonBox>
-          <span>{counter}x</span>
           <Button
             disabled={counter === 0}
             aria-label="button-minus"
@@ -42,19 +51,30 @@ export default function ServiceCard({ name, costs, onPlus, onMinus }) {
           </Button>
         </ButtonBox>
       </Servicebox>
-      {isVisible && <CardInfo>Preis: {costs}€</CardInfo>}
+
+      {isVisible && (
+        <CardInfo>
+          <ServicecardInfo
+            counter={counter}
+            index={index}
+            currentCosts={usedCosts}
+            setUsedCosts={setUsedCosts}
+            onAddingNewCosts={onAddingNewCosts}
+          />
+        </CardInfo>
+      )}
     </CardContainer>
   )
 
-  function handleClickPlus(e) {
-    e.stopPropagation()
-    onPlus(costs)
+  function handleClickPlus(event) {
+    event.stopPropagation()
+    onPlus(usedCosts)
     setCounter(counter + 1)
   }
 
-  function handleClickMinus(e) {
-    e.stopPropagation()
-    onMinus(costs)
+  function handleClickMinus(event) {
+    event.stopPropagation()
+    onMinus(usedCosts)
     setCounter(counter - 1)
   }
 }
@@ -64,6 +84,7 @@ const CardContainer = styled.div`
   gap: 5px;
   background-color: white;
   padding: 10px 15px;
+  margin: 2px;
   box-shadow: 0 0 5px #868686;
   border-radius: 7px;
   overflow: hidden;
@@ -93,4 +114,5 @@ const ButtonBox = styled.div`
 const TextBox = styled.div`
   display: flex;
   align-items: center;
+  font-size: 0.9em;
 `
