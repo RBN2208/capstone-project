@@ -1,9 +1,8 @@
 import { v4 as uuidv4 } from 'uuid'
-import { useEffect } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
-import loadLocal from '../../lib/loadLocal'
-import saveLocal from '../../lib/saveLocal'
+import loadFromLocal from '../../lib/loadFromLocal'
+import saveToLocal from '../../lib/saveToLocal'
 import ServiceCard from '../ServiceCard/ServiceCard'
 import Result from '../Result/Result'
 import Button from '../Button/Button'
@@ -11,50 +10,45 @@ import NewService from '../FormComponents/NewService'
 import Header from '../Header/Header'
 
 export default function App() {
-  const [services, setServices] = useState(loadLocal('services') ?? [])
+  const [services, setServices] = useState(loadFromLocal('services') ?? [])
   const [sum, setSum] = useState(0)
   const [openServiceFrom, setOpenServiceFrom] = useState('home')
 
   useEffect(() => {
-    saveLocal('services', services)
+    saveToLocal('services', services)
   }, [services])
 
   return (
-    <>
-      <AppLayout>
-        <Header title={'QuickQalc'} />
-        <Content>
-          {services.map(({ name, costs, id }) => (
-            <ServiceCard
-              key={id}
-              name={name}
-              costs={costs}
-              onPlus={handlePlus}
-              onMinus={handleMinus}
-              services={services}
-              onAddingNewCosts={updateCosts}
-            />
-          ))}
-        </Content>
-
-        <ButtonBox>
-          <ButtonNewService
-            onClick={() => setOpenServiceFrom('newService')}
-            bgColor={{ name: 'white' }}
-          >
-            New
-          </ButtonNewService>
-          <Result resultValue={sum} />
-          <Delete onClick={() => localStorage.clear()}>clear</Delete>
-        </ButtonBox>
-        {openServiceFrom === 'newService' && (
-          <NewService
-            onSubmit={addNewService}
-            onAddNewService={setOpenServiceFrom}
+    <AppLayout>
+      <Header title={'QuickQalc'} />
+      <Content>
+        {services.map(({ name, costs, id }) => (
+          <ServiceCard
+            key={id}
+            name={name}
+            costs={costs}
+            onPlus={handlePlus}
+            onMinus={handleMinus}
+            services={services}
+            onAddingNewCosts={updateCosts}
           />
-        )}
-      </AppLayout>
-    </>
+        ))}
+      </Content>
+
+      <ButtonBox>
+        <ButtonNewService
+          onClick={() => setOpenServiceFrom('newService')}
+          bgColor={{ name: 'white' }}
+        >
+          New
+        </ButtonNewService>
+        <Result resultValue={sum} />
+        <Delete onClick={() => localStorage.clear()}>clear</Delete>
+      </ButtonBox>
+      {openServiceFrom === 'newService' && (
+        <NewService onSubmit={onAddNewService} />
+      )}
+    </AppLayout>
   )
 
   function updateCosts(index, currentCosts) {
@@ -66,13 +60,14 @@ export default function App() {
     ])
   }
 
-  function addNewService({ name, costs }) {
+  function onAddNewService({ name, costs }) {
     const newService = {
       id: uuidv4(),
       name,
       costs,
     }
     setServices([...services, newService])
+    setOpenServiceFrom('home')
   }
 
   function handlePlus(costs) {

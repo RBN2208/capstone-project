@@ -9,33 +9,31 @@ export default function ServicecardInfo({
   index,
 }) {
   return (
-    <>
-      <ServiceInfoForm
-        data-testid="setCostsForm"
-        onSubmit={event => handleSettingNewCosts(event)}
-      >
-        <div>Zeit: {counter} Stunden</div>
-        <div>
-          <label>
-            Stundensatz:
-            <NoSpinnersInput
-              data-testid="costInput"
-              id="setcosts"
-              name="setcosts"
-              type="number"
-              placeholder={currentCosts + '€'}
-              onClick={event => event.stopPropagation()}
-            />
-          </label>
-          <Button
-            bgColor={{ name: 'grey' }}
+    <ServiceInfoForm
+      data-testid="setCostsForm"
+      onSubmit={event => handleSettingNewCosts(event)}
+    >
+      <div>Zeit: {counter} Stunden</div>
+      <div>
+        <label>
+          Stundensatz:
+          <CostInput
+            data-testid="costInput"
+            id="setcosts"
+            name="setcosts"
+            type="number"
+            placeholder={currentCosts + '€'}
             onClick={event => event.stopPropagation()}
-          >
-            Set
-          </Button>
-        </div>
-      </ServiceInfoForm>
-    </>
+          />
+        </label>
+        <Button
+          bgColor={{ name: 'grey' }}
+          onClick={event => event.stopPropagation()}
+        >
+          Set
+        </Button>
+      </div>
+    </ServiceInfoForm>
   )
   function handleSettingNewCosts(event) {
     event.preventDefault()
@@ -54,7 +52,7 @@ const ServiceInfoForm = styled.form`
   }
 `
 
-const NoSpinnersInput = styled.input`
+const CostInput = styled.input`
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;

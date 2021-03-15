@@ -1,32 +1,30 @@
 import styled from 'styled-components/macro'
 import Button from '../Button/Button'
 
-export default function NewService({ onSubmit, onAddNewService }) {
+export default function NewService({ onSubmit }) {
   return (
-    <>
-      <BlurContainer>
-        <Form
-          onSubmit={event => handleSubmit(event)}
-          data-testid="newServiceForm"
-        >
-          <label>
-            Name der Dienstleistung
-            <input
-              data-testid="newServiceInput"
-              maxLength="20"
-              name="service"
-              placeholder="Dienstleistung"
-              required
-            />
-          </label>
-          <label>
-            Stundensatz
-            <input name="costs" placeholder="default: 50€" />
-          </label>
-          <Button bgColor={{ name: 'green' }}>Hinzufügen</Button>
-        </Form>
-      </BlurContainer>
-    </>
+    <BlurContainer>
+      <Form
+        onSubmit={event => handleSubmit(event)}
+        data-testid="newServiceForm"
+      >
+        <label>
+          Name der Dienstleistung
+          <input
+            data-testid="newServiceInput"
+            maxLength="20"
+            name="service"
+            placeholder="Dienstleistung"
+            required
+          />
+        </label>
+        <label>
+          Stundensatz
+          <input name="costs" placeholder="default: 50€" />
+        </label>
+        <Button bgColor={{ name: 'green' }}>Hinzufügen</Button>
+      </Form>
+    </BlurContainer>
   )
 
   function handleSubmit(event) {
@@ -36,7 +34,6 @@ export default function NewService({ onSubmit, onAddNewService }) {
       name: formElements.service.value,
       costs: Number(formElements.costs.value) || Number(50),
     }
-    onAddNewService('home')
     onSubmit(data)
   }
 }

@@ -1,3 +1,3 @@
-export default function saveLocal(key, data) {
+export default function saveToLocal(key, data) {
   localStorage.setItem(key, JSON.stringify(data))
 }
