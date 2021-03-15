@@ -8,48 +8,59 @@ import Result from '../Result/Result'
 import Button from '../Button/Button'
 import NewService from '../FormComponents/NewService'
 import Header from '../Header/Header'
+import SlideMenu from '../SlideMenu/SlideMenu'
 
 export default function App() {
   const [services, setServices] = useState(loadFromLocal('services') ?? [])
   const [sum, setSum] = useState(0)
   const [openServiceFrom, setOpenServiceFrom] = useState('home')
+  const [menuIsOpen, setMenuIsOpen] = useState(false)
 
   useEffect(() => {
     saveToLocal('services', services)
   }, [services])
 
   return (
-    <AppLayout>
-      <Header title={'QuickQalc'}></Header>
-      <Content>
-        {services.map(({ name, costs, id }) => (
-          <ServiceCard
-            key={id}
-            name={name}
-            costs={costs}
-            onPlus={handlePlus}
-            onMinus={handleMinus}
-            services={services}
-            onAddingNewCosts={updateCosts}
-            adjustCurrentCosts={adjustCurrentCosts}
-          />
-        ))}
-      </Content>
-
-      <ButtonBox>
-        <ButtonNewService
-          onClick={() => setOpenServiceFrom('newService')}
-          bgColor={{ name: 'white' }}
+    <>
+      <SlideMenu menuIsOpen={menuIsOpen} setMenuIsOpen={setMenuIsOpen} />
+      <AppLayout>
+        <MenuButton
+          bgColor={{ name: 'grey' }}
+          onClick={() => setMenuIsOpen(true)}
         >
-          New
-        </ButtonNewService>
-        <Result resultValue={sum} />
-        <Delete onClick={() => localStorage.clear()}>clear</Delete>
-      </ButtonBox>
-      {openServiceFrom === 'newService' && (
-        <NewService onSubmit={onAddNewService} />
-      )}
-    </AppLayout>
+          Open
+        </MenuButton>
+        <Header title={'QuickQalc'}></Header>
+        <Content>
+          {services.map(({ name, costs, id }) => (
+            <ServiceCard
+              key={id}
+              name={name}
+              costs={costs}
+              onPlus={handlePlus}
+              onMinus={handleMinus}
+              services={services}
+              onAddingNewCosts={updateCosts}
+              adjustCurrentCosts={adjustCurrentCosts}
+            />
+          ))}
+        </Content>
+
+        <ButtonBox>
+          <ButtonNewService
+            onClick={() => setOpenServiceFrom('newService')}
+            bgColor={{ name: 'white' }}
+          >
+            New
+          </ButtonNewService>
+          <Result resultValue={sum} />
+          <Delete onClick={() => localStorage.clear()}>clear</Delete>
+        </ButtonBox>
+        {openServiceFrom === 'newService' && (
+          <NewService onSubmit={onAddNewService} />
+        )}
+      </AppLayout>
+    </>
   )
 
   function updateCosts(index, currentCosts) {
@@ -116,4 +127,9 @@ const Content = styled.div`
 `
 const Delete = styled.button`
   height: 50px;
+`
+
+const MenuButton = styled(Button)`
+  position: absolute;
+  right: 5px;
 `
