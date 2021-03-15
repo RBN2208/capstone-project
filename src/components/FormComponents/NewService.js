@@ -20,7 +20,7 @@ export default function NewService({ onSubmit }) {
         </label>
         <label>
           Stundensatz
-          <input name="costs" placeholder="default: 50€" />
+          <input name="costs" placeholder="default: 50€ (e.g. 25)" />
         </label>
         <Button bgColor={{ name: 'green' }}>Hinzufügen</Button>
       </Form>
@@ -30,9 +30,10 @@ export default function NewService({ onSubmit }) {
   function handleSubmit(event) {
     event.preventDefault()
     const formElements = event.target.elements
+    const costValue = formElements.costs.value.replace(/[^\d]/g, '')
     const data = {
       name: formElements.service.value,
-      costs: Number(formElements.costs.value) || Number(50),
+      costs: Number(costValue) || Number(50),
     }
     onSubmit(data)
   }
