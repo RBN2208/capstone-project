@@ -20,7 +20,7 @@ export default function App() {
 
   return (
     <AppLayout>
-      <Header title={'QuickQalc'} />
+      <Header title={'QuickQalc'}></Header>
       <Content>
         {services.map(({ name, costs, id }) => (
           <ServiceCard
