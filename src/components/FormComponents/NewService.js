@@ -11,6 +11,7 @@ export default function NewService({ onSubmit }) {
         <label>
           Name der Dienstleistung
           <input
+            aria-label="dienstleistung"
             data-testid="newServiceInput"
             maxLength="20"
             name="service"

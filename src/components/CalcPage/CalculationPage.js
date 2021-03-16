@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { v4 as uuidv4 } from 'uuid'
 import ServiceCard from '../ServiceCard/ServiceCard'
 import Header from '../Header/Header'
-import Icon from 'supercons'
+import MenuButton from '../MenuButton/MenuButton'
 import Button from '../Button/Button'
 import Result from '../Result/Result'
 import NewService from '../FormComponents/NewService'
@@ -21,9 +21,7 @@ export default function Calculation({
 
   return (
     <>
-      <MenuButton>
-        <Icon glyph="menu" onClick={() => setIsSlideMenuOpen(true)} />
-      </MenuButton>
+      <MenuButton openSlideMenu={setIsSlideMenuOpen} />
       <Header title={'QuickQalc'}></Header>
       <Content>
         {services.map(({ name, costs, id }) => (
@@ -84,11 +82,4 @@ const ButtonNewService = styled(Button)`
 const ButtonBox = styled.div`
   display: flex;
   justify-content: space-between;
-`
-
-const MenuButton = styled.div`
-  position: absolute;
-  right: 0.5em;
-  top: 0.7em;
-  scale: 180%;
 `
