@@ -2,11 +2,11 @@ import styled from 'styled-components'
 import Header from '../Header/Header'
 import Icon from 'supercons'
 
-export default function History({ setMenuIsOpen }) {
+export default function History({ setIsSlideMenuOpen }) {
   return (
     <>
       <MenuButton>
-        <Icon glyph="menu" onClick={() => setMenuIsOpen(true)} />
+        <Icon glyph="menu" onClick={() => setIsSlideMenuOpen(true)} />
       </MenuButton>
       <Header title="Historypage" />
     </>

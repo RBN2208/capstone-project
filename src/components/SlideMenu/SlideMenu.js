@@ -1,14 +1,14 @@
 import styled from 'styled-components/macro'
 import { Link } from 'react-router-dom'
 
-export default function SlideMenu({ menuIsOpen, setMenuIsOpen }) {
+export default function SlideMenu({ isSlideMenuOpen, setIsSlideMenuOpen }) {
   return (
-    <MenuBox position={menuIsOpen}>
+    <MenuBox position={isSlideMenuOpen}>
       <Nav>
-        <Link to="/" onClick={() => setMenuIsOpen(false)}>
+        <Link to="/" onClick={() => setIsSlideMenuOpen(false)}>
           Home
         </Link>
-        <Link to="/history" onClick={() => setMenuIsOpen(false)}>
+        <Link to="/history" onClick={() => setIsSlideMenuOpen(false)}>
           History
         </Link>
       </Nav>

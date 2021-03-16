@@ -12,9 +12,9 @@ import CalculationPage from '../CalcPage/CalculationPage'
 
 export default function App() {
   const [services, setServices] = useState(loadFromLocal('services') ?? [])
-  const [sum, setSum] = useState(0)
+  const [finalCosts, setFinalCosts] = useState(0)
   const [openServiceFrom, setOpenServiceFrom] = useState('home')
-  const [menuIsOpen, setMenuIsOpen] = useState(false)
+  const [isSlideMenuOpen, setIsSlideMenuOpen] = useState(false)
 
   useEffect(() => {
     saveToLocal('services', services)
@@ -22,16 +22,19 @@ export default function App() {
 
   return (
     <>
-      <SlideMenu menuIsOpen={menuIsOpen} setMenuIsOpen={setMenuIsOpen} />
+      <SlideMenu
+        isSlideMenuOpen={isSlideMenuOpen}
+        setIsSlideMenuOpen={setIsSlideMenuOpen}
+      />
       <Switch>
-        <AppLayout openMenu={menuIsOpen}>
+        <AppLayout openMenu={isSlideMenuOpen}>
           <Route exact path="/">
             <CalculationPage
-              sum={sum}
+              finalCosts={finalCosts}
               services={services}
               openServiceFrom={openServiceFrom}
               setOpenServiceFrom={setOpenServiceFrom}
-              setMenuIsOpen={setMenuIsOpen}
+              setIsSlideMenuOpen={setIsSlideMenuOpen}
               onPlus={handlePlus}
               onMinus={handleMinus}
               onAddingNewCosts={updateCosts}
@@ -40,21 +43,21 @@ export default function App() {
           </Route>
 
           <Route path="/history">
-            <History setMenuIsOpen={setMenuIsOpen} />
+            <History setIsSlideMenuOpen={setIsSlideMenuOpen} />
           </Route>
         </AppLayout>
       </Switch>
     </>
   )
 
-  function updateCosts(index, newCosts, currentCosts, counter) {
+  function updateCosts(index, newCostsPerHour, currentCostsPerHour, hours) {
     const currentService = services[index]
     setServices([
       ...services.slice(0, index),
-      { ...currentService, costs: currentCosts },
+      { ...currentService, costs: newCostsPerHour },
       ...services.slice(index + 1),
     ])
-    setSum(sum - (currentCosts - newCosts) * counter)
+    setFinalCosts(finalCosts - (currentCostsPerHour - newCostsPerHour) * hours)
   }
 
   function onAddNewService({ name, costs }) {
@@ -68,11 +71,11 @@ export default function App() {
   }
 
   function handlePlus(costs) {
-    setSum(sum + costs)
+    setFinalCosts(finalCosts + costs)
   }
 
   function handleMinus(costs) {
-    setSum(sum - costs)
+    setFinalCosts(finalCosts - costs)
   }
 }
 

@@ -11,16 +11,16 @@ export default function Calculation({
   onPlus,
   onMinus,
   onAddingNewCosts,
-  setMenuIsOpen,
+  setIsSlideMenuOpen,
   openServiceFrom,
   setOpenServiceFrom,
   onAddNewService,
-  sum,
+  finalCosts,
 }) {
   return (
     <>
       <MenuButton>
-        <Icon glyph="menu" onClick={() => setMenuIsOpen(true)} />
+        <Icon glyph="menu" onClick={() => setIsSlideMenuOpen(true)} />
       </MenuButton>
       <Header title={'QuickQalc'}></Header>
       <Content>
@@ -44,7 +44,7 @@ export default function Calculation({
         >
           New
         </ButtonNewService>
-        <Result resultValue={sum} />
+        <Result resultValue={finalCosts} />
         <Delete onClick={() => localStorage.clear()}>clear</Delete>
       </ButtonBox>
 
