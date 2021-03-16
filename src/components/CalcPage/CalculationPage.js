@@ -1,22 +1,24 @@
 import styled from 'styled-components'
+import { v4 as uuidv4 } from 'uuid'
 import ServiceCard from '../ServiceCard/ServiceCard'
 import Header from '../Header/Header'
 import Icon from 'supercons'
 import Button from '../Button/Button'
 import Result from '../Result/Result'
 import NewService from '../FormComponents/NewService'
+import { useState } from 'react'
 
 export default function Calculation({
   services,
+  setServices,
   onPlus,
   onMinus,
   onAddingNewCosts,
   setIsSlideMenuOpen,
-  openServiceFrom,
-  setOpenServiceFrom,
-  onAddNewService,
   finalCosts,
 }) {
+  const [createNewService, setCreateNewService] = useState('home')
+
   return (
     <>
       <MenuButton>
@@ -39,20 +41,28 @@ export default function Calculation({
 
       <ButtonBox>
         <ButtonNewService
-          onClick={() => setOpenServiceFrom('newService')}
+          onClick={() => setCreateNewService('newService')}
           bgColor={{ name: 'white' }}
         >
           New
         </ButtonNewService>
         <Result resultValue={finalCosts} />
-        <Delete onClick={() => localStorage.clear()}>clear</Delete>
       </ButtonBox>
 
-      {openServiceFrom === 'newService' && (
+      {createNewService === 'newService' && (
         <NewService onSubmit={onAddNewService} />
       )}
     </>
   )
+  function onAddNewService({ name, costs }) {
+    const newService = {
+      id: uuidv4(),
+      name,
+      costs,
+    }
+    setServices([...services, newService])
+    setCreateNewService('home')
+  }
 }
 
 const Content = styled.div`
@@ -60,14 +70,13 @@ const Content = styled.div`
   gap: 10px;
   grid-auto-rows: min-content;
   padding: 15px;
-
   margin: 0 auto;
   overflow-y: scroll;
   width: 100%;
 `
 
 const ButtonNewService = styled(Button)`
-  width: 100px;
+  width: 25%;
   color: black;
   border: 1px solid darkgray;
 `
@@ -75,10 +84,6 @@ const ButtonNewService = styled(Button)`
 const ButtonBox = styled.div`
   display: flex;
   justify-content: space-between;
-`
-
-const Delete = styled.button`
-  height: 50px;
 `
 
 const MenuButton = styled.div`

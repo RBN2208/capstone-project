@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 import { Switch, Route } from 'react-router-dom'
@@ -13,7 +12,6 @@ import CalculationPage from '../CalcPage/CalculationPage'
 export default function App() {
   const [services, setServices] = useState(loadFromLocal('services') ?? [])
   const [finalCosts, setFinalCosts] = useState(0)
-  const [openServiceFrom, setOpenServiceFrom] = useState('home')
   const [isSlideMenuOpen, setIsSlideMenuOpen] = useState(false)
 
   useEffect(() => {
@@ -32,13 +30,11 @@ export default function App() {
             <CalculationPage
               finalCosts={finalCosts}
               services={services}
-              openServiceFrom={openServiceFrom}
-              setOpenServiceFrom={setOpenServiceFrom}
+              setServices={setServices}
               setIsSlideMenuOpen={setIsSlideMenuOpen}
               onPlus={handlePlus}
               onMinus={handleMinus}
               onAddingNewCosts={updateCosts}
-              onAddNewService={onAddNewService}
             />
           </Route>
 
@@ -58,16 +54,6 @@ export default function App() {
       ...services.slice(index + 1),
     ])
     setFinalCosts(finalCosts - (currentCostsPerHour - newCostsPerHour) * hours)
-  }
-
-  function onAddNewService({ name, costs }) {
-    const newService = {
-      id: uuidv4(),
-      name,
-      costs,
-    }
-    setServices([...services, newService])
-    setOpenServiceFrom('home')
   }
 
   function handlePlus(costs) {
