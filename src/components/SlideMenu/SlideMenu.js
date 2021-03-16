@@ -1,6 +1,5 @@
-import styled, { keyframes } from 'styled-components/macro'
+import styled from 'styled-components/macro'
 import { Link } from 'react-router-dom'
-import Icon from 'supercons'
 
 export default function SlideMenu({ menuIsOpen, setMenuIsOpen }) {
   return (
@@ -13,42 +12,21 @@ export default function SlideMenu({ menuIsOpen, setMenuIsOpen }) {
           History
         </Link>
       </Nav>
-      <IconBox>
-        <Icon glyph="view-close-small" onClick={() => setMenuIsOpen(false)} />
-      </IconBox>
     </MenuBox>
   )
 }
 
-const slideIn = keyframes`
-    0% {left: -100vw;}
-    100% {left: 0vw;}
-`
-
-const slideOut = keyframes`
-    0% {left: 0vw;}
-    100% {left: -100vw;}
-`
-
 const MenuBox = styled.div`
   position: fixed;
   left: ${props => (props.position ? '0' : '-100vw')};
-  display: ${props => (props.position ? 'inline' : 'none')};
   background-color: gainsboro;
-  width: 50vw;
+  width: 150px;
   height: 100vh;
   padding: 50px 20px;
   z-index: 1;
-  animation-name: ${props => (props.position ? slideIn : slideOut)};
-  animation-duration: 1s;
-  animation-iteration-count: 1;
+  transition: all 0.4s;
 `
 const Nav = styled.nav`
   display: grid;
   gap: 30px;
-`
-const IconBox = styled.div`
-  position: absolute;
-  top: 10px;
-  right: 10px;
 `

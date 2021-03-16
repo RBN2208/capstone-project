@@ -24,7 +24,7 @@ export default function App() {
     <>
       <SlideMenu menuIsOpen={menuIsOpen} setMenuIsOpen={setMenuIsOpen} />
       <Switch>
-        <AppLayout>
+        <AppLayout openMenu={menuIsOpen}>
           <Route exact path="/">
             <CalculationPage
               sum={sum}
@@ -82,5 +82,6 @@ const AppLayout = styled.div`
   gap: 10px;
   height: 100vh;
   position: relative;
-  filter: ${props => props.blur};
+  margin-left: ${props => (props.openMenu ? '150px' : '0px')};
+  transition: all 0.5s;
 `
