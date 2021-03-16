@@ -9,7 +9,7 @@ export default function Result({ resultValue }) {
 }
 
 const Resultbox = styled.div`
-  width: 70%;
+  width: 75%;
   background-color: lightgreen;
   padding: 15px;
 `
