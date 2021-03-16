@@ -1,12 +1,17 @@
 import styled, { keyframes } from 'styled-components/macro'
+import { Link } from 'react-router-dom'
 import Icon from 'supercons'
 
 export default function SlideMenu({ menuIsOpen, setMenuIsOpen }) {
   return (
     <MenuBox position={menuIsOpen}>
       <Nav>
-        <span>Home</span>
-        <span>History</span>
+        <Link to="/" onClick={() => setMenuIsOpen(false)}>
+          Home
+        </Link>
+        <Link to="/history" onClick={() => setMenuIsOpen(false)}>
+          History
+        </Link>
       </Nav>
       <IconBox>
         <Icon glyph="view-close-small" onClick={() => setMenuIsOpen(false)} />

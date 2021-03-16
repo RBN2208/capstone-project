@@ -1,16 +1,14 @@
 import { v4 as uuidv4 } from 'uuid'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
-import Icon from 'supercons'
+import { Switch, Route } from 'react-router-dom'
 
 import loadFromLocal from '../../lib/loadFromLocal'
 import saveToLocal from '../../lib/saveToLocal'
-import ServiceCard from '../ServiceCard/ServiceCard'
-import Result from '../Result/Result'
-import Button from '../Button/Button'
-import NewService from '../FormComponents/NewService'
-import Header from '../Header/Header'
+
 import SlideMenu from '../SlideMenu/SlideMenu'
+import History from '../HistoryPage/History'
+import CalculationPage from '../CalcPage/CalculationPage'
 
 export default function App() {
   const [services, setServices] = useState(loadFromLocal('services') ?? [])
@@ -25,53 +23,37 @@ export default function App() {
   return (
     <>
       <SlideMenu menuIsOpen={menuIsOpen} setMenuIsOpen={setMenuIsOpen} />
-      <AppLayout>
-        <MenuButton>
-          <Icon glyph="menu" onClick={() => setMenuIsOpen(true)} />
-        </MenuButton>
-        <Header title={'QuickQalc'}></Header>
-        <Content>
-          {services.map(({ name, costs, id }) => (
-            <ServiceCard
-              key={id}
-              name={name}
-              costs={costs}
+      <Switch>
+        <AppLayout>
+          <Route exact path="/">
+            <CalculationPage
+              sum={sum}
+              services={services}
+              openServiceFrom={openServiceFrom}
+              setOpenServiceFrom={setOpenServiceFrom}
+              setMenuIsOpen={setMenuIsOpen}
               onPlus={handlePlus}
               onMinus={handleMinus}
-              services={services}
               onAddingNewCosts={updateCosts}
-              adjustCurrentCosts={adjustCurrentCosts}
+              onAddNewService={onAddNewService}
             />
-          ))}
-        </Content>
+          </Route>
 
-        <ButtonBox>
-          <ButtonNewService
-            onClick={() => setOpenServiceFrom('newService')}
-            bgColor={{ name: 'white' }}
-          >
-            New
-          </ButtonNewService>
-          <Result resultValue={sum} />
-          <Delete onClick={() => localStorage.clear()}>clear</Delete>
-        </ButtonBox>
-        {openServiceFrom === 'newService' && (
-          <NewService onSubmit={onAddNewService} />
-        )}
-      </AppLayout>
+          <Route path="/history">
+            <History setMenuIsOpen={setMenuIsOpen} />
+          </Route>
+        </AppLayout>
+      </Switch>
     </>
   )
 
-  function updateCosts(index, currentCosts) {
+  function updateCosts(index, newCosts, currentCosts, counter) {
     const currentService = services[index]
     setServices([
       ...services.slice(0, index),
       { ...currentService, costs: currentCosts },
       ...services.slice(index + 1),
     ])
-  }
-
-  function adjustCurrentCosts({ newCosts, counter, currentCosts }) {
     setSum(sum - (currentCosts - newCosts) * counter)
   }
 
@@ -101,36 +83,4 @@ const AppLayout = styled.div`
   height: 100vh;
   position: relative;
   filter: ${props => props.blur};
-`
-
-const ButtonNewService = styled(Button)`
-  width: 100px;
-  color: black;
-  border: 1px solid darkgray;
-`
-
-const ButtonBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-`
-
-const Content = styled.div`
-  display: grid;
-  gap: 10px;
-  grid-auto-rows: min-content;
-  padding: 15px;
-
-  margin: 0 auto;
-  overflow-y: scroll;
-  width: 100%;
-`
-const Delete = styled.button`
-  height: 50px;
-`
-
-const MenuButton = styled.div`
-  position: absolute;
-  right: 0.5em;
-  top: 0.7em;
-  scale: 180%;
 `
