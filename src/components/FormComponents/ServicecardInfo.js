@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import Button from '../Button/Button'
 
 export default function ServicecardInfo({
-  counter,
-  currentCosts,
+  hours,
+  currentCostsPerHour,
   setUsedCosts,
   onAddingNewCosts,
   index,
@@ -13,7 +13,7 @@ export default function ServicecardInfo({
       data-testid="setCostsForm"
       onSubmit={event => handleSettingNewCosts(event)}
     >
-      <div>Zeit: {counter} Stunden</div>
+      <div>Zeit: {hours} Stunden</div>
       <div>
         <label>
           Stundensatz:
@@ -22,7 +22,7 @@ export default function ServicecardInfo({
             id="setcosts"
             name="setcosts"
             type="number"
-            placeholder={currentCosts + '€'}
+            placeholder={currentCostsPerHour + '€'}
             onClick={event => event.stopPropagation()}
           />
         </label>
@@ -38,9 +38,9 @@ export default function ServicecardInfo({
   function handleSettingNewCosts(event) {
     event.preventDefault()
     const formElement = event.target.elements
-    const newCosts = Number(formElement.setcosts.value)
-    setUsedCosts(newCosts)
-    onAddingNewCosts(index, newCosts)
+    const newCostsPerHour = Number(formElement.setcosts.value)
+    setUsedCosts(newCostsPerHour)
+    onAddingNewCosts(index, newCostsPerHour, currentCostsPerHour, hours)
   }
 }
 

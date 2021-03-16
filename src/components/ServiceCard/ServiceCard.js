@@ -10,9 +10,10 @@ export default function ServiceCard({
   onMinus,
   services,
   onAddingNewCosts,
+  adjustCurrentCosts,
 }) {
   const [isVisible, setIsVisible] = useState(false)
-  const [counter, setCounter] = useState(0)
+  const [hours, setHours] = useState(0)
   const [usedCosts, setUsedCosts] = useState(costs)
   const index = services.findIndex(param => param.name === name)
 
@@ -35,7 +36,7 @@ export default function ServiceCard({
         </TextBox>
         <ButtonBox>
           <Button
-            disabled={counter === 0}
+            disabled={hours === 0}
             aria-label="button-minus"
             onClick={handleClickMinus}
             bgColor={{ name: 'crimson' }}
@@ -55,11 +56,12 @@ export default function ServiceCard({
       {isVisible && (
         <CardInfo>
           <ServicecardInfo
-            counter={counter}
+            hours={hours}
             index={index}
-            currentCosts={usedCosts}
+            currentCostsPerHour={usedCosts}
             setUsedCosts={setUsedCosts}
             onAddingNewCosts={onAddingNewCosts}
+            adjustCurrentCosts={adjustCurrentCosts}
           />
         </CardInfo>
       )}
@@ -69,13 +71,13 @@ export default function ServiceCard({
   function handleClickPlus(event) {
     event.stopPropagation()
     onPlus(usedCosts)
-    setCounter(counter + 1)
+    setHours(hours + 1)
   }
 
   function handleClickMinus(event) {
     event.stopPropagation()
     onMinus(usedCosts)
-    setCounter(counter - 1)
+    setHours(hours - 1)
   }
 }
 

@@ -1,63 +1,63 @@
 import { v4 as uuidv4 } from 'uuid'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
+import { Switch, Route } from 'react-router-dom'
+
 import loadFromLocal from '../../lib/loadFromLocal'
 import saveToLocal from '../../lib/saveToLocal'
-import ServiceCard from '../ServiceCard/ServiceCard'
-import Result from '../Result/Result'
-import Button from '../Button/Button'
-import NewService from '../FormComponents/NewService'
-import Header from '../Header/Header'
+
+import SlideMenu from '../SlideMenu/SlideMenu'
+import History from '../HistoryPage/History'
+import CalculationPage from '../CalcPage/CalculationPage'
 
 export default function App() {
   const [services, setServices] = useState(loadFromLocal('services') ?? [])
-  const [sum, setSum] = useState(0)
+  const [finalCosts, setFinalCosts] = useState(0)
   const [openServiceFrom, setOpenServiceFrom] = useState('home')
+  const [isSlideMenuOpen, setIsSlideMenuOpen] = useState(false)
 
   useEffect(() => {
     saveToLocal('services', services)
   }, [services])
 
   return (
-    <AppLayout>
-      <Header title={'QuickQalc'} />
-      <Content>
-        {services.map(({ name, costs, id }) => (
-          <ServiceCard
-            key={id}
-            name={name}
-            costs={costs}
-            onPlus={handlePlus}
-            onMinus={handleMinus}
-            services={services}
-            onAddingNewCosts={updateCosts}
-          />
-        ))}
-      </Content>
+    <>
+      <SlideMenu
+        isSlideMenuOpen={isSlideMenuOpen}
+        setIsSlideMenuOpen={setIsSlideMenuOpen}
+      />
+      <Switch>
+        <AppLayout openMenu={isSlideMenuOpen}>
+          <Route exact path="/">
+            <CalculationPage
+              finalCosts={finalCosts}
+              services={services}
+              openServiceFrom={openServiceFrom}
+              setOpenServiceFrom={setOpenServiceFrom}
+              setIsSlideMenuOpen={setIsSlideMenuOpen}
+              onPlus={handlePlus}
+              onMinus={handleMinus}
+              onAddingNewCosts={updateCosts}
+              onAddNewService={onAddNewService}
+            />
+          </Route>
 
-      <ButtonBox>
-        <ButtonNewService
-          onClick={() => setOpenServiceFrom('newService')}
-          bgColor={{ name: 'white' }}
-        >
-          New
-        </ButtonNewService>
-        <Result resultValue={sum} />
-        <Delete onClick={() => localStorage.clear()}>clear</Delete>
-      </ButtonBox>
-      {openServiceFrom === 'newService' && (
-        <NewService onSubmit={onAddNewService} />
-      )}
-    </AppLayout>
+          <Route path="/history">
+            <History setIsSlideMenuOpen={setIsSlideMenuOpen} />
+          </Route>
+        </AppLayout>
+      </Switch>
+    </>
   )
 
-  function updateCosts(index, currentCosts) {
+  function updateCosts(index, newCostsPerHour, currentCostsPerHour, hours) {
     const currentService = services[index]
     setServices([
       ...services.slice(0, index),
-      { ...currentService, costs: currentCosts },
+      { ...currentService, costs: newCostsPerHour },
       ...services.slice(index + 1),
     ])
+    setFinalCosts(finalCosts - (currentCostsPerHour - newCostsPerHour) * hours)
   }
 
   function onAddNewService({ name, costs }) {
@@ -71,11 +71,11 @@ export default function App() {
   }
 
   function handlePlus(costs) {
-    setSum(sum + costs)
+    setFinalCosts(finalCosts + costs)
   }
 
   function handleMinus(costs) {
-    setSum(sum - costs)
+    setFinalCosts(finalCosts - costs)
   }
 }
 
@@ -85,30 +85,6 @@ const AppLayout = styled.div`
   gap: 10px;
   height: 100vh;
   position: relative;
-  filter: ${props => props.blur};
-`
-
-const ButtonNewService = styled(Button)`
-  width: 100px;
-  color: black;
-  border: 1px solid darkgray;
-`
-
-const ButtonBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-`
-
-const Content = styled.div`
-  display: grid;
-  gap: 10px;
-  grid-auto-rows: min-content;
-  padding: 15px;
-
-  margin: 0 auto;
-  overflow-y: scroll;
-  width: 100%;
-`
-const Delete = styled.button`
-  height: 50px;
+  margin-left: ${props => (props.openMenu ? '150px' : '0px')};
+  transition: all 0.5s;
 `
