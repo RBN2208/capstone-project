@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import Button from '../Button/Button'
 
 export default function ServicecardInfo({
@@ -26,12 +26,7 @@ export default function ServicecardInfo({
             onClick={event => event.stopPropagation()}
           />
         </label>
-        <Button
-          bgColor={{ name: 'grey' }}
-          onClick={event => event.stopPropagation()}
-        >
-          Set
-        </Button>
+        <Button onClick={event => event.stopPropagation()}>Set</Button>
       </div>
     </ServiceInfoForm>
   )

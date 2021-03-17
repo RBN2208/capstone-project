@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { v4 as uuidv4 } from 'uuid'
 import ServiceCard from '../ServiceCard/ServiceCard'
 import Header from '../Header/Header'
@@ -38,10 +38,7 @@ export default function Calculation({
       </Content>
 
       <ButtonBox>
-        <ButtonNewService
-          onClick={() => setCreateNewService('newService')}
-          bgColor={{ name: 'white' }}
-        >
+        <ButtonNewService onClick={() => setCreateNewService('newService')}>
           New
         </ButtonNewService>
         <Result resultValue={finalCosts} />
@@ -75,8 +72,7 @@ const Content = styled.div`
 
 const ButtonNewService = styled(Button)`
   width: 25%;
-  color: black;
-  border: 1px solid darkgray;
+  border-radius: 0;
 `
 
 const ButtonBox = styled.div`

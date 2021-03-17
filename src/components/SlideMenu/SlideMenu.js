@@ -20,7 +20,8 @@ export default function SlideMenu({ isSlideMenuOpen, setIsSlideMenuOpen }) {
 const MenuBox = styled.div`
   position: fixed;
   left: ${props => (props.position ? '0' : '-150px')};
-  background-color: gainsboro;
+  background-color: var(--color-dark);
+  color: var(--color-light);
   width: 150px;
   height: 100vh;
   padding: 50px 20px;
@@ -35,7 +36,7 @@ const Nav = styled.nav`
 const NavLinkStyled = styled(NavLink)`
   text-decoration: none;
   &:visited {
-    color: black;
+    color: var(--color-light);
   }
 `
 const Delete = styled.button`

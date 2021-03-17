@@ -15,10 +15,10 @@ const Resultbox = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 75%;
-  background-color: lightgreen;
+  background-color: var(--color-green);
   padding: 20px;
 `
 const Checkmark = styled(Icon)`
   scale: 250%;
-  color: darkcyan;
+  color: var(--color-darkgreen);
 `

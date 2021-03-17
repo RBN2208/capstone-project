@@ -13,10 +13,17 @@ export default function App() {
   const [services, setServices] = useState(loadFromLocal('services') ?? [])
   const [finalCosts, setFinalCosts] = useState(0)
   const [isSlideMenuOpen, setIsSlideMenuOpen] = useState(false)
+  const [lastCalculations, setLastCalculation] = useState(
+    loadFromLocal('calculations') ?? []
+  )
 
   useEffect(() => {
     saveToLocal('services', services)
   }, [services])
+
+  useEffect(() => {
+    saveToLocal('calculations', lastCalculations)
+  }, [lastCalculations])
 
   return (
     <>

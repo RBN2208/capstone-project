@@ -35,21 +35,16 @@ export default function ServiceCard({
           {name}
         </TextBox>
         <ButtonBox>
-          <Button
+          <ButtonMinus
             disabled={hours === 0}
             aria-label="button-minus"
             onClick={handleClickMinus}
-            bgColor={{ name: 'crimson' }}
           >
             -
-          </Button>
-          <Button
-            aria-label="button-plus"
-            onClick={handleClickPlus}
-            bgColor={{ name: 'green' }}
-          >
+          </ButtonMinus>
+          <ButtonPlus aria-label="button-plus" onClick={handleClickPlus}>
             +
-          </Button>
+          </ButtonPlus>
         </ButtonBox>
       </Servicebox>
 
@@ -84,10 +79,10 @@ export default function ServiceCard({
 const CardContainer = styled.div`
   display: grid;
   gap: 5px;
-  background-color: white;
+  background-color: var(--color-lighter);
   padding: 10px 15px;
   margin: 2px;
-  box-shadow: 0 0 5px #868686;
+  box-shadow: 0 0 5px var(--color-dark);
   border-radius: 7px;
   overflow: hidden;
   svg {
@@ -97,7 +92,7 @@ const CardContainer = styled.div`
   }
 `
 const CardInfo = styled.div`
-  background-color: gainsboro;
+  background-color: var(--color-light);
   padding: 15px;
   margin: 5px -15px -15px;
 `
@@ -113,6 +108,16 @@ const ButtonBox = styled.div`
   align-items: center;
   gap: 10px;
 `
+
+const ButtonMinus = styled(Button)`
+  background-color: var(--color-red);
+`
+
+const ButtonPlus = styled(Button)`
+  background-color: var(--color-green);
+  color: var(--color-dark);
+`
+
 const TextBox = styled.div`
   display: flex;
   align-items: center;
