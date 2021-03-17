@@ -1,11 +1,16 @@
 import styled from 'styled-components/macro'
 import Icon from 'supercons'
 
-export default function Result({ resultValue }) {
+export default function Result({ resultValue, setOpenSafeResult }) {
   return (
     <Resultbox>
       <span>Endpreis: {resultValue} €</span>
-      <Checkmark glyph="checkmark" width={'20'} height={'20'} />
+      <Checkmark
+        glyph="checkmark"
+        width={'20'}
+        height={'20'}
+        onClick={() => setOpenSafeResult('openSafeResult')}
+      />
     </Resultbox>
   )
 }

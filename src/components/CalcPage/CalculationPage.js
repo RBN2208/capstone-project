@@ -16,6 +16,7 @@ export default function Calculation({
   onAddingNewCosts,
   setIsSlideMenuOpen,
   finalCosts,
+  setOpenSafeResult,
 }) {
   const [createNewService, setCreateNewService] = useState('home')
 
@@ -41,7 +42,10 @@ export default function Calculation({
         <ButtonNewService onClick={() => setCreateNewService('newService')}>
           New
         </ButtonNewService>
-        <Result resultValue={finalCosts} />
+        <Result
+          resultValue={finalCosts}
+          setOpenSafeResult={setOpenSafeResult}
+        />
       </ButtonBox>
 
       {createNewService === 'newService' && (

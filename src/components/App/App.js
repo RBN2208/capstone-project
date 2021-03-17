@@ -8,11 +8,13 @@ import saveToLocal from '../../lib/saveToLocal'
 import SlideMenu from '../SlideMenu/SlideMenu'
 import History from '../HistoryPage/History'
 import CalculationPage from '../CalcPage/CalculationPage'
+import SafeResult from '../FormComponents/SafeResult'
 
 export default function App() {
   const [services, setServices] = useState(loadFromLocal('services') ?? [])
   const [finalCosts, setFinalCosts] = useState(0)
   const [isSlideMenuOpen, setIsSlideMenuOpen] = useState(false)
+  const [openSafeResult, setOpenSafeResult] = useState('')
   const [lastCalculations, setLastCalculation] = useState(
     loadFromLocal('calculations') ?? []
   )
@@ -27,10 +29,6 @@ export default function App() {
 
   return (
     <>
-      <SlideMenu
-        isSlideMenuOpen={isSlideMenuOpen}
-        setIsSlideMenuOpen={setIsSlideMenuOpen}
-      />
       <Switch>
         <AppLayout openMenu={isSlideMenuOpen}>
           <Route exact path="/">
@@ -42,6 +40,7 @@ export default function App() {
               onPlus={handlePlus}
               onMinus={handleMinus}
               onAddingNewCosts={updateCosts}
+              setOpenSafeResult={setOpenSafeResult}
             />
           </Route>
 
@@ -50,6 +49,16 @@ export default function App() {
           </Route>
         </AppLayout>
       </Switch>
+      <SlideMenu
+        isSlideMenuOpen={isSlideMenuOpen}
+        setIsSlideMenuOpen={setIsSlideMenuOpen}
+      />
+      {openSafeResult === 'openSafeResult' && (
+        <SafeResult
+          finalCosts={finalCosts}
+          setOpenSafeResult={setOpenSafeResult}
+        />
+      )}
     </>
   )
 
