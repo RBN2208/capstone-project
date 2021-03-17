@@ -4,7 +4,7 @@ import styled from 'styled-components/macro'
 export default function MenuButton({ openSlideMenu }) {
   return (
     <Container>
-      <Icon glyph="menu" onClick={() => openSlideMenu(true)} />
+      <Icon role="button" glyph="menu" onClick={() => openSlideMenu(true)} />
     </Container>
   )
 }

@@ -11,8 +11,11 @@ export default function SafeResult({
       <Form onSubmit={event => handleClickOnSafe(event)}>
         <p>Die aktuell geschätzten Kosten betragen:</p>
         <FinalCosts name="endresult">{finalCosts}€</FinalCosts>
-        <ButtonSafe>Speichern</ButtonSafe>
-        <ButtonBack onClick={() => setOpenSafeResult('home')}>
+        <ButtonSafe data-testid="safebutton">Speichern</ButtonSafe>
+        <ButtonBack
+          data-testid="backbutton"
+          onClick={() => setOpenSafeResult('home')}
+        >
           Zurück
         </ButtonBack>
       </Form>
