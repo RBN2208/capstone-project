@@ -11,7 +11,7 @@ export default function SlideMenu({ isSlideMenuOpen, setIsSlideMenuOpen }) {
         <NavLinkStyled to="/history" onClick={() => setIsSlideMenuOpen(false)}>
           History
         </NavLinkStyled>
-        <Delete onClick={() => localStorage.clear()}>clear</Delete>
+        <Delete onClick={() => localStorage.clear()}>Clear</Delete>
       </Nav>
     </MenuBox>
   )

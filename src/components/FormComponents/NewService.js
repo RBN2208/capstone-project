@@ -58,4 +58,5 @@ const BlurContainer = styled.div`
 `
 const NewServiceButton = styled(Button)`
   background-color: var(--color-green);
+  color: var(--color-dark);
 `

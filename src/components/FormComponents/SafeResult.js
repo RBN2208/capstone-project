@@ -12,8 +12,10 @@ export default function SafeResult({
         <p>Die aktuell geschätzten Kosten betragen:</p>
         <FinalCosts name="endresult">{finalCosts}€</FinalCosts>
         <ButtonSafe>Speichern</ButtonSafe>
+        <ButtonBack onClick={() => setOpenSafeResult('home')}>
+          Zurück
+        </ButtonBack>
       </Form>
-      <Button onClick={() => setOpenSafeResult('home')}>Zurück</Button>
     </BlurContainer>
   )
   function handleClickOnSafe(event) {
@@ -56,4 +58,11 @@ const FinalCosts = styled.output`
 const ButtonSafe = styled(Button)`
   background-color: var(--color-green);
   color: var(--color-dark);
+`
+const ButtonBack = styled.div`
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  padding: 0.2em 0.6em;
+  border-radius: 3px;
+  font-size: 1.2rem;
 `
