@@ -19,6 +19,7 @@ export default function SlideMenu({ isSlideMenuOpen, setIsSlideMenuOpen }) {
 
 const MenuBox = styled.div`
   position: fixed;
+  top: 0;
   left: ${props => (props.position ? '0' : '-150px')};
   background-color: var(--color-dark);
   color: var(--color-light);

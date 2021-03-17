@@ -1,19 +1,32 @@
 import styled from 'styled-components'
 import Button from '../Button/Button'
 
-export default function SafeResult({ finalCosts, setOpenSafeResult }) {
+export default function SafeResult({
+  finalCosts,
+  setOpenSafeResult,
+  onSafeCosts,
+}) {
   return (
     <BlurContainer>
-      <Form>
+      <Form onSubmit={event => handleClickOnSafe(event)}>
         <p>Die aktuell geschätzten Kosten betragen:</p>
-        <FinalCosts>{finalCosts}€</FinalCosts>
-        <ButtonSafe onClick={() => setOpenSafeResult('home')}>
-          Speichern
-        </ButtonSafe>
-        <Button onClick={() => setOpenSafeResult('home')}>Zurück</Button>
+        <FinalCosts name="endresult">{finalCosts}€</FinalCosts>
+        <ButtonSafe>Speichern</ButtonSafe>
       </Form>
+      <Button onClick={() => setOpenSafeResult('home')}>Zurück</Button>
     </BlurContainer>
   )
+  function handleClickOnSafe(event) {
+    event.preventDefault()
+    const formElement = event.target.elements
+    const savedCosts = formElement.endresult.value
+    const currentDate = new Date().toLocaleDateString('de')
+    const data = {
+      date: currentDate,
+      costs: savedCosts,
+    }
+    onSafeCosts(data)
+  }
 }
 
 const Form = styled.form`
@@ -35,7 +48,9 @@ const BlurContainer = styled.div`
   display: grid;
   place-content: center;
 `
-const FinalCosts = styled.h3`
+const FinalCosts = styled.output`
+  font-size: 1.2rem;
+  font-weight: bold;
   margin-top: 0;
 `
 const ButtonSafe = styled(Button)`

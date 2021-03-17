@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 import { Switch, Route } from 'react-router-dom'
+import { v4 as uuidv4 } from 'uuid'
 
 import loadFromLocal from '../../lib/loadFromLocal'
 import saveToLocal from '../../lib/saveToLocal'
@@ -16,7 +17,7 @@ export default function App() {
   const [isSlideMenuOpen, setIsSlideMenuOpen] = useState(false)
   const [openSafeResult, setOpenSafeResult] = useState('')
   const [lastCalculations, setLastCalculation] = useState(
-    loadFromLocal('calculations') ?? []
+    loadFromLocal('lastCalculations') ?? []
   )
 
   useEffect(() => {
@@ -24,7 +25,7 @@ export default function App() {
   }, [services])
 
   useEffect(() => {
-    saveToLocal('calculations', lastCalculations)
+    saveToLocal('lastCalculations', lastCalculations)
   }, [lastCalculations])
 
   return (
@@ -45,7 +46,10 @@ export default function App() {
           </Route>
 
           <Route path="/history">
-            <History setIsSlideMenuOpen={setIsSlideMenuOpen} />
+            <History
+              setIsSlideMenuOpen={setIsSlideMenuOpen}
+              lastCalculations={lastCalculations}
+            />
           </Route>
         </AppLayout>
       </Switch>
@@ -57,10 +61,21 @@ export default function App() {
         <SafeResult
           finalCosts={finalCosts}
           setOpenSafeResult={setOpenSafeResult}
+          onSafeCosts={safeCostsToHistory}
         />
       )}
     </>
   )
+
+  function safeCostsToHistory({ date, costs }) {
+    const newCalculation = {
+      id: uuidv4(),
+      date,
+      costs,
+    }
+    setLastCalculation([...lastCalculations, newCalculation])
+    setOpenSafeResult('home')
+  }
 
   function updateCosts(index, newCostsPerHour, currentCostsPerHour, hours) {
     const currentService = services[index]
