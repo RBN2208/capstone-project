@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 import { Switch, Route } from 'react-router-dom'
+import { v4 as uuidv4 } from 'uuid'
 
 import loadFromLocal from '../../lib/loadFromLocal'
 import saveToLocal from '../../lib/saveToLocal'
@@ -8,43 +9,80 @@ import saveToLocal from '../../lib/saveToLocal'
 import SlideMenu from '../SlideMenu/SlideMenu'
 import History from '../HistoryPage/History'
 import CalculationPage from '../CalcPage/CalculationPage'
+import ResultForm from '../FormComponents/ResultForm'
+
+import useToggle from '../../services/useToggle'
 
 export default function App() {
   const [services, setServices] = useState(loadFromLocal('services') ?? [])
   const [finalCosts, setFinalCosts] = useState(0)
-  const [isSlideMenuOpen, setIsSlideMenuOpen] = useState(false)
+  const [toggleSlideMenu, setToggleSlideMenu] = useToggle()
+  const [openSafeResult, setOpenSafeResult] = useState('')
+  const [lastCalculations, setLastCalculation] = useState(
+    loadFromLocal('lastCalculations') ?? []
+  )
 
   useEffect(() => {
     saveToLocal('services', services)
   }, [services])
 
+  useEffect(() => {
+    saveToLocal('lastCalculations', lastCalculations)
+  }, [lastCalculations])
+
   return (
     <>
-      <SlideMenu
-        isSlideMenuOpen={isSlideMenuOpen}
-        setIsSlideMenuOpen={setIsSlideMenuOpen}
-      />
       <Switch>
-        <AppLayout openMenu={isSlideMenuOpen}>
+        <AppLayout openMenu={toggleSlideMenu}>
           <Route exact path="/">
             <CalculationPage
               finalCosts={finalCosts}
               services={services}
               setServices={setServices}
-              setIsSlideMenuOpen={setIsSlideMenuOpen}
+              setToggleSlideMenu={setToggleSlideMenu}
               onPlus={handlePlus}
               onMinus={handleMinus}
               onAddingNewCosts={updateCosts}
+              setOpenSafeResult={setOpenSafeResult}
             />
           </Route>
 
           <Route path="/history">
-            <History setIsSlideMenuOpen={setIsSlideMenuOpen} />
+            <History
+              setToggleSlideMenu={setToggleSlideMenu}
+              lastCalculations={lastCalculations}
+            />
           </Route>
         </AppLayout>
       </Switch>
+      <SlideMenu
+        toggleSlideMenu={toggleSlideMenu}
+        setToggleSlideMenu={setToggleSlideMenu}
+      />
+      {openSafeResult === 'openSafeResult' && (
+        <ResultForm
+          finalCosts={finalCosts}
+          onDiscardSave={setOpenSafeResult}
+          onSafeCosts={safeCostsToHistory}
+        />
+      )}
     </>
   )
+
+  function safeCostsToHistory({ date, costs }) {
+    const newCalculation = {
+      id: uuidv4(),
+      date,
+      costs,
+    }
+    setLastCalculation([...lastCalculations, newCalculation])
+    setOpenSafeResult('home')
+    resetValues()
+  }
+
+  function resetValues() {
+    window.location.reload()
+  }
 
   function updateCosts(index, newCostsPerHour, currentCostsPerHour, hours) {
     const currentService = services[index]

@@ -1,17 +1,17 @@
 import styled from 'styled-components/macro'
 import { NavLink } from 'react-router-dom'
 
-export default function SlideMenu({ isSlideMenuOpen, setIsSlideMenuOpen }) {
+export default function SlideMenu({ toggleSlideMenu, setToggleSlideMenu }) {
   return (
-    <MenuBox position={isSlideMenuOpen}>
+    <MenuBox position={toggleSlideMenu}>
       <Nav>
-        <NavLinkStyled to="/" onClick={() => setIsSlideMenuOpen(false)}>
+        <NavLinkStyled to="/" onClick={setToggleSlideMenu}>
           Home
         </NavLinkStyled>
-        <NavLinkStyled to="/history" onClick={() => setIsSlideMenuOpen(false)}>
+        <NavLinkStyled to="/history" onClick={setToggleSlideMenu}>
           History
         </NavLinkStyled>
-        <Delete onClick={() => localStorage.clear()}>clear</Delete>
+        <Delete onClick={() => localStorage.clear()}>Clear</Delete>
       </Nav>
     </MenuBox>
   )
@@ -19,8 +19,10 @@ export default function SlideMenu({ isSlideMenuOpen, setIsSlideMenuOpen }) {
 
 const MenuBox = styled.div`
   position: fixed;
+  top: 0;
   left: ${props => (props.position ? '0' : '-150px')};
-  background-color: gainsboro;
+  background-color: var(--color-dark);
+  color: var(--color-light);
   width: 150px;
   height: 100vh;
   padding: 50px 20px;
@@ -35,7 +37,7 @@ const Nav = styled.nav`
 const NavLinkStyled = styled(NavLink)`
   text-decoration: none;
   &:visited {
-    color: black;
+    color: var(--color-light);
   }
 `
 const Delete = styled.button`

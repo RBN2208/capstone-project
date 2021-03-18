@@ -1,8 +1,8 @@
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { v4 as uuidv4 } from 'uuid'
 import ServiceCard from '../ServiceCard/ServiceCard'
 import Header from '../Header/Header'
-import Icon from 'supercons'
+import MenuButton from '../MenuButton/MenuButton'
 import Button from '../Button/Button'
 import Result from '../Result/Result'
 import NewService from '../FormComponents/NewService'
@@ -14,16 +14,15 @@ export default function Calculation({
   onPlus,
   onMinus,
   onAddingNewCosts,
-  setIsSlideMenuOpen,
+  setToggleSlideMenu,
   finalCosts,
+  setOpenSafeResult,
 }) {
   const [createNewService, setCreateNewService] = useState('home')
 
   return (
     <>
-      <MenuButton>
-        <Icon glyph="menu" onClick={() => setIsSlideMenuOpen(true)} />
-      </MenuButton>
+      <MenuButton setToggleSlideMenu={setToggleSlideMenu} />
       <Header title={'QuickQalc'}></Header>
       <Content>
         {services.map(({ name, costs, id }) => (
@@ -40,13 +39,13 @@ export default function Calculation({
       </Content>
 
       <ButtonBox>
-        <ButtonNewService
-          onClick={() => setCreateNewService('newService')}
-          bgColor={{ name: 'white' }}
-        >
+        <NewServiceButton onClick={() => setCreateNewService('newService')}>
           New
-        </ButtonNewService>
-        <Result resultValue={finalCosts} />
+        </NewServiceButton>
+        <Result
+          resultValue={finalCosts}
+          setOpenSafeResult={setOpenSafeResult}
+        />
       </ButtonBox>
 
       {createNewService === 'newService' && (
@@ -54,6 +53,7 @@ export default function Calculation({
       )}
     </>
   )
+
   function onAddNewService({ name, costs }) {
     const newService = {
       id: uuidv4(),
@@ -75,20 +75,12 @@ const Content = styled.div`
   width: 100%;
 `
 
-const ButtonNewService = styled(Button)`
+const NewServiceButton = styled(Button)`
   width: 25%;
-  color: black;
-  border: 1px solid darkgray;
+  border-radius: 0;
 `
 
 const ButtonBox = styled.div`
   display: flex;
   justify-content: space-between;
-`
-
-const MenuButton = styled.div`
-  position: absolute;
-  right: 0.5em;
-  top: 0.7em;
-  scale: 180%;
 `

@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro'
 import Button from '../Button/Button'
+import Costinput from '../Inputs/CostInput'
 
 export default function NewService({ onSubmit }) {
   return (
@@ -11,6 +12,7 @@ export default function NewService({ onSubmit }) {
         <label>
           Name der Dienstleistung
           <input
+            aria-label="dienstleistung"
             data-testid="newServiceInput"
             maxLength="20"
             name="service"
@@ -20,9 +22,9 @@ export default function NewService({ onSubmit }) {
         </label>
         <label>
           Stundensatz
-          <input name="costs" placeholder="default: 50€ (e.g. 25)" />
+          <Costinput currentCostsPerHour="default: 50" />
         </label>
-        <Button bgColor={{ name: 'green' }}>Hinzufügen</Button>
+        <NewServiceButton>Hinzufügen</NewServiceButton>
       </Form>
     </BlurContainer>
   )
@@ -43,15 +45,19 @@ const Form = styled.form`
   display: grid;
   padding: 20px;
   background: white;
-  box-shadow: 0 0 10px darkgray;
+  box-shadow: 0 0 10px var(--color-dark);
   border-radius: 5px;
 `
 const BlurContainer = styled.div`
   position: absolute;
-  background: rgba(240, 240, 240, 0.9);
+  background: var(--color-blur);
   width: 100%;
   height: 100%;
   padding: 30px;
   display: grid;
   place-content: center;
+`
+const NewServiceButton = styled(Button)`
+  background-color: var(--color-green);
+  color: var(--color-dark);
 `

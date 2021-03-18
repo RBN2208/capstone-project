@@ -18,6 +18,6 @@ const Template = args => <ServicecardInfo {...events} {...args} />
 
 export const Primary = Template.bind({})
 Primary.args = {
-  counter: 5,
-  currentCosts: 200,
+  hours: 5,
+  currentCostsPerHour: 200,
 }
