@@ -9,7 +9,7 @@ import saveToLocal from '../../lib/saveToLocal'
 import SlideMenu from '../SlideMenu/SlideMenu'
 import History from '../HistoryPage/History'
 import CalculationPage from '../CalcPage/CalculationPage'
-import SafeResult from '../FormComponents/SafeResult'
+import ResultForm from '../FormComponents/ResultForm'
 
 export default function App() {
   const [services, setServices] = useState(loadFromLocal('services') ?? [])
@@ -58,7 +58,7 @@ export default function App() {
         setIsSlideMenuOpen={setIsSlideMenuOpen}
       />
       {openSafeResult === 'openSafeResult' && (
-        <SafeResult
+        <ResultForm
           finalCosts={finalCosts}
           setOpenSafeResult={setOpenSafeResult}
           onSafeCosts={safeCostsToHistory}

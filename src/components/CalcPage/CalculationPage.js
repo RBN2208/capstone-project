@@ -39,9 +39,9 @@ export default function Calculation({
       </Content>
 
       <ButtonBox>
-        <ButtonNewService onClick={() => setCreateNewService('newService')}>
+        <NewServiceButton onClick={() => setCreateNewService('newService')}>
           New
-        </ButtonNewService>
+        </NewServiceButton>
         <Result
           resultValue={finalCosts}
           setOpenSafeResult={setOpenSafeResult}
@@ -74,7 +74,7 @@ const Content = styled.div`
   width: 100%;
 `
 
-const ButtonNewService = styled(Button)`
+const NewServiceButton = styled(Button)`
   width: 25%;
   border-radius: 0;
 `

@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 
 export default createGlobalStyle`
-html{
+:root{
   --color-dark: #32323C;
   --color-midgrey:#8F8F94;
   --color-light: #EBEBEB;

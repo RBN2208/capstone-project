@@ -10,15 +10,11 @@ export default {
 }
 
 const events = actions({
-  setIsSlideMenuOpen: false,
-  isSlideMenuOpen: false,
+  setIsSlideMenuOpen: 'true or false',
+  isSlideMenuOpen: 'open and close',
 })
 
-const Template = args => (
-  <MemoryRouter>
-    <SlideMenu {...events} {...args} />
-  </MemoryRouter>
-)
+const Template = args => <SlideMenu {...events} {...args} />
 
 export const Primary = Template.bind({})
 Primary.args = {

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Button from '../Button/Button'
 
-export default function SafeResult({
+export default function ResultForm({
   finalCosts,
   setOpenSafeResult,
   onSafeCosts,
