@@ -65,7 +65,7 @@ export default function ServiceCard({
 
   function handleClickPlus(event) {
     event.stopPropagation()
-    onPlus(usedCosts)
+    onPlus(usedCosts, hours)
     setHours(hours + 1)
   }
 

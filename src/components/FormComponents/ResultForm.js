@@ -1,11 +1,7 @@
 import styled from 'styled-components'
 import Button from '../Button/Button'
 
-export default function ResultForm({
-  finalCosts,
-  setOpenSafeResult,
-  onSafeCosts,
-}) {
+export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
   return (
     <BlurContainer>
       <Form onSubmit={event => handleClickOnSafe(event)}>
@@ -14,7 +10,7 @@ export default function ResultForm({
         <ButtonSafe data-testid="safebutton">Speichern</ButtonSafe>
         <ButtonBack
           data-testid="backbutton"
-          onClick={() => setOpenSafeResult('home')}
+          onClick={() => onDiscardSave('home')}
         >
           Zurück
         </ButtonBack>
@@ -22,7 +18,6 @@ export default function ResultForm({
     </BlurContainer>
   )
   function handleClickOnSafe(event) {
-    event.preventDefault()
     const formElement = event.target.elements
     const savedCosts = formElement.endresult.value
     const currentDate = new Date().toLocaleDateString('de')

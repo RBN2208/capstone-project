@@ -14,7 +14,7 @@ export default function Calculation({
   onPlus,
   onMinus,
   onAddingNewCosts,
-  setIsSlideMenuOpen,
+  setToggleSlideMenu,
   finalCosts,
   setOpenSafeResult,
 }) {
@@ -22,7 +22,7 @@ export default function Calculation({
 
   return (
     <>
-      <MenuButton openSlideMenu={setIsSlideMenuOpen} />
+      <MenuButton setToggleSlideMenu={setToggleSlideMenu} />
       <Header title={'QuickQalc'}></Header>
       <Content>
         {services.map(({ name, costs, id }) => (
@@ -53,6 +53,7 @@ export default function Calculation({
       )}
     </>
   )
+
   function onAddNewService({ name, costs }) {
     const newService = {
       id: uuidv4(),

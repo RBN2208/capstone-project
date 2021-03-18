@@ -11,10 +11,12 @@ import History from '../HistoryPage/History'
 import CalculationPage from '../CalcPage/CalculationPage'
 import ResultForm from '../FormComponents/ResultForm'
 
+import useToggle from '../../services/useToggle'
+
 export default function App() {
   const [services, setServices] = useState(loadFromLocal('services') ?? [])
   const [finalCosts, setFinalCosts] = useState(0)
-  const [isSlideMenuOpen, setIsSlideMenuOpen] = useState(false)
+  const [toggleSlideMenu, setToggleSlideMenu] = useToggle()
   const [openSafeResult, setOpenSafeResult] = useState('')
   const [lastCalculations, setLastCalculation] = useState(
     loadFromLocal('lastCalculations') ?? []
@@ -31,13 +33,13 @@ export default function App() {
   return (
     <>
       <Switch>
-        <AppLayout openMenu={isSlideMenuOpen}>
+        <AppLayout openMenu={toggleSlideMenu}>
           <Route exact path="/">
             <CalculationPage
               finalCosts={finalCosts}
               services={services}
               setServices={setServices}
-              setIsSlideMenuOpen={setIsSlideMenuOpen}
+              setToggleSlideMenu={setToggleSlideMenu}
               onPlus={handlePlus}
               onMinus={handleMinus}
               onAddingNewCosts={updateCosts}
@@ -47,20 +49,20 @@ export default function App() {
 
           <Route path="/history">
             <History
-              setIsSlideMenuOpen={setIsSlideMenuOpen}
+              setToggleSlideMenu={setToggleSlideMenu}
               lastCalculations={lastCalculations}
             />
           </Route>
         </AppLayout>
       </Switch>
       <SlideMenu
-        isSlideMenuOpen={isSlideMenuOpen}
-        setIsSlideMenuOpen={setIsSlideMenuOpen}
+        toggleSlideMenu={toggleSlideMenu}
+        setToggleSlideMenu={setToggleSlideMenu}
       />
       {openSafeResult === 'openSafeResult' && (
         <ResultForm
           finalCosts={finalCosts}
-          setOpenSafeResult={setOpenSafeResult}
+          onDiscardSave={setOpenSafeResult}
           onSafeCosts={safeCostsToHistory}
         />
       )}
@@ -75,6 +77,11 @@ export default function App() {
     }
     setLastCalculation([...lastCalculations, newCalculation])
     setOpenSafeResult('home')
+    resetValues()
+  }
+
+  function resetValues() {
+    window.location.reload()
   }
 
   function updateCosts(index, newCostsPerHour, currentCostsPerHour, hours) {

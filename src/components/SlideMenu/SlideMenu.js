@@ -1,14 +1,14 @@
 import styled from 'styled-components/macro'
 import { NavLink } from 'react-router-dom'
 
-export default function SlideMenu({ isSlideMenuOpen, setIsSlideMenuOpen }) {
+export default function SlideMenu({ toggleSlideMenu, setToggleSlideMenu }) {
   return (
-    <MenuBox position={isSlideMenuOpen}>
+    <MenuBox position={toggleSlideMenu}>
       <Nav>
-        <NavLinkStyled to="/" onClick={() => setIsSlideMenuOpen(false)}>
+        <NavLinkStyled to="/" onClick={setToggleSlideMenu}>
           Home
         </NavLinkStyled>
-        <NavLinkStyled to="/history" onClick={() => setIsSlideMenuOpen(false)}>
+        <NavLinkStyled to="/history" onClick={setToggleSlideMenu}>
           History
         </NavLinkStyled>
         <Delete onClick={() => localStorage.clear()}>Clear</Delete>
