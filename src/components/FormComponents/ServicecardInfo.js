@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro'
 import Button from '../Button/Button'
+import CostInput from '../Inputs/CostInput'
 
 export default function ServicecardInfo({
   hours,
@@ -18,11 +19,7 @@ export default function ServicecardInfo({
         <label>
           Stundensatz:
           <CostInput
-            data-testid="costInput"
-            id="setcosts"
-            name="setcosts"
-            type="number"
-            placeholder={currentCostsPerHour + '€'}
+            currentCostsPerHour={currentCostsPerHour}
             onClick={event => event.stopPropagation()}
           />
         </label>
@@ -33,7 +30,7 @@ export default function ServicecardInfo({
   function handleSettingNewCosts(event) {
     event.preventDefault()
     const formElement = event.target.elements
-    const newCostsPerHour = Number(formElement.setcosts.value)
+    const newCostsPerHour = parseFloat(formElement.setcosts.value)
     setUsedCosts(newCostsPerHour)
     onAddingNewCosts(index, newCostsPerHour, currentCostsPerHour, hours)
   }
@@ -45,13 +42,4 @@ const ServiceInfoForm = styled.form`
   input {
     width: 130px;
   }
-`
-
-const CostInput = styled.input`
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  -moz-appearance: textfield;
 `

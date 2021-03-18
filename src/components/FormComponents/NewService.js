@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro'
 import Button from '../Button/Button'
+import Costinput from '../Inputs/CostInput'
 
 export default function NewService({ onSubmit }) {
   return (
@@ -21,7 +22,7 @@ export default function NewService({ onSubmit }) {
         </label>
         <label>
           Stundensatz
-          <input name="costs" placeholder="default: 50€ (e.g. 25)" />
+          <Costinput currentCostsPerHour="default: 50" />
         </label>
         <NewServiceButton>Hinzufügen</NewServiceButton>
       </Form>
