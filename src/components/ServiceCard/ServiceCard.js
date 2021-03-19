@@ -2,6 +2,7 @@ import { useState } from 'react'
 import styled from 'styled-components/macro'
 import Button from '../Button/Button'
 import ServicecardInfo from '../FormComponents/ServicecardInfo'
+import useToggle from '../../hooks/useToggle'
 
 export default function ServiceCard({
   name,
@@ -13,8 +14,7 @@ export default function ServiceCard({
   onAddingNewCosts,
   adjustCurrentCosts,
 }) {
-  const [isVisible, setIsVisible] = useState(false)
-  // const [hours, setHours] = useState(0)
+  const [isVisible, setIsVisible] = useToggle(false)
   const [usedCosts, setUsedCosts] = useState(costs)
   const index = services.findIndex(param => param.name === name)
 

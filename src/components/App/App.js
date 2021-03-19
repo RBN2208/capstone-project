@@ -1,35 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components/macro'
 import { Switch, Route } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
-
-import loadFromLocal from '../../lib/loadFromLocal'
-import saveToLocal from '../../lib/saveToLocal'
 
 import SlideMenu from '../SlideMenu/SlideMenu'
 import History from '../HistoryPage/History'
 import CalculationPage from '../CalcPage/CalculationPage'
 import SafeResultForm from '../FormComponents/SafeResultForm'
 
-import useToggle from '../../services/useToggle'
+import useToggle from '../../hooks/useToggle'
+import useLocalStorage from '../../hooks/useLocalStorage'
 
 export default function App() {
-  const [services, setServices] = useState(loadFromLocal('services') ?? [])
+  const [services, setServices] = useLocalStorage('services', [])
   const [openNewServiceForm, setOpenNewServiceForm] = useState('home')
   const [finalCosts, setFinalCosts] = useState(0)
-  const [toggleSlideMenu, setToggleSlideMenu] = useToggle()
+  const [toggleSlideMenu, setToggleSlideMenu] = useToggle(false)
   const [openSafeResult, setOpenSafeResult] = useState('')
-  const [lastCalculations, setLastCalculation] = useState(
-    loadFromLocal('lastCalculations') ?? []
+  const [lastCalculations, setLastCalculation] = useLocalStorage(
+    'lastCalculations',
+    []
   )
-
-  useEffect(() => {
-    saveToLocal('services', services)
-  }, [services])
-
-  useEffect(() => {
-    saveToLocal('lastCalculations', lastCalculations)
-  }, [lastCalculations])
 
   return (
     <>
