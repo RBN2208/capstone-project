@@ -3,7 +3,7 @@ import ServiceCard from '../ServiceCard/ServiceCard'
 import Header from '../Header/Header'
 import MenuButton from '../MenuButton/MenuButton'
 import Button from '../Button/Button'
-import ResultField from '../Result/ResultField'
+import ResultField from '../ResultField/ResultField'
 import NewService from '../FormComponents/NewService'
 
 export default function Calculation({
