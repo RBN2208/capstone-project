@@ -23,5 +23,8 @@ input,
 button {
   font-size: inherit;
   padding: 5px;
+  outline: none;
+  width: 100%;
 }
+
 `

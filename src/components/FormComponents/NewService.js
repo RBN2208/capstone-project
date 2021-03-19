@@ -2,7 +2,7 @@ import styled from 'styled-components/macro'
 import Button from '../Button/Button'
 import Costinput from '../Inputs/CostInput'
 
-export default function NewService({ onSubmit }) {
+export default function NewService({ onAddNewService, onOpenNewServiceForm }) {
   return (
     <BlurContainer>
       <Form
@@ -25,6 +25,12 @@ export default function NewService({ onSubmit }) {
           <Costinput currentCostsPerHour="default: 50" />
         </label>
         <NewServiceButton>Hinzufügen</NewServiceButton>
+        <ButtonBack
+          data-testid="backbutton"
+          onClick={() => onOpenNewServiceForm('home')}
+        >
+          Zurück
+        </ButtonBack>
       </Form>
     </BlurContainer>
   )
@@ -32,17 +38,18 @@ export default function NewService({ onSubmit }) {
   function handleSubmit(event) {
     event.preventDefault()
     const formElements = event.target.elements
-    const costValue = formElements.costs.value.replace(/[^\d]/g, '')
+    const costsPerHour = formElements.costs.value.replace(/[^\d]/g, '')
     const data = {
       name: formElements.service.value,
-      costs: Number(costValue) || Number(50),
+      costs: Number(costsPerHour) || Number(50),
     }
-    onSubmit(data)
+    onAddNewService(data)
   }
 }
 
 const Form = styled.form`
   display: grid;
+  gap: 10px;
   padding: 20px;
   background: white;
   box-shadow: 0 0 10px var(--color-dark);
@@ -60,4 +67,11 @@ const BlurContainer = styled.div`
 const NewServiceButton = styled(Button)`
   background-color: var(--color-green);
   color: var(--color-dark);
+`
+const ButtonBack = styled(Button)`
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  padding: 0.2em 0.6em;
+  border-radius: 3px;
+  font-size: 1.2rem;
 `

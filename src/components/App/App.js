@@ -1,34 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components/macro'
 import { Switch, Route } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 
-import loadFromLocal from '../../lib/loadFromLocal'
-import saveToLocal from '../../lib/saveToLocal'
-
 import SlideMenu from '../SlideMenu/SlideMenu'
 import History from '../HistoryPage/History'
 import CalculationPage from '../CalcPage/CalculationPage'
-import ResultForm from '../FormComponents/ResultForm'
+import SafeResultForm from '../FormComponents/SafeResultForm'
 
-import useToggle from '../../services/useToggle'
+import useToggle from '../../hooks/useToggle'
+import useLocalStorage from '../../hooks/useLocalStorage'
 
 export default function App() {
-  const [services, setServices] = useState(loadFromLocal('services') ?? [])
+  const [services, setServices] = useLocalStorage('services', [])
+  const [openNewServiceForm, setOpenNewServiceForm] = useState('home')
   const [finalCosts, setFinalCosts] = useState(0)
-  const [toggleSlideMenu, setToggleSlideMenu] = useToggle()
+  const [toggleSlideMenu, setToggleSlideMenu] = useToggle(false)
   const [openSafeResult, setOpenSafeResult] = useState('')
-  const [lastCalculations, setLastCalculation] = useState(
-    loadFromLocal('lastCalculations') ?? []
+  const [lastCalculations, setLastCalculation] = useLocalStorage(
+    'lastCalculations',
+    []
   )
-
-  useEffect(() => {
-    saveToLocal('services', services)
-  }, [services])
-
-  useEffect(() => {
-    saveToLocal('lastCalculations', lastCalculations)
-  }, [lastCalculations])
 
   return (
     <>
@@ -36,20 +28,22 @@ export default function App() {
         <AppLayout openMenu={toggleSlideMenu}>
           <Route exact path="/">
             <CalculationPage
-              finalCosts={finalCosts}
               services={services}
-              setServices={setServices}
-              setToggleSlideMenu={setToggleSlideMenu}
               onPlus={handlePlus}
               onMinus={handleMinus}
-              onAddingNewCosts={updateCosts}
-              setOpenSafeResult={setOpenSafeResult}
+              finalCosts={finalCosts}
+              onAddingNewCosts={updateCostsPerHours}
+              onSafeResult={setOpenSafeResult}
+              toggleSlideMenu={setToggleSlideMenu}
+              onAddNewService={addNewService}
+              openNewServiceForm={openNewServiceForm}
+              onOpenNewServiceForm={setOpenNewServiceForm}
             />
           </Route>
 
           <Route path="/history">
             <History
-              setToggleSlideMenu={setToggleSlideMenu}
+              toggleSlideMenu={setToggleSlideMenu}
               lastCalculations={lastCalculations}
             />
           </Route>
@@ -57,10 +51,10 @@ export default function App() {
       </Switch>
       <SlideMenu
         toggleSlideMenu={toggleSlideMenu}
-        setToggleSlideMenu={setToggleSlideMenu}
+        onToggleSlideMenu={setToggleSlideMenu}
       />
       {openSafeResult === 'openSafeResult' && (
-        <ResultForm
+        <SafeResultForm
           finalCosts={finalCosts}
           onDiscardSave={setOpenSafeResult}
           onSafeCosts={safeCostsToHistory}
@@ -68,6 +62,17 @@ export default function App() {
       )}
     </>
   )
+
+  function addNewService({ name, costs }) {
+    const newService = {
+      id: uuidv4(),
+      name,
+      costs,
+      hours: 0,
+    }
+    setServices([...services, newService])
+    setOpenNewServiceForm('home')
+  }
 
   function safeCostsToHistory({ date, costs }) {
     const newCalculation = {
@@ -81,10 +86,16 @@ export default function App() {
   }
 
   function resetValues() {
-    window.location.reload()
+    setServices(services.map(service => ({ ...service, hours: 0 })))
+    setFinalCosts(0)
   }
 
-  function updateCosts(index, newCostsPerHour, currentCostsPerHour, hours) {
+  function updateCostsPerHours(
+    index,
+    newCostsPerHour,
+    currentCostsPerHour,
+    hours
+  ) {
     const currentService = services[index]
     setServices([
       ...services.slice(0, index),
@@ -94,12 +105,24 @@ export default function App() {
     setFinalCosts(finalCosts - (currentCostsPerHour - newCostsPerHour) * hours)
   }
 
-  function handlePlus(costs) {
+  function handlePlus(costs, hours, index) {
     setFinalCosts(finalCosts + costs)
+    const currentService = services[index]
+    setServices([
+      ...services.slice(0, index),
+      { ...currentService, hours: hours + 1 },
+      ...services.slice(index + 1),
+    ])
   }
 
-  function handleMinus(costs) {
+  function handleMinus(costs, hours, index) {
     setFinalCosts(finalCosts - costs)
+    const currentService = services[index]
+    setServices([
+      ...services.slice(0, index),
+      { ...currentService, hours: hours - 1 },
+      ...services.slice(index + 1),
+    ])
   }
 }
 

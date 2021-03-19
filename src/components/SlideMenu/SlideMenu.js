@@ -1,14 +1,14 @@
 import styled from 'styled-components/macro'
 import { NavLink } from 'react-router-dom'
 
-export default function SlideMenu({ toggleSlideMenu, setToggleSlideMenu }) {
+export default function SlideMenu({ toggleSlideMenu, onToggleSlideMenu }) {
   return (
     <MenuBox position={toggleSlideMenu}>
       <Nav>
-        <NavLinkStyled to="/" onClick={setToggleSlideMenu}>
+        <NavLinkStyled to="/" onClick={onToggleSlideMenu}>
           Home
         </NavLinkStyled>
-        <NavLinkStyled to="/history" onClick={setToggleSlideMenu}>
+        <NavLinkStyled to="/history" onClick={onToggleSlideMenu}>
           History
         </NavLinkStyled>
         <Delete onClick={() => localStorage.clear()}>Clear</Delete>
@@ -36,6 +36,7 @@ const Nav = styled.nav`
 `
 const NavLinkStyled = styled(NavLink)`
   text-decoration: none;
+  color: var(--color-light);
   &:visited {
     color: var(--color-light);
   }

@@ -1,35 +1,34 @@
 import styled from 'styled-components/macro'
-import { v4 as uuidv4 } from 'uuid'
 import ServiceCard from '../ServiceCard/ServiceCard'
 import Header from '../Header/Header'
 import MenuButton from '../MenuButton/MenuButton'
 import Button from '../Button/Button'
-import Result from '../Result/Result'
+import ResultField from '../ResultField/ResultField'
 import NewService from '../FormComponents/NewService'
-import { useState } from 'react'
 
 export default function Calculation({
   services,
-  setServices,
   onPlus,
   onMinus,
-  onAddingNewCosts,
-  setToggleSlideMenu,
   finalCosts,
-  setOpenSafeResult,
+  onAddingNewCosts,
+  onSafeResult,
+  toggleSlideMenu,
+  onAddNewService,
+  openNewServiceForm,
+  onOpenNewServiceForm,
 }) {
-  const [createNewService, setCreateNewService] = useState('home')
-
   return (
     <>
-      <MenuButton setToggleSlideMenu={setToggleSlideMenu} />
+      <MenuButton toggleSlideMenu={toggleSlideMenu} />
       <Header title={'QuickQalc'}></Header>
       <Content>
-        {services.map(({ name, costs, id }) => (
+        {services.map(({ id, name, costs, hours }) => (
           <ServiceCard
             key={id}
             name={name}
             costs={costs}
+            hours={hours}
             onPlus={onPlus}
             onMinus={onMinus}
             services={services}
@@ -39,30 +38,20 @@ export default function Calculation({
       </Content>
 
       <ButtonBox>
-        <NewServiceButton onClick={() => setCreateNewService('newService')}>
+        <NewServiceButton onClick={() => onOpenNewServiceForm('newService')}>
           New
         </NewServiceButton>
-        <Result
-          resultValue={finalCosts}
-          setOpenSafeResult={setOpenSafeResult}
-        />
+        <ResultField finalCosts={finalCosts} onSafeResult={onSafeResult} />
       </ButtonBox>
 
-      {createNewService === 'newService' && (
-        <NewService onSubmit={onAddNewService} />
+      {openNewServiceForm === 'newService' && (
+        <NewService
+          onAddNewService={onAddNewService}
+          onOpenNewServiceForm={onOpenNewServiceForm}
+        />
       )}
     </>
   )
-
-  function onAddNewService({ name, costs }) {
-    const newService = {
-      id: uuidv4(),
-      name,
-      costs,
-    }
-    setServices([...services, newService])
-    setCreateNewService('home')
-  }
 }
 
 const Content = styled.div`

@@ -15,7 +15,7 @@ export default function ServicecardInfo({
       onSubmit={event => handleSettingNewCosts(event)}
     >
       <div>Zeit: {hours} Stunden</div>
-      <div>
+      <NewCostsBox>
         <label>
           Stundensatz:
           <CostInput
@@ -24,7 +24,7 @@ export default function ServicecardInfo({
           />
         </label>
         <Button onClick={event => event.stopPropagation()}>Set</Button>
-      </div>
+      </NewCostsBox>
     </ServiceInfoForm>
   )
   function handleSettingNewCosts(event) {
@@ -38,8 +38,15 @@ export default function ServicecardInfo({
 
 const ServiceInfoForm = styled.form`
   display: grid;
+  gap: 10px;
   grid-auto-flow: dense;
   input {
     width: 130px;
   }
+`
+
+const NewCostsBox = styled.div`
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
 `

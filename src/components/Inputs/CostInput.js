@@ -7,7 +7,7 @@ export default function Costinput({ currentCostsPerHour }) {
       id="setcosts"
       name="costs"
       type="number"
-      step="0.5"
+      step="0.05"
       placeholder={currentCostsPerHour + '€'}
       onClick={event => event.stopPropagation()}
     />
