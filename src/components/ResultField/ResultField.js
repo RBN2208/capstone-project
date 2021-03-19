@@ -9,6 +9,7 @@ export default function ResultField({ finalCosts, onSafeResult }) {
         glyph="checkmark"
         width={'20'}
         height={'20'}
+        viewBox="5 4 24 24"
         onClick={() => onSafeResult('openSafeResult')}
       />
     </Resultbox>
