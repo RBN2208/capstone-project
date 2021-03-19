@@ -19,11 +19,11 @@ export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
   )
   function handleClickOnSafe(event) {
     const formElement = event.target.elements
-    const savedCosts = formElement.endresult.value
+    const finalCosts = formElement.endresult.value
     const currentDate = new Date().toLocaleDateString('de')
     const data = {
       date: currentDate,
-      costs: savedCosts,
+      costs: finalCosts,
     }
     onSafeCosts(data)
   }
@@ -57,7 +57,7 @@ const ButtonSafe = styled(Button)`
   background-color: var(--color-green);
   color: var(--color-dark);
 `
-const ButtonBack = styled.div`
+const ButtonBack = styled(Button)`
   background-color: var(--color-dark);
   color: var(--color-light);
   padding: 0.2em 0.6em;

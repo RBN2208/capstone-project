@@ -1,10 +1,10 @@
 import Icon from 'supercons'
 import styled from 'styled-components/macro'
 
-export default function MenuButton({ setToggleSlideMenu }) {
+export default function MenuButton({ toggleSlideMenu }) {
   return (
     <Container>
-      <Icon role="button" glyph="menu" onClick={setToggleSlideMenu} />
+      <Icon role="button" glyph="menu" onClick={toggleSlideMenu} />
     </Container>
   )
 }
