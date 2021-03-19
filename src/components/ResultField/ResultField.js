@@ -7,8 +7,8 @@ export default function ResultField({ finalCosts, onSafeResult }) {
       <span>Endpreis: {finalCosts} €</span>
       <Checkmark
         glyph="checkmark"
-        width={'20'}
-        height={'20'}
+        width={'40'}
+        height={'40'}
         viewBox="5 4 24 24"
         onClick={() => onSafeResult('openSafeResult')}
       />
@@ -25,6 +25,5 @@ const Resultbox = styled.div`
   padding: 20px;
 `
 const Checkmark = styled(Icon)`
-  scale: 250%;
   color: var(--color-darkgreen);
 `
