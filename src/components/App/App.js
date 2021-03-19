@@ -38,7 +38,6 @@ export default function App() {
           <Route exact path="/">
             <CalculationPage
               services={services}
-              setServices={setServices}
               onPlus={handlePlus}
               onMinus={handleMinus}
               finalCosts={finalCosts}

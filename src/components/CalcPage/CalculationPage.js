@@ -8,7 +8,6 @@ import NewService from '../FormComponents/NewService'
 
 export default function Calculation({
   services,
-  setServices,
   onPlus,
   onMinus,
   finalCosts,
