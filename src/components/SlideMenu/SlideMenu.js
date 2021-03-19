@@ -36,6 +36,7 @@ const Nav = styled.nav`
 `
 const NavLinkStyled = styled(NavLink)`
   text-decoration: none;
+  color: var(--color-light);
   &:visited {
     color: var(--color-light);
   }
