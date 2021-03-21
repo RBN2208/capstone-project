@@ -6,6 +6,7 @@ export default function ResultField({ finalCosts, onSafeResult }) {
     <Resultbox>
       <span>Endpreis: {finalCosts} €</span>
       <Checkmark
+        data-testid="saveResultButton"
         glyph="checkmark"
         width={'40'}
         height={'40'}

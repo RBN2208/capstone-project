@@ -4,9 +4,11 @@ import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 
 describe('ServicecardInfo', () => {
-  it('renders a form to change the cost value', () => {
-    render(<ServicecardInfo />)
-    expect(screen.getByLabelText('Stundensatz:')).toBeInTheDocument()
+  it('shows the current costs per hour, also when changed', () => {
+    const { rerender } = render(<ServicecardInfo currentCostsPerHour={40} />)
+    expect(screen.getByPlaceholderText('40€')).toBeInTheDocument()
+    rerender(<ServicecardInfo currentCostsPerHour={55} />)
+    expect(screen.getByPlaceholderText('55€')).toBeInTheDocument()
   })
   it('has a submit button that gets the new data', () => {
     const handleSets = jest.fn()
@@ -20,9 +22,7 @@ describe('ServicecardInfo', () => {
       />
     )
     userEvent.type(screen.getByTestId('costInput'), '50')
-    expect(screen.getByTestId('setCostsForm')).toHaveFormValues({
-      setcosts: 50,
-    })
+    expect(screen.getByTestId('setCostsForm')).toHaveFormValues(50)
     userEvent.click(screen.getByRole('button'))
     expect(setCostChange).toHaveBeenCalledTimes(1)
   })

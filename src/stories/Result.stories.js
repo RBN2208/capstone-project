@@ -1,18 +1,18 @@
 import React from 'react'
 import { actions } from '@storybook/addon-actions'
 
-import Result from '../components/Result/Result'
+import ResultField from '../components/ResultField/ResultField'
 
 export default {
   title: 'Result',
-  component: Result,
+  component: ResultField,
 }
 
 const events = actions({
-  setOpenSafeResult: 'open',
+  onSafeResult: 'opens the "SafeResultForm',
 })
 
-const Template = args => <Result {...events} {...args} />
+const Template = args => <ResultField {...events} {...args} />
 
 export const Primary = Template.bind({})
 Primary.args = {

@@ -9,6 +9,8 @@ const services = [
   { id: 3, name: 'three', costs: 250 },
 ]
 
+const onOpenNewServiceForm = jest.fn()
+
 describe('CalculationPage', () => {
   it('renders a servicecard with text', () => {
     render(<CalculationPage name={services[0].name} services={services} />)
@@ -21,5 +23,9 @@ describe('CalculationPage', () => {
   it('renders a header', () => {
     render(<CalculationPage services={services} />)
     expect(screen.getByText('QuickQalc')).toBeInTheDocument()
+  })
+  it('renders the finalCosts without add', () => {
+    render(<CalculationPage services={services} />)
+    expect(screen.getByText('Endpreis: €')).toBeInTheDocument()
   })
 })

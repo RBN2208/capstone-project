@@ -1,7 +1,7 @@
 import React from 'react'
 import { actions } from '@storybook/addon-actions'
 
-import SafeResult from '../components/FormComponents/SafeResult'
+import SafeResult from '../components/FormComponents/SafeResultForm'
 
 export default {
   title: 'SafeResult',
@@ -11,6 +11,7 @@ export default {
 const events = actions({
   setOpenSafeResult: 'Close Menu',
   onSafeCosts: 'Handle cost safe',
+  onDiscardSave: 'closes this form without action',
 })
 
 const Template = args => <SafeResult {...events} {...args} />

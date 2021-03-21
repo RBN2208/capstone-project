@@ -2,7 +2,6 @@ import React from 'react'
 import { actions } from '@storybook/addon-actions'
 
 import CalculationPage from '../components/CalcPage/CalculationPage'
-import { act } from 'react-dom/test-utils'
 
 export default {
   title: 'CalculationPage',
@@ -21,7 +20,9 @@ const events = actions({
   onPlus: 'plus',
   onMinus: 'minus',
   onAddingNewCosts: 'set new costs',
-  setOpenSafeResult: 'open safe',
+  onSafeResult: 'Safe resultvalue',
+  onOpenNewServiceForm: 'open new Serivce',
+  toggleSlideMenu: 'toggle open/close',
 })
 
 const Template = args => <CalculationPage {...events} {...args} />
