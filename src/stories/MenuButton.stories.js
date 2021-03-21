@@ -9,7 +9,7 @@ export default {
 }
 
 const events = actions({
-  openSlideMenu: 'open Menu',
+  toggleSlideMenu: 'toggle open/close',
 })
 
 const Template = args => <MenuButton {...events} {...args} />

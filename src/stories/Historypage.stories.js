@@ -10,13 +10,13 @@ export default {
 }
 
 const lastCalculations = [
-  { id: 1, date: 'gestern', costs: 50 },
-  { id: 2, date: 'heute', costs: 150 },
-  { id: 3, date: 'morgen', costs: 250 },
+  { id: 1, date: '01.01.2021', costs: 50 },
+  { id: 2, date: '02.01.2021', costs: 150 },
+  { id: 3, date: '03.01.2021', costs: 250 },
 ]
 
 const events = actions({
-  setIsSlideMenuOpen: 'open slide menu',
+  toggleSlideMenu: 'toggle open/close',
 })
 
 const Template = args => <History {...events} {...args} />

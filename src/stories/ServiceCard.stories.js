@@ -14,7 +14,6 @@ const services = [
   { id: 2, name: 'test2', costs: 150 },
   { id: 3, name: 'test3', costs: 250 },
 ]
-const index = services.findIndex(param => param.name === services.name)
 
 const Template = args => <ServiceCard {...args} />
 

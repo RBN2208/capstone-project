@@ -10,8 +10,9 @@ export default {
 }
 
 const events = actions({
-  onAddNewService: 'Home wird übergeben und blendet Form wieder aus',
+  onAddNewService: '"home" = close, data is used for new card',
   onSubmit: 'Name und Costs aus Submit',
+  onOpenNewServiceForm: 'only close form',
 })
 
 const Template = args => <NewService {...events} {...args} />

@@ -18,6 +18,7 @@ export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
     </BlurContainer>
   )
   function handleClickOnSafe(event) {
+    event.preventDefault()
     const formElement = event.target.elements
     const finalCosts = formElement.endresult.value
     const currentDate = new Date().toLocaleDateString('de')
