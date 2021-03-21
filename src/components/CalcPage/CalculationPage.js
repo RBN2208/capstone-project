@@ -38,7 +38,10 @@ export default function Calculation({
       </Content>
 
       <ButtonBox>
-        <NewServiceButton onClick={() => onOpenNewServiceForm('newService')}>
+        <NewServiceButton
+          data-testid="plusbutton"
+          onClick={() => onOpenNewServiceForm('newService')}
+        >
           New
         </NewServiceButton>
         <ResultField finalCosts={finalCosts} onSafeResult={onSafeResult} />

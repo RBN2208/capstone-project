@@ -4,7 +4,10 @@ import Button from '../Button/Button'
 export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
   return (
     <BlurContainer>
-      <Form onSubmit={event => handleClickOnSafe(event)}>
+      <Form
+        onSubmit={event => handleClickOnSafe(event)}
+        data-testid="safeResultForm"
+      >
         <p>Die aktuell geschätzten Kosten betragen:</p>
         <FinalCosts name="endresult">{finalCosts}€</FinalCosts>
         <ButtonSafe data-testid="safebutton">Speichern</ButtonSafe>
