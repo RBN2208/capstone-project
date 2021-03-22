@@ -5,27 +5,31 @@ import MenuButton from '../MenuButton/MenuButton'
 import Button from '../Button/Button'
 import ResultField from '../ResultField/ResultField'
 import NewService from '../FormComponents/NewService'
+import { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 
 export default function Calculation({
   services,
+  setServices,
   onPlus,
   onMinus,
   finalCosts,
   onAddingNewCosts,
   onSafeResult,
   toggleSlideMenu,
-  onAddNewService,
-  openNewServiceForm,
-  onOpenNewServiceForm,
+  onDeleteEntry,
 }) {
+  const [openNewServiceForm, setOpenNewServiceForm] = useState('home')
+
   return (
     <>
       <MenuButton toggleSlideMenu={toggleSlideMenu} />
       <Header title={'QuickQalc'}></Header>
       <Content>
-        {services.map(({ id, name, costs, hours }) => (
+        {services.map(({ id, name, costs, hours }, index) => (
           <ServiceCard
             key={id}
+            index={index}
             name={name}
             costs={costs}
             hours={hours}
@@ -33,6 +37,7 @@ export default function Calculation({
             onMinus={onMinus}
             services={services}
             onAddingNewCosts={onAddingNewCosts}
+            onDeleteEntry={onDeleteEntry}
           />
         ))}
       </Content>
@@ -40,7 +45,7 @@ export default function Calculation({
       <ButtonBox>
         <NewServiceButton
           data-testid="plusbutton"
-          onClick={() => onOpenNewServiceForm('newService')}
+          onClick={() => setOpenNewServiceForm('newService')}
         >
           New
         </NewServiceButton>
@@ -49,12 +54,22 @@ export default function Calculation({
 
       {openNewServiceForm === 'newService' && (
         <NewService
-          onAddNewService={onAddNewService}
-          onOpenNewServiceForm={onOpenNewServiceForm}
+          onAddNewService={addNewService}
+          onOpenNewServiceForm={setOpenNewServiceForm}
         />
       )}
     </>
   )
+  function addNewService({ name, costs }) {
+    const newService = {
+      id: uuidv4(),
+      name,
+      costs,
+      hours: 0,
+    }
+    setServices([...services, newService])
+    setOpenNewServiceForm('home')
+  }
 }
 
 const Content = styled.div`

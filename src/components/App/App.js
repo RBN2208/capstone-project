@@ -13,14 +13,13 @@ import useLocalStorage from '../../hooks/useLocalStorage'
 
 export default function App() {
   const [services, setServices] = useLocalStorage('services', [])
-  const [openNewServiceForm, setOpenNewServiceForm] = useState('home')
-  const [finalCosts, setFinalCosts] = useState(0)
-  const [toggleSlideMenu, setToggleSlideMenu] = useToggle(false)
-  const [openSafeResult, setOpenSafeResult] = useState('')
-  const [lastCalculations, setLastCalculation] = useLocalStorage(
+  const [lastCalculations, setLastCalculations] = useLocalStorage(
     'lastCalculations',
     []
   )
+  const [finalCosts, setFinalCosts] = useState(0)
+  const [toggleSlideMenu, setToggleSlideMenu] = useToggle(false)
+  const [openSafeResult, setOpenSafeResult] = useState('')
 
   return (
     <>
@@ -29,15 +28,14 @@ export default function App() {
           <Route exact path="/">
             <CalculationPage
               services={services}
+              setServices={setServices}
               onPlus={handlePlus}
               onMinus={handleMinus}
               finalCosts={finalCosts}
               onAddingNewCosts={updateCostsPerHours}
-              onSafeResult={setOpenSafeResult}
               toggleSlideMenu={setToggleSlideMenu}
-              onAddNewService={addNewService}
-              openNewServiceForm={openNewServiceForm}
-              onOpenNewServiceForm={setOpenNewServiceForm}
+              onDeleteEntry={deleteCard}
+              onSafeResult={setOpenSafeResult}
             />
           </Route>
 
@@ -45,6 +43,7 @@ export default function App() {
             <History
               toggleSlideMenu={setToggleSlideMenu}
               lastCalculations={lastCalculations}
+              onDeleteHistoryEntry={deleteHistoryEntry}
             />
           </Route>
         </AppLayout>
@@ -63,24 +62,13 @@ export default function App() {
     </>
   )
 
-  function addNewService({ name, costs }) {
-    const newService = {
-      id: uuidv4(),
-      name,
-      costs,
-      hours: 0,
-    }
-    setServices([...services, newService])
-    setOpenNewServiceForm('home')
-  }
-
   function safeCostsToHistory({ date, costs }) {
     const newCalculation = {
       id: uuidv4(),
       date,
       costs,
     }
-    setLastCalculation([...lastCalculations, newCalculation])
+    setLastCalculations([...lastCalculations, newCalculation])
     setOpenSafeResult('home')
     resetValues()
   }
@@ -122,6 +110,17 @@ export default function App() {
       ...services.slice(0, index),
       { ...currentService, hours: hours - 1 },
       ...services.slice(index + 1),
+    ])
+  }
+
+  function deleteCard(index) {
+    setServices([...services.slice(0, index), ...services.slice(index + 1)])
+  }
+
+  function deleteHistoryEntry(index) {
+    setLastCalculations([
+      ...lastCalculations.slice(0, index),
+      ...lastCalculations.slice(index + 1),
     ])
   }
 }

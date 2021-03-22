@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro'
 import Button from '../Button/Button'
 import CostInput from '../Inputs/CostInput'
+import Icon from 'supercons'
 
 export default function ServicecardInfo({
   hours,
@@ -8,24 +9,36 @@ export default function ServicecardInfo({
   setUsedCosts,
   onAddingNewCosts,
   index,
+  onDeleteEntry,
 }) {
   return (
-    <ServiceInfoForm
-      data-testid="setCostsForm"
-      onSubmit={event => handleSettingNewCosts(event)}
-    >
-      <div>Zeit: {hours} Stunden</div>
-      <NewCostsBox>
-        <label>
-          Stundensatz:
-          <CostInput
-            currentCostsPerHour={currentCostsPerHour}
-            onClick={event => event.stopPropagation()}
-          />
-        </label>
-        <Button onClick={event => event.stopPropagation()}>Set</Button>
-      </NewCostsBox>
-    </ServiceInfoForm>
+    <InfoWrapper>
+      <ServiceInfoForm
+        data-testid="setCostsForm"
+        onSubmit={event => handleSettingNewCosts(event)}
+      >
+        <div>Zeit: {hours} Stunden</div>
+        <NewCostsBox>
+          <label>
+            Stundensatz:
+            <CostInput
+              currentCostsPerHour={currentCostsPerHour}
+              onClick={event => event.stopPropagation()}
+            />
+          </label>
+          <Button onClick={event => event.stopPropagation()}>Set</Button>
+        </NewCostsBox>
+      </ServiceInfoForm>
+      <DeleteButton>
+        <Icon
+          glyph="view-close"
+          width={'25'}
+          height={'25'}
+          viewBox="6 6 20 20"
+          onClick={() => onDeleteEntry(index)}
+        />
+      </DeleteButton>
+    </InfoWrapper>
   )
   function handleSettingNewCosts(event) {
     event.preventDefault()
@@ -49,4 +62,14 @@ const NewCostsBox = styled.div`
   display: grid;
   grid-auto-flow: column;
   align-items: center;
+`
+
+const InfoWrapper = styled.div`
+  position: relative;
+`
+
+const DeleteButton = styled.div`
+  position: absolute;
+  top: -6px;
+  right: 0px;
 `
