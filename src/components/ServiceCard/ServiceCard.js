@@ -9,6 +9,7 @@ export default function ServiceCard({
   index,
   name,
   costs,
+  notes,
   hours,
   onPlus,
   onMinus,
@@ -47,6 +48,7 @@ export default function ServiceCard({
         <CardInfo>
           <ServicecardInfo
             hours={hours}
+            notes={notes}
             index={index}
             currentCostsPerHour={usedCosts}
             setUsedCosts={setUsedCosts}

@@ -36,12 +36,13 @@ export default function Calculation({
             .filter(character =>
               character.name.toLowerCase().includes(searchInput.toLowerCase())
             )
-            .map(({ id, name, costs, hours }, index) => (
+            .map(({ id, name, costs, notes, hours }, index) => (
               <ServiceCard
                 key={id}
                 index={index}
                 name={name}
                 costs={costs}
+                notes={notes}
                 hours={hours}
                 onPlus={onPlus}
                 onMinus={onMinus}
@@ -71,14 +72,15 @@ export default function Calculation({
       )}
     </>
   )
-  function addNewService({ name, costs }) {
+  function addNewService({ name, costs, notes }) {
     const newService = {
       id: uuidv4(),
       name,
       costs,
+      notes,
       hours: 0,
     }
-    setServices([...services, newService])
+    setServices([newService, ...services])
     setOpenNewServiceForm('home')
   }
 }
