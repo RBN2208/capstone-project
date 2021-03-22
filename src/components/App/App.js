@@ -128,7 +128,6 @@ export default function App() {
 const AppLayout = styled.div`
   display: grid;
   grid-template-rows: 50px auto 50px;
-  gap: 10px;
   height: 100vh;
   position: relative;
   margin-left: ${props => (props.openMenu ? '150px' : '0px')};
