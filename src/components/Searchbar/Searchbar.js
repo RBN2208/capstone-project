@@ -12,6 +12,7 @@ export default function Searchbar({ searchInput, onTypeSearch }) {
 }
 
 const SearchInput = styled.input`
-  padding: 20px 10px;
+  padding: 8px 10px;
   border: 1px solid var(--color-midgrey);
+  border-radius: 5px;
 `

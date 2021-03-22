@@ -26,9 +26,11 @@ export default function Calculation({
   return (
     <>
       <MenuButton toggleSlideMenu={toggleSlideMenu} />
-      <Header title={'QuickQalc'}></Header>
+      <Header title={'QuickQalc'} />
       <Content>
-        <Searchbar searchInput={searchInput} onTypeSearch={setSearchInput} />
+        <SearchbarWrapper>
+          <Searchbar searchInput={searchInput} onTypeSearch={setSearchInput} />
+        </SearchbarWrapper>
         <ServiceCardWrapper>
           {services
             .filter(character =>
@@ -107,4 +109,12 @@ const ServiceCardWrapper = styled.div`
   padding: 5px;
   overflow-y: scroll;
   width: 100%;
+  scrollbar-width: none;
+  &:last-child::after {
+    content: '';
+    height: 10px;
+  }
+`
+const SearchbarWrapper = styled.div`
+  padding: 5px;
 `
