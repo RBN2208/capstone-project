@@ -1,5 +1,6 @@
 import React from 'react'
 import { actions } from '@storybook/addon-actions'
+import styled from 'styled-components'
 
 import CalculationPage from '../components/CalcPage/CalculationPage'
 
@@ -20,15 +21,24 @@ const events = actions({
   onPlus: 'plus',
   onMinus: 'minus',
   onAddingNewCosts: 'set new costs',
-  onSafeResult: 'Safe resultvalue',
+  onSafeResult: 'Safe result value',
   onOpenNewServiceForm: 'open new Serivce',
   toggleSlideMenu: 'toggle open/close',
 })
 
-const Template = args => <CalculationPage {...events} {...args} />
+const Template = args => (
+  <SampleGrid>
+    <CalculationPage {...events} {...args} />
+  </SampleGrid>
+)
 
 export const Primary = Template.bind({})
 Primary.args = {
   services: services,
   finalCosts: 200,
 }
+
+const SampleGrid = styled.div`
+  display: grid;
+  grid-template-rows: 50px auto 50px;
+`
