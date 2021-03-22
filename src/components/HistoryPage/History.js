@@ -19,8 +19,8 @@ export default function History({
             id={id}
             date={date}
             costs={costs}
-            onDeleteHistoryEntry={onDeleteHistoryEntry}
             lastCalculations={lastCalculations}
+            onDeleteHistoryEntry={onDeleteHistoryEntry}
           />
         ))}
       </Content>

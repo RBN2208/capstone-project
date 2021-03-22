@@ -13,14 +13,13 @@ import useLocalStorage from '../../hooks/useLocalStorage'
 
 export default function App() {
   const [services, setServices] = useLocalStorage('services', [])
-  const [openNewServiceForm, setOpenNewServiceForm] = useState('home')
-  const [finalCosts, setFinalCosts] = useState(0)
-  const [toggleSlideMenu, setToggleSlideMenu] = useToggle(false)
-  const [openSafeResult, setOpenSafeResult] = useState('')
   const [lastCalculations, setLastCalculations] = useLocalStorage(
     'lastCalculations',
     []
   )
+  const [finalCosts, setFinalCosts] = useState(0)
+  const [toggleSlideMenu, setToggleSlideMenu] = useToggle(false)
+  const [openSafeResult, setOpenSafeResult] = useState('')
 
   return (
     <>
@@ -29,16 +28,14 @@ export default function App() {
           <Route exact path="/">
             <CalculationPage
               services={services}
+              setServices={setServices}
               onPlus={handlePlus}
               onMinus={handleMinus}
               finalCosts={finalCosts}
               onAddingNewCosts={updateCostsPerHours}
-              onSafeResult={setOpenSafeResult}
               toggleSlideMenu={setToggleSlideMenu}
-              onAddNewService={addNewService}
-              openNewServiceForm={openNewServiceForm}
-              onOpenNewServiceForm={setOpenNewServiceForm}
               onDeleteEntry={deleteCard}
+              onSafeResult={setOpenSafeResult}
             />
           </Route>
 
@@ -64,17 +61,6 @@ export default function App() {
       )}
     </>
   )
-
-  function addNewService({ name, costs }) {
-    const newService = {
-      id: uuidv4(),
-      name,
-      costs,
-      hours: 0,
-    }
-    setServices([...services, newService])
-    setOpenNewServiceForm('home')
-  }
 
   function safeCostsToHistory({ date, costs }) {
     const newCalculation = {
