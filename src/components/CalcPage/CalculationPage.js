@@ -21,28 +21,33 @@ export default function Calculation({
   onDeleteEntry,
 }) {
   const [openNewServiceForm, setOpenNewServiceForm] = useState('home')
+  const [searchInput, setSearchInput] = useState('')
 
   return (
     <>
       <MenuButton toggleSlideMenu={toggleSlideMenu} />
       <Header title={'QuickQalc'}></Header>
       <Content>
-        <Searchbar />
+        <Searchbar searchInput={searchInput} onTypeSearch={setSearchInput} />
         <ServiceCardWrapper>
-          {services.map(({ id, name, costs, hours }, index) => (
-            <ServiceCard
-              key={id}
-              index={index}
-              name={name}
-              costs={costs}
-              hours={hours}
-              onPlus={onPlus}
-              onMinus={onMinus}
-              services={services}
-              onAddingNewCosts={onAddingNewCosts}
-              onDeleteEntry={onDeleteEntry}
-            />
-          ))}
+          {services
+            .filter(character =>
+              character.name.toLowerCase().includes(searchInput.toLowerCase())
+            )
+            .map(({ id, name, costs, hours }, index) => (
+              <ServiceCard
+                key={id}
+                index={index}
+                name={name}
+                costs={costs}
+                hours={hours}
+                onPlus={onPlus}
+                onMinus={onMinus}
+                services={services}
+                onAddingNewCosts={onAddingNewCosts}
+                onDeleteEntry={onDeleteEntry}
+              />
+            ))}
         </ServiceCardWrapper>
       </Content>
 

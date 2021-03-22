@@ -1,11 +1,11 @@
 import styled from 'styled-components/macro'
 
-export default function Searchbar({ searchInput, setSearchInput }) {
+export default function Searchbar({ searchInput, onTypeSearch }) {
   return (
     <SearchInput
       placeholder="Dienstleistungen..."
       value={searchInput}
-      onChange={event => setSearchInput(event.target.value)}
+      onChange={event => onTypeSearch(event.target.value)}
     />
   )
 }
