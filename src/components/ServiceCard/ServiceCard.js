@@ -6,20 +6,18 @@ import useToggle from '../../hooks/useToggle'
 import Icon from 'supercons'
 
 export default function ServiceCard({
-  id,
+  index,
   name,
   costs,
   hours,
   onPlus,
   onMinus,
-  services,
   onAddingNewCosts,
   adjustCurrentCosts,
   onDeleteEntry,
 }) {
   const [isVisible, setIsVisible] = useToggle(false)
   const [usedCosts, setUsedCosts] = useState(costs)
-  const index = services.findIndex(param => param.id === id)
 
   return (
     <CardContainer

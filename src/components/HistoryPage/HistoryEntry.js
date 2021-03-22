@@ -1,14 +1,11 @@
 import styled from 'styled-components/macro'
 import Icon from 'supercons'
 export default function HistoryEntry({
-  id,
   date,
   costs,
+  index,
   onDeleteHistoryEntry,
-  lastCalculations,
 }) {
-  const index = lastCalculations.findIndex(param => param.id === id)
-
   return (
     <>
       <EntryBox>

@@ -17,7 +17,6 @@ export default function Calculation({
   onAddingNewCosts,
   onSafeResult,
   toggleSlideMenu,
-  onOpenNewServiceForm,
   onDeleteEntry,
 }) {
   const [openNewServiceForm, setOpenNewServiceForm] = useState('home')
@@ -27,10 +26,10 @@ export default function Calculation({
       <MenuButton toggleSlideMenu={toggleSlideMenu} />
       <Header title={'QuickQalc'}></Header>
       <Content>
-        {services.map(({ id, name, costs, hours }) => (
+        {services.map(({ id, name, costs, hours }, index) => (
           <ServiceCard
             key={id}
-            id={id}
+            index={index}
             name={name}
             costs={costs}
             hours={hours}

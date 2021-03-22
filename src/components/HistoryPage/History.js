@@ -13,10 +13,10 @@ export default function History({
       <MenuButton toggleSlideMenu={toggleSlideMenu} />
       <Header title="Historypage" />
       <Content>
-        {lastCalculations.map(({ id, date, costs }) => (
+        {lastCalculations.map(({ id, date, costs }, index) => (
           <HistoryEntry
             key={id}
-            id={id}
+            index={index}
             date={date}
             costs={costs}
             lastCalculations={lastCalculations}
