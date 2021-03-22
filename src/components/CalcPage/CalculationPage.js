@@ -17,6 +17,7 @@ export default function Calculation({
   onAddNewService,
   openNewServiceForm,
   onOpenNewServiceForm,
+  onDeleteEntry,
 }) {
   return (
     <>
@@ -33,6 +34,7 @@ export default function Calculation({
             onMinus={onMinus}
             services={services}
             onAddingNewCosts={onAddingNewCosts}
+            onDeleteEntry={onDeleteEntry}
           />
         ))}
       </Content>

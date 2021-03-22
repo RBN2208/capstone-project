@@ -38,6 +38,7 @@ export default function App() {
               onAddNewService={addNewService}
               openNewServiceForm={openNewServiceForm}
               onOpenNewServiceForm={setOpenNewServiceForm}
+              onDeleteEntry={deleteEntry}
             />
           </Route>
 
@@ -123,6 +124,10 @@ export default function App() {
       { ...currentService, hours: hours - 1 },
       ...services.slice(index + 1),
     ])
+  }
+
+  function deleteEntry(index) {
+    setServices([...services.slice(0, index), ...services.slice(index + 1)])
   }
 }
 

@@ -3,6 +3,7 @@ import styled from 'styled-components/macro'
 import Button from '../Button/Button'
 import ServicecardInfo from '../FormComponents/ServicecardInfo'
 import useToggle from '../../hooks/useToggle'
+import Icon from 'supercons'
 
 export default function ServiceCard({
   name,
@@ -13,26 +14,20 @@ export default function ServiceCard({
   services,
   onAddingNewCosts,
   adjustCurrentCosts,
+  onDeleteEntry,
 }) {
   const [isVisible, setIsVisible] = useToggle(false)
   const [usedCosts, setUsedCosts] = useState(costs)
   const index = services.findIndex(param => param.name === name)
 
   return (
-    <CardContainer onClick={() => setIsVisible(!isVisible)}>
+    <CardContainer
+      onClick={() => setIsVisible(!isVisible)}
+      isVisible={isVisible}
+    >
       <Servicebox>
         <TextBox>
-          <svg
-            aria-hidden="true"
-            focusable="false"
-            data-prefix="fas"
-            data-icon="chevron-up"
-            role="img"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 448 512"
-          >
-            <path d="M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z"></path>
-          </svg>
+          <Icon glyph="down-caret" />
           {name}
         </TextBox>
         <ButtonBox>
@@ -58,6 +53,7 @@ export default function ServiceCard({
             setUsedCosts={setUsedCosts}
             onAddingNewCosts={onAddingNewCosts}
             adjustCurrentCosts={adjustCurrentCosts}
+            onDeleteEntry={onDeleteEntry}
           />
         </CardInfo>
       )}
@@ -85,9 +81,7 @@ const CardContainer = styled.div`
   border-radius: 7px;
   overflow: hidden;
   svg {
-    width: 10px;
-    rotate: 180deg;
-    margin-right: 10px;
+    rotate: ${props => (props.isVisible ? '180deg' : '0deg')};
   }
 `
 const CardInfo = styled.div`
