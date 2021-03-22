@@ -1,16 +1,27 @@
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import Header from '../Header/Header'
 import MenuButton from '../MenuButton/MenuButton'
 import HistoryEntry from './HistoryEntry'
 
-export default function History({ toggleSlideMenu, lastCalculations }) {
+export default function History({
+  toggleSlideMenu,
+  lastCalculations,
+  onDeleteHistoryEntry,
+}) {
   return (
     <>
       <MenuButton toggleSlideMenu={toggleSlideMenu} />
       <Header title="Historypage" />
       <Content>
         {lastCalculations.map(({ id, date, costs }) => (
-          <HistoryEntry key={id} date={date} costs={costs} />
+          <HistoryEntry
+            key={id}
+            id={id}
+            date={date}
+            costs={costs}
+            onDeleteHistoryEntry={onDeleteHistoryEntry}
+            lastCalculations={lastCalculations}
+          />
         ))}
       </Content>
     </>

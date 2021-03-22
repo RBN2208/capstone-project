@@ -27,6 +27,7 @@ export default function Calculation({
         {services.map(({ id, name, costs, hours }) => (
           <ServiceCard
             key={id}
+            id={id}
             name={name}
             costs={costs}
             hours={hours}

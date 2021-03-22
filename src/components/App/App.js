@@ -17,7 +17,7 @@ export default function App() {
   const [finalCosts, setFinalCosts] = useState(0)
   const [toggleSlideMenu, setToggleSlideMenu] = useToggle(false)
   const [openSafeResult, setOpenSafeResult] = useState('')
-  const [lastCalculations, setLastCalculation] = useLocalStorage(
+  const [lastCalculations, setLastCalculations] = useLocalStorage(
     'lastCalculations',
     []
   )
@@ -38,7 +38,7 @@ export default function App() {
               onAddNewService={addNewService}
               openNewServiceForm={openNewServiceForm}
               onOpenNewServiceForm={setOpenNewServiceForm}
-              onDeleteEntry={deleteEntry}
+              onDeleteEntry={deleteCard}
             />
           </Route>
 
@@ -46,6 +46,7 @@ export default function App() {
             <History
               toggleSlideMenu={setToggleSlideMenu}
               lastCalculations={lastCalculations}
+              onDeleteHistoryEntry={deleteHistoryEntry}
             />
           </Route>
         </AppLayout>
@@ -81,7 +82,7 @@ export default function App() {
       date,
       costs,
     }
-    setLastCalculation([...lastCalculations, newCalculation])
+    setLastCalculations([...lastCalculations, newCalculation])
     setOpenSafeResult('home')
     resetValues()
   }
@@ -126,8 +127,15 @@ export default function App() {
     ])
   }
 
-  function deleteEntry(index) {
+  function deleteCard(index) {
     setServices([...services.slice(0, index), ...services.slice(index + 1)])
+  }
+
+  function deleteHistoryEntry(index) {
+    setLastCalculations([
+      ...lastCalculations.slice(0, index),
+      ...lastCalculations.slice(index + 1),
+    ])
   }
 }
 
