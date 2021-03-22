@@ -112,7 +112,6 @@ export default function App() {
       ...services.slice(index + 1),
     ])
   }
-
   function deleteCard(index) {
     setServices([...services.slice(0, index), ...services.slice(index + 1)])
   }

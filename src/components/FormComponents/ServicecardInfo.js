@@ -11,6 +11,8 @@ export default function ServicecardInfo({
   index,
   onDeleteEntry,
 }) {
+  const handlePropagation = event => event.stopPropagation()
+
   return (
     <InfoWrapper>
       <ServiceInfoForm
@@ -23,10 +25,10 @@ export default function ServicecardInfo({
             Stundensatz:
             <CostInput
               currentCostsPerHour={currentCostsPerHour}
-              onClick={event => event.stopPropagation()}
+              onClick={handlePropagation}
             />
           </label>
-          <Button onClick={event => event.stopPropagation()}>Set</Button>
+          <Button onClick={handlePropagation}>Set</Button>
         </NewCostsBox>
       </ServiceInfoForm>
       <DeleteButton>
