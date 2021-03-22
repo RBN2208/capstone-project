@@ -24,8 +24,12 @@ describe('CalculationPage', () => {
     render(<CalculationPage services={services} />)
     expect(screen.getByText('QuickQalc')).toBeInTheDocument()
   })
-  it('renders the finalCosts without add', () => {
-    render(<CalculationPage services={services} />)
-    expect(screen.getByText('Endpreis: €')).toBeInTheDocument()
+  it('renders the finalCosts coming from state', () => {
+    const { rerender } = render(
+      <CalculationPage services={services} finalCosts={0} />
+    )
+    expect(screen.getByText('Endpreis: 0 €')).toBeInTheDocument()
+    rerender(<CalculationPage services={services} finalCosts={333} />)
+    expect(screen.getByText('Endpreis: 333 €')).toBeInTheDocument()
   })
 })
