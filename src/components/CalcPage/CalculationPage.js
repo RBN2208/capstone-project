@@ -7,6 +7,7 @@ import ResultField from '../ResultField/ResultField'
 import NewService from '../FormComponents/NewService'
 import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
+import Searchbar from '../Searchbar/Searchbar'
 
 export default function Calculation({
   services,
@@ -26,20 +27,23 @@ export default function Calculation({
       <MenuButton toggleSlideMenu={toggleSlideMenu} />
       <Header title={'QuickQalc'}></Header>
       <Content>
-        {services.map(({ id, name, costs, hours }, index) => (
-          <ServiceCard
-            key={id}
-            index={index}
-            name={name}
-            costs={costs}
-            hours={hours}
-            onPlus={onPlus}
-            onMinus={onMinus}
-            services={services}
-            onAddingNewCosts={onAddingNewCosts}
-            onDeleteEntry={onDeleteEntry}
-          />
-        ))}
+        <Searchbar />
+        <ServiceCardWrapper>
+          {services.map(({ id, name, costs, hours }, index) => (
+            <ServiceCard
+              key={id}
+              index={index}
+              name={name}
+              costs={costs}
+              hours={hours}
+              onPlus={onPlus}
+              onMinus={onMinus}
+              services={services}
+              onAddingNewCosts={onAddingNewCosts}
+              onDeleteEntry={onDeleteEntry}
+            />
+          ))}
+        </ServiceCardWrapper>
       </Content>
 
       <ButtonBox>
@@ -74,12 +78,10 @@ export default function Calculation({
 
 const Content = styled.div`
   display: grid;
-  gap: 10px;
-  grid-auto-rows: min-content;
-  padding: 15px;
-  margin: 0 auto;
+  gap: 12px;
+  grid-template-rows: 40px auto;
+  padding: 10px;
   overflow-y: scroll;
-  width: 100%;
 `
 
 const NewServiceButton = styled(Button)`
@@ -90,4 +92,14 @@ const NewServiceButton = styled(Button)`
 const ButtonBox = styled.div`
   display: flex;
   justify-content: space-between;
+  box-shadow: 0 -20px 10px white;
+`
+
+const ServiceCardWrapper = styled.div`
+  display: grid;
+  gap: 10px;
+  grid-auto-rows: min-content;
+  padding: 5px;
+  overflow-y: scroll;
+  width: 100%;
 `
