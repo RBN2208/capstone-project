@@ -18,10 +18,10 @@ export default function HistoryEntry({
           <h3>{keynote}</h3>
           <ButtonWrapper style={{ color: 'black' }}>
             <IconBox
-              glyph="view-close"
+              glyph="delete"
               width={'25'}
               height={'25'}
-              viewBox="6 6 20 20"
+              viewBox="4 4 25 25"
               onClick={() => setOpenConfirm(true)}
             />
             <IconBox
@@ -66,8 +66,6 @@ const CostValue = styled.p`
   font-weight: bold;
   font-size: 1.2em;
 `
-
-const DeleteButton = styled.div``
 
 const TopWrapper = styled.section`
   display: flex;

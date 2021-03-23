@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro'
 import Button from '../Button/Button'
 
-export default function HistoryConfirm({
+export default function DeleteConfirmation({
   id,
   onDeleteHistoryEntry,
   setOpenConfirm,

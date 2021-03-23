@@ -12,7 +12,12 @@ export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
         <FinalCosts name="endresult">{finalCosts}€</FinalCosts>
         <Keynotes>
           Füge noch ein Stichwort hinzu!
-          <input name="keynote" placeholder="z.B. Herr Müller" max="20" />
+          <input
+            name="keynote"
+            placeholder="z.B. Herr Müller"
+            max="20"
+            required
+          />
         </Keynotes>
         <ButtonSafe data-testid="safebutton">Speichern</ButtonSafe>
         <ButtonBack
