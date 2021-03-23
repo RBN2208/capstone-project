@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components/macro'
 import Icon from 'supercons'
-import HistoryConfirm from '../FormComponents/HistoryConfirm'
+import ConfirmDialog from '../FormComponents/ConfirmDialog'
 
 export default function HistoryEntry({
   id,
@@ -16,7 +16,7 @@ export default function HistoryEntry({
       <EntryWrapper>
         <TopWrapper>
           <h3>{keynote}</h3>
-          <ButtonWrapper style={{ color: 'black' }}>
+          <ButtonWrapper>
             <IconBox
               glyph="delete"
               width={'25'}
@@ -31,19 +31,21 @@ export default function HistoryEntry({
               viewBox="6 6 20 20"
               onClick={() => console.log('opens the details!')}
             />
-            {openConfirm === true && (
-              <HistoryConfirm
-                id={id}
-                onDeleteHistoryEntry={onDeleteHistoryEntry}
-                setOpenConfirm={setOpenConfirm}
-              />
-            )}
           </ButtonWrapper>
         </TopWrapper>
         <BottomWrapper>
           <p>Kalkulation vom {date} :</p>
           <CostValue>{costs}</CostValue>
         </BottomWrapper>
+        {openConfirm === true && (
+          <ConfirmDialog
+            id={id}
+            deleteEntry={onDeleteHistoryEntry}
+            toggle={setOpenConfirm}
+            right={'70px'}
+            top={'10px'}
+          />
+        )}
       </EntryWrapper>
     </>
   )
@@ -75,6 +77,7 @@ const TopWrapper = styled.section`
 const BottomWrapper = styled.section`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   position: relative;
 `
 const ButtonWrapper = styled.div`
@@ -86,14 +89,3 @@ const IconBox = styled(Icon)`
   border-radius: 2px;
   margin: 0 5px;
 `
-
-/*
-            {openConfirm === true && (
-              <HistoryConfirm
-                id={id}
-                onDeleteHistoryEntry={onDeleteHistoryEntry}
-                setOpenConfirm={setOpenConfirm}
-              />
-            )}
-
-*/

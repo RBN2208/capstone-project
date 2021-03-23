@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro'
 import Button from '../Button/Button'
 import CostInput from '../Inputs/CostInput'
-import ServiceConfirm from './ServiceConfirm'
+import ConfirmDialog from './ConfirmDialog'
 import Icon from 'supercons'
 import { useState } from 'react'
 
@@ -47,11 +47,14 @@ export default function ServicecardInfo({
             onClick={event => event.stopPropagation() & setOpenConfirm(true)}
           />
         </DeleteIcon>
+
         {openConfirm === true && (
-          <ServiceConfirm
+          <ConfirmDialog
             id={id}
-            onDeleteEntry={onDeleteEntry}
-            setOpenConfirm={setOpenConfirm}
+            deleteEntry={onDeleteEntry}
+            toggle={setOpenConfirm}
+            right={'30px'}
+            top={'5px'}
           />
         )}
       </DeleteButton>
@@ -70,6 +73,7 @@ const ServiceInfoForm = styled.form`
   display: grid;
   gap: 10px;
   grid-auto-flow: dense;
+  height: min-content;
   input {
     width: 130px;
   }
