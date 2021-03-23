@@ -24,6 +24,15 @@ export default function NewService({ onAddNewService, onOpenNewServiceForm }) {
           Stundensatz
           <Costinput currentCostsPerHour="default: 50" />
         </label>
+        <label>
+          Notiz(Optional):
+          <ServiceNote
+            aria-label="notes"
+            data-testid="servicenote"
+            name="notes"
+            placeholder="Für Notizen zur Dienstleistung."
+          ></ServiceNote>
+        </label>
         <NewServiceButton>Hinzufügen</NewServiceButton>
         <ButtonBack
           data-testid="backbutton"
@@ -42,6 +51,7 @@ export default function NewService({ onAddNewService, onOpenNewServiceForm }) {
     const data = {
       name: formElements.service.value,
       costs: Number(costsPerHour) || Number(50),
+      notes: formElements.notes.value,
     }
     onAddNewService(data)
   }
@@ -74,4 +84,14 @@ const ButtonBack = styled(Button)`
   padding: 0.2em 0.6em;
   border-radius: 3px;
   font-size: 1.2rem;
+`
+
+const ServiceNote = styled.textarea`
+  width: 100%;
+  height: 90px;
+  border: 1px solid var(--color-light);
+  outline: none;
+  resize: none;
+  font-family: sans-serif;
+  padding: 10px 8px;
 `

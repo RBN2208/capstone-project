@@ -5,10 +5,11 @@ import Icon from 'supercons'
 
 export default function ServicecardInfo({
   hours,
+  notes,
+  index,
   currentCostsPerHour,
   setUsedCosts,
   onAddingNewCosts,
-  index,
   onDeleteEntry,
 }) {
   const handlePropagation = event => event.stopPropagation()
@@ -31,6 +32,7 @@ export default function ServicecardInfo({
           <Button onClick={handlePropagation}>Set</Button>
         </NewCostsBox>
       </ServiceInfoForm>
+      <NoteWrapper>{notes}</NoteWrapper>
       <DeleteButton>
         <Icon
           glyph="view-close"
@@ -67,6 +69,8 @@ const NewCostsBox = styled.div`
 `
 
 const InfoWrapper = styled.div`
+  display: grid;
+  gap: 15px;
   position: relative;
 `
 
@@ -74,4 +78,9 @@ const DeleteButton = styled.div`
   position: absolute;
   top: -6px;
   right: 0px;
+`
+
+const NoteWrapper = styled.div`
+  font-style: italic;
+  font-size: medium;
 `
