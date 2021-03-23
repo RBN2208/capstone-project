@@ -40,6 +40,3 @@ const NavLinkStyled = styled(NavLink)`
     color: var(--color-light);
   }
 `
-const Delete = styled.button`
-  height: 50px;
-`
