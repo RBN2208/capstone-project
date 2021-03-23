@@ -24,6 +24,7 @@ export default function ServiceCard({
     <CardContainer
       onClick={() => setIsVisible(!isVisible)}
       isVisible={isVisible}
+      data-testid="cardcontainer"
     >
       <Servicebox>
         <TextBox>
