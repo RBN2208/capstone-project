@@ -4,15 +4,26 @@ import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 
 const services = [
-  { id: 1, name: 'one', costs: 50 },
-  { id: 2, name: 'two', costs: 150 },
-  { id: 3, name: 'three', costs: 250 },
+  { id: 1, name: 'one', costs: 50, notes: 'Hey note 1!' },
+  { id: 2, name: 'two', costs: 150, notes: 'Hey note 2!' },
+  { id: 3, name: 'three', costs: 250, notes: 'Hey note 3!' },
 ]
 
 describe('ServiceCard', () => {
   it('renders a card with text', () => {
     render(<ServiceCard name={services[0].name} services={services} />)
     expect(screen.getByText('one')).toBeInTheDocument()
+  })
+  it('renders the text for notes', () => {
+    render(
+      <ServiceCard
+        name={services[0].name}
+        notes={services[0].notes}
+        services={services}
+      />
+    )
+    userEvent.click(screen.getByTestId('cardcontainer'))
+    expect(screen.getByText('Hey note 1!')).toBeInTheDocument()
   })
   it('contains two buttons', () => {
     render(

@@ -9,6 +9,7 @@ export default function ServicecardInfo({
   id,
   index,
   hours,
+  notes,
   currentCostsPerHour,
   setUsedCosts,
   onAddingNewCosts,
@@ -35,6 +36,7 @@ export default function ServicecardInfo({
           <Button onClick={handlePropagation}>Set</Button>
         </NewCostsBox>
       </ServiceInfoForm>
+      <NoteWrapper>{notes}</NoteWrapper>
       <DeleteButton>
         <DeleteIcon>
           <Icon
@@ -80,6 +82,8 @@ const NewCostsBox = styled.div`
 `
 
 const InfoWrapper = styled.div`
+  display: grid;
+  gap: 15px;
   position: relative;
 `
 
@@ -90,4 +94,8 @@ const DeleteButton = styled.div`
 `
 const DeleteIcon = styled.div`
   rotate: 180deg;
+`
+const NoteWrapper = styled.div`
+  font-style: italic;
+  font-size: medium;
 `

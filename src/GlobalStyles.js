@@ -20,13 +20,13 @@ body {
   margin: 0 auto;
 }
 input,
-button {
+button,textarea {
   font-size: inherit;
   padding: 5px;
   outline: none;
   width: 100%;
-    border-radius: 5px;
-    border: 1px solid var(--color-midgrey);
+  border-radius: 5px;
+  border: 1px solid var(--color-midgrey);
 }
 
 `
