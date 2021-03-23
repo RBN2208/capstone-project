@@ -63,7 +63,8 @@ export default function ServicecardInfo({
   function handleSettingNewCosts(event) {
     event.preventDefault()
     const formElement = event.target.elements
-    const newCostsPerHour = parseFloat(formElement.setcosts.value)
+    const toRound = parseFloat(formElement.setcosts.value)
+    const newCostsPerHour = Math.round(toRound / 0.5) * 0.5
     setUsedCosts(newCostsPerHour)
     onAddingNewCosts(index, newCostsPerHour, currentCostsPerHour, hours)
   }
