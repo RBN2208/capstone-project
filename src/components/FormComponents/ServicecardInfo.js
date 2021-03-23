@@ -36,13 +36,15 @@ export default function ServicecardInfo({
         </NewCostsBox>
       </ServiceInfoForm>
       <DeleteButton>
-        <Icon
-          glyph="delete"
-          width={'25'}
-          height={'25'}
-          viewBox="4 4 25 25"
-          onClick={event => event.stopPropagation() & setOpenConfirm(true)}
-        />
+        <DeleteIcon>
+          <Icon
+            glyph="delete"
+            width={'25'}
+            height={'25'}
+            viewBox="4 4 25 25"
+            onClick={event => event.stopPropagation() & setOpenConfirm(true)}
+          />
+        </DeleteIcon>
         {openConfirm === true && (
           <ServiceConfirm
             id={id}
@@ -85,5 +87,7 @@ const DeleteButton = styled.div`
   position: absolute;
   top: -11px;
   right: 0px;
+`
+const DeleteIcon = styled.div`
   rotate: 180deg;
 `

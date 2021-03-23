@@ -10,7 +10,7 @@ import SafeResultForm from '../FormComponents/SafeResultForm'
 
 import useToggle from '../../hooks/useToggle'
 import useLocalStorage from '../../hooks/useLocalStorage'
-import deleteEntry from '../../lib/deleteEntry'
+import { deleteEntry } from '../../services/deleteEntry'
 
 export default function App() {
   const [services, setServices] = useLocalStorage('services', [])

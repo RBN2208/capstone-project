@@ -86,3 +86,14 @@ const IconBox = styled(Icon)`
   border-radius: 2px;
   margin: 0 5px;
 `
+
+/*
+            {openConfirm === true && (
+              <HistoryConfirm
+                id={id}
+                onDeleteHistoryEntry={onDeleteHistoryEntry}
+                setOpenConfirm={setOpenConfirm}
+              />
+            )}
+
+*/

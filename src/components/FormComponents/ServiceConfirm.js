@@ -22,8 +22,8 @@ const ConfirmBox = styled.div`
   border: 2px solid black;
   border-radius: 5px;
   position: absolute;
-  right: 25px;
-  top: -50px;
+  right: 30px;
+  top: -42px;
   width: 250px;
 `
 const ButtonWrapper = styled.div`
