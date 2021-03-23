@@ -13,12 +13,14 @@ export default function History({
       <MenuButton toggleSlideMenu={toggleSlideMenu} />
       <Header title="Historypage" />
       <Content>
-        {lastCalculations.map(({ id, date, costs }, index) => (
+        {lastCalculations.map(({ id, date, costs, keynote }, index) => (
           <HistoryEntry
             key={id}
+            id={id}
             index={index}
             date={date}
             costs={costs}
+            keynote={keynote}
             lastCalculations={lastCalculations}
             onDeleteHistoryEntry={onDeleteHistoryEntry}
           />
@@ -28,7 +30,7 @@ export default function History({
   )
 }
 
-const Content = styled.div`
+const Content = styled.main`
   display: grid;
   gap: 10px;
   grid-auto-rows: min-content;
@@ -36,4 +38,5 @@ const Content = styled.div`
   margin: 0 auto;
   overflow-y: scroll;
   width: 100%;
+  height: 109%;
 `

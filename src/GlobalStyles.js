@@ -25,6 +25,8 @@ button {
   padding: 5px;
   outline: none;
   width: 100%;
+    border-radius: 5px;
+    border: 1px solid var(--color-midgrey);
 }
 
 `

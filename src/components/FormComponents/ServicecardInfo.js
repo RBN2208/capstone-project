@@ -1,17 +1,21 @@
 import styled from 'styled-components/macro'
 import Button from '../Button/Button'
 import CostInput from '../Inputs/CostInput'
+import ServiceConfirm from './ServiceConfirm'
 import Icon from 'supercons'
+import { useState } from 'react'
 
 export default function ServicecardInfo({
+  id,
+  index,
   hours,
   currentCostsPerHour,
   setUsedCosts,
   onAddingNewCosts,
-  index,
   onDeleteEntry,
 }) {
   const handlePropagation = event => event.stopPropagation()
+  const [openConfirm, setOpenConfirm] = useState(false)
 
   return (
     <InfoWrapper>
@@ -37,8 +41,15 @@ export default function ServicecardInfo({
           width={'25'}
           height={'25'}
           viewBox="6 6 20 20"
-          onClick={() => onDeleteEntry(index)}
+          onClick={event => event.stopPropagation() & setOpenConfirm(true)}
         />
+        {openConfirm === true && (
+          <ServiceConfirm
+            id={id}
+            onDeleteEntry={onDeleteEntry}
+            setOpenConfirm={setOpenConfirm}
+          />
+        )}
       </DeleteButton>
     </InfoWrapper>
   )

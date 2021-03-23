@@ -62,11 +62,12 @@ export default function App() {
     </>
   )
 
-  function safeCostsToHistory({ date, costs }) {
+  function safeCostsToHistory({ date, costs, keynote }) {
     const newCalculation = {
       id: uuidv4(),
       date,
       costs,
+      keynote,
     }
     setLastCalculations([...lastCalculations, newCalculation])
     setOpenSafeResult('home')
@@ -112,15 +113,15 @@ export default function App() {
       ...services.slice(index + 1),
     ])
   }
-  function deleteCard(index) {
-    setServices([...services.slice(0, index), ...services.slice(index + 1)])
+
+  function deleteCard(currentId) {
+    setServices(services.filter(service => service.id !== currentId))
   }
 
-  function deleteHistoryEntry(index) {
-    setLastCalculations([
-      ...lastCalculations.slice(0, index),
-      ...lastCalculations.slice(index + 1),
-    ])
+  function deleteHistoryEntry(currentId) {
+    setLastCalculations(
+      lastCalculations.filter(entry => entry.id !== currentId)
+    )
   }
 }
 

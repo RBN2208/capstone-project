@@ -6,6 +6,7 @@ import useToggle from '../../hooks/useToggle'
 import Icon from 'supercons'
 
 export default function ServiceCard({
+  id,
   index,
   name,
   costs,
@@ -48,6 +49,7 @@ export default function ServiceCard({
           <ServicecardInfo
             hours={hours}
             index={index}
+            id={id}
             currentCostsPerHour={usedCosts}
             setUsedCosts={setUsedCosts}
             onAddingNewCosts={onAddingNewCosts}
