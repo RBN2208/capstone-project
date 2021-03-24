@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid'
+import styled from 'styled-components'
 
 const cloudname = 'du5gyoj7r'
 const preset = 'xuusbzps'
@@ -8,6 +9,20 @@ const preset = 'xuusbzps'
 // const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET
 
 export default function Uploader({ images, setImages }) {
+  return (
+    <div>
+      <Upload for="imageupload">
+        Upload
+        <Input
+          id="imageupload"
+          type="file"
+          name="file"
+          onChange={upload}
+          accept=".png, .jpg, .jpeg"
+        />
+      </Upload>
+    </div>
+  )
   function upload(event) {
     const url = `https://api.cloudinary.com/v1_1/${cloudname}/image/upload`
 
@@ -29,10 +44,14 @@ export default function Uploader({ images, setImages }) {
     const newImage = { id: uuidv4(), url: response.data.url }
     setImages([...images, newImage])
   }
-
-  return (
-    <div>
-      <input type="file" name="file" onChange={upload} />
-    </div>
-  )
 }
+const Upload = styled.label`
+  display: block;
+  width: min-content;
+  height: min-content;
+  background-color: cornflowerblue;
+`
+
+const Input = styled.input`
+  display: none;
+`
