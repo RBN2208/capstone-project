@@ -71,17 +71,20 @@ export default function App() {
           finalCosts={finalCosts}
           onDiscardSave={setOpenSafeResult}
           onSafeCosts={safeCostsToHistory}
+          images={images}
+          setImages={setImages}
         />
       )}
     </>
   )
 
-  function safeCostsToHistory({ date, costs, keynote }) {
+  function safeCostsToHistory({ date, costs, keynote, URL }) {
     const newCalculation = {
       id: uuidv4(),
       date,
       costs,
       keynote,
+      URL,
     }
     setLastCalculations([...lastCalculations, newCalculation])
     setOpenSafeResult('home')

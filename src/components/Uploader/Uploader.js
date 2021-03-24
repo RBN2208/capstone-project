@@ -29,7 +29,6 @@ export default function Uploader({ images, setImages }) {
     const formData = new FormData()
     formData.append('file', event.target.files[0])
     formData.append('upload_preset', preset)
-    console.log(images)
     axios
       .post(url, formData, {
         headers: {

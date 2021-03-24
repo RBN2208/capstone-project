@@ -1,7 +1,14 @@
 import styled from 'styled-components'
 import Button from '../Button/Button'
+import Uploader from '../Uploader/Uploader'
 
-export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
+export default function ResultForm({
+  finalCosts,
+  onDiscardSave,
+  onSafeCosts,
+  images,
+  setImages,
+}) {
   return (
     <BlurContainer>
       <Form
@@ -26,6 +33,7 @@ export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
         >
           Zurück
         </ButtonBack>
+        <Uploader images={images} setImages={setImages} />
       </Form>
     </BlurContainer>
   )
@@ -35,10 +43,12 @@ export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
     const finalCosts = formElement.endresult.value
     const keynote = formElement.keynote.value
     const currentDate = new Date().toLocaleDateString('de')
+    const URL = images[0].url
     const data = {
       date: currentDate,
       costs: finalCosts,
       keynote,
+      URL,
     }
     onSafeCosts(data)
   }
