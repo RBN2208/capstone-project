@@ -9,8 +9,6 @@ const services = [
   { id: 3, name: 'three', costs: 250 },
 ]
 
-const onOpenNewServiceForm = jest.fn()
-
 describe('CalculationPage', () => {
   it('renders a servicecard with text', () => {
     render(<CalculationPage name={services[0].name} services={services} />)
