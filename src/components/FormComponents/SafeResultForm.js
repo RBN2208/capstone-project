@@ -10,6 +10,15 @@ export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
       >
         <p>Die aktuell geschätzten Kosten betragen:</p>
         <FinalCosts name="endresult">{finalCosts}€</FinalCosts>
+        <Keynotes>
+          Füge noch ein Stichwort hinzu!
+          <input
+            name="keynote"
+            placeholder="z.B. Herr Müller"
+            max="20"
+            required
+          />
+        </Keynotes>
         <ButtonSafe data-testid="safebutton">Speichern</ButtonSafe>
         <ButtonBack
           data-testid="backbutton"
@@ -24,10 +33,12 @@ export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
     event.preventDefault()
     const formElement = event.target.elements
     const finalCosts = formElement.endresult.value
+    const keynote = formElement.keynote.value
     const currentDate = new Date().toLocaleDateString('de')
     const data = {
       date: currentDate,
       costs: finalCosts,
+      keynote,
     }
     onSafeCosts(data)
   }
@@ -55,7 +66,7 @@ const BlurContainer = styled.div`
 const FinalCosts = styled.output`
   font-size: 1.2rem;
   font-weight: bold;
-  margin-top: 0;
+  margin-bottom: 20px;
 `
 const ButtonSafe = styled(Button)`
   background-color: var(--color-green);
@@ -67,4 +78,8 @@ const ButtonBack = styled(Button)`
   padding: 0.2em 0.6em;
   border-radius: 3px;
   font-size: 1.2rem;
+`
+const Keynotes = styled.label`
+  display: grid;
+  gap: 10px;
 `

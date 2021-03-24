@@ -1,18 +1,22 @@
 import styled from 'styled-components/macro'
 import Button from '../Button/Button'
 import CostInput from '../Inputs/CostInput'
+import ConfirmDialog from './ConfirmDialog'
 import Icon from 'supercons'
+import { useState } from 'react'
 
 export default function ServicecardInfo({
+  id,
+  index,
   hours,
   notes,
-  index,
   currentCostsPerHour,
   setUsedCosts,
   onAddingNewCosts,
   onDeleteEntry,
 }) {
   const handlePropagation = event => event.stopPropagation()
+  const [openConfirm, setOpenConfirm] = useState(false)
 
   return (
     <InfoWrapper>
@@ -34,20 +38,33 @@ export default function ServicecardInfo({
       </ServiceInfoForm>
       <NoteWrapper>{notes}</NoteWrapper>
       <DeleteButton>
-        <Icon
-          glyph="view-close"
-          width={'25'}
-          height={'25'}
-          viewBox="6 6 20 20"
-          onClick={() => onDeleteEntry(index)}
-        />
+        <DeleteIcon>
+          <Icon
+            glyph="delete"
+            width={'25'}
+            height={'25'}
+            viewBox="4 4 25 25"
+            onClick={event => event.stopPropagation() & setOpenConfirm(true)}
+          />
+        </DeleteIcon>
+
+        {openConfirm === true && (
+          <ConfirmDialog
+            id={id}
+            deleteEntry={onDeleteEntry}
+            toggle={setOpenConfirm}
+            right={'30px'}
+            top={'5px'}
+          />
+        )}
       </DeleteButton>
     </InfoWrapper>
   )
   function handleSettingNewCosts(event) {
     event.preventDefault()
     const formElement = event.target.elements
-    const newCostsPerHour = parseFloat(formElement.setcosts.value)
+    const toRound = parseFloat(formElement.setcosts.value)
+    const newCostsPerHour = Math.round(toRound / 0.5) * 0.5
     setUsedCosts(newCostsPerHour)
     onAddingNewCosts(index, newCostsPerHour, currentCostsPerHour, hours)
   }
@@ -57,6 +74,7 @@ const ServiceInfoForm = styled.form`
   display: grid;
   gap: 10px;
   grid-auto-flow: dense;
+  height: min-content;
   input {
     width: 130px;
   }
@@ -76,10 +94,12 @@ const InfoWrapper = styled.div`
 
 const DeleteButton = styled.div`
   position: absolute;
-  top: -6px;
+  top: -11px;
   right: 0px;
 `
-
+const DeleteIcon = styled.div`
+  rotate: 180deg;
+`
 const NoteWrapper = styled.div`
   font-style: italic;
   font-size: medium;

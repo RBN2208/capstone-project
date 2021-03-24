@@ -1,38 +1,67 @@
+import { useState } from 'react'
 import styled from 'styled-components/macro'
 import Icon from 'supercons'
+import ConfirmDialog from '../FormComponents/ConfirmDialog'
+
 export default function HistoryEntry({
+  id,
   date,
   costs,
-  index,
+  keynote,
   onDeleteHistoryEntry,
 }) {
+  const [openConfirm, setOpenConfirm] = useState(false)
   return (
     <>
-      <EntryBox>
-        <p>Kalkulation vom {date} :</p>
-        <CostValue>{costs}</CostValue>
-        <DeleteButton>
-          <Icon
-            glyph="view-close"
-            width={'25'}
-            height={'25'}
-            viewBox="6 6 20 20"
-            onClick={() => onDeleteHistoryEntry(index)}
+      <EntryWrapper>
+        <TopWrapper>
+          <h3>{keynote}</h3>
+          <ButtonWrapper>
+            <IconBox
+              glyph="delete"
+              width={'25'}
+              height={'25'}
+              viewBox="4 4 25 25"
+              onClick={() => setOpenConfirm(true)}
+            />
+            <IconBox
+              glyph="view"
+              width={'25'}
+              height={'25'}
+              viewBox="6 6 20 20"
+              onClick={() => console.log('opens the details!')}
+            />
+          </ButtonWrapper>
+        </TopWrapper>
+        <BottomWrapper>
+          <p>Kalkulation vom {date} :</p>
+          <CostValue>{costs}</CostValue>
+        </BottomWrapper>
+        {openConfirm === true && (
+          <ConfirmDialog
+            id={id}
+            deleteEntry={onDeleteHistoryEntry}
+            toggle={setOpenConfirm}
+            right={'70px'}
+            top={'10px'}
           />
-        </DeleteButton>
-      </EntryBox>
+        )}
+      </EntryWrapper>
     </>
   )
 }
 
-const EntryBox = styled.div`
-  width: 90%;
+const EntryWrapper = styled.section`
   position: relative;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
   align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-midgrey);
+  h3 {
+    margin-top: 0;
+  }
   p {
-    margin: 10px 0 10px 0;
+    margin: 10px 0;
   }
 `
 const CostValue = styled.p`
@@ -40,8 +69,23 @@ const CostValue = styled.p`
   font-size: 1.2em;
 `
 
-const DeleteButton = styled.div`
-  position: absolute;
-  top: 6px;
-  right: -40px;
+const TopWrapper = styled.section`
+  display: flex;
+  justify-content: space-between;
+`
+
+const BottomWrapper = styled.section`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+`
+const ButtonWrapper = styled.div`
+  display: flex;
+`
+const IconBox = styled(Icon)`
+  border: 1px solid grey;
+  padding: 3px;
+  border-radius: 2px;
+  margin: 0 5px;
 `

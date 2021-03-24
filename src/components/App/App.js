@@ -10,6 +10,7 @@ import SafeResultForm from '../FormComponents/SafeResultForm'
 
 import useToggle from '../../hooks/useToggle'
 import useLocalStorage from '../../hooks/useLocalStorage'
+import { deleteEntry } from '../../services/deleteEntry'
 
 export default function App() {
   const [services, setServices] = useLocalStorage('services', [])
@@ -34,7 +35,7 @@ export default function App() {
               finalCosts={finalCosts}
               onAddingNewCosts={updateCostsPerHours}
               toggleSlideMenu={setToggleSlideMenu}
-              onDeleteEntry={deleteCard}
+              onDeleteEntry={deleteServiceEntry}
               onSafeResult={setOpenSafeResult}
             />
           </Route>
@@ -62,11 +63,12 @@ export default function App() {
     </>
   )
 
-  function safeCostsToHistory({ date, costs }) {
+  function safeCostsToHistory({ date, costs, keynote }) {
     const newCalculation = {
       id: uuidv4(),
       date,
       costs,
+      keynote,
     }
     setLastCalculations([...lastCalculations, newCalculation])
     setOpenSafeResult('home')
@@ -112,15 +114,13 @@ export default function App() {
       ...services.slice(index + 1),
     ])
   }
-  function deleteCard(index) {
-    setServices([...services.slice(0, index), ...services.slice(index + 1)])
+
+  function deleteServiceEntry(currentId) {
+    deleteEntry(services, setServices, currentId)
   }
 
-  function deleteHistoryEntry(index) {
-    setLastCalculations([
-      ...lastCalculations.slice(0, index),
-      ...lastCalculations.slice(index + 1),
-    ])
+  function deleteHistoryEntry(currentId) {
+    deleteEntry(lastCalculations, setLastCalculations, currentId)
   }
 }
 

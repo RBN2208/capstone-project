@@ -39,6 +39,7 @@ export default function Calculation({
             .map(({ id, name, costs, notes, hours }, index) => (
               <ServiceCard
                 key={id}
+                id={id}
                 index={index}
                 name={name}
                 costs={costs}
@@ -111,7 +112,6 @@ const ServiceCardWrapper = styled.div`
   padding: 5px;
   overflow-y: scroll;
   width: 100%;
-  scrollbar-width: none;
   &:last-child::after {
     content: '';
     height: 10px;

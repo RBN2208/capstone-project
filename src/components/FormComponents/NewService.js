@@ -89,7 +89,6 @@ const ButtonBack = styled(Button)`
 const ServiceNote = styled.textarea`
   width: 100%;
   height: 90px;
-  border: 1px solid var(--color-light);
   outline: none;
   resize: none;
   font-family: sans-serif;

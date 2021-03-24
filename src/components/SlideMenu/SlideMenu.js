@@ -11,7 +11,6 @@ export default function SlideMenu({ toggleSlideMenu, onToggleSlideMenu }) {
         <NavLinkStyled to="/history" onClick={onToggleSlideMenu}>
           History
         </NavLinkStyled>
-        <Delete onClick={() => localStorage.clear()}>Clear</Delete>
       </Nav>
     </MenuBox>
   )
@@ -40,7 +39,4 @@ const NavLinkStyled = styled(NavLink)`
   &:visited {
     color: var(--color-light);
   }
-`
-const Delete = styled.button`
-  height: 50px;
 `
