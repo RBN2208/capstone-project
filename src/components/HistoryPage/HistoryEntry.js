@@ -51,7 +51,7 @@ export default function HistoryEntry({
           />
         )}
         {openDetails === true && (
-          <HistoryDetails toggleDetails={toggleDetails} url={url} />
+          <HistoryDetails toggleDetails={toggleDetails} id={id} url={url} />
         )}
       </EntryWrapper>
     </>

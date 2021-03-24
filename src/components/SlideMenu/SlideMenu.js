@@ -11,9 +11,6 @@ export default function SlideMenu({ toggleSlideMenu, onToggleSlideMenu }) {
         <NavLinkStyled to="/history" onClick={onToggleSlideMenu}>
           History
         </NavLinkStyled>
-        <NavLinkStyled to="/uploader" onClick={onToggleSlideMenu}>
-          upload
-        </NavLinkStyled>
       </Nav>
     </MenuBox>
   )

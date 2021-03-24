@@ -7,7 +7,6 @@ import SlideMenu from '../SlideMenu/SlideMenu'
 import History from '../HistoryPage/History'
 import CalculationPage from '../CalcPage/CalculationPage'
 import SafeResultForm from '../FormComponents/SafeResultForm'
-import ImagePage from '../Uploader/ImagePage'
 
 import useToggle from '../../hooks/useToggle'
 import useLocalStorage from '../../hooks/useLocalStorage'
@@ -57,9 +56,6 @@ export default function App() {
               onDeleteHistoryEntry={deleteHistoryEntry}
             />
           </Route>
-          <Route path="/uploader">
-            <ImagePage images={images} setImages={setImages} />
-          </Route>
         </AppLayout>
       </Switch>
       <SlideMenu
@@ -78,13 +74,13 @@ export default function App() {
     </>
   )
 
-  function safeCostsToHistory({ date, costs, keynote, URL }) {
+  function safeCostsToHistory({ date, costs, keynote, url }) {
     const newCalculation = {
       id: uuidv4(),
       date,
       costs,
       keynote,
-      URL,
+      url,
     }
     setLastCalculations([...lastCalculations, newCalculation])
     setOpenSafeResult('home')

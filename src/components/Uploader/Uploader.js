@@ -1,8 +1,8 @@
 import React from 'react'
-import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid'
 import styled from 'styled-components'
 
+import axios from 'axios'
 const cloudname = 'du5gyoj7r'
 const preset = 'xuusbzps'
 // const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME
@@ -11,10 +11,9 @@ const preset = 'xuusbzps'
 export default function Uploader({ images, setImages }) {
   return (
     <div>
-      <Upload for="imageupload">
+      <Upload>
         Upload
         <Input
-          id="imageupload"
           type="file"
           name="file"
           onChange={upload}

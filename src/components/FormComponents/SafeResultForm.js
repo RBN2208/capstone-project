@@ -1,14 +1,13 @@
 import styled from 'styled-components'
-import Button from '../Button/Button'
-import Uploader from '../Uploader/Uploader'
+import Icon from 'supercons'
 
-export default function ResultForm({
-  finalCosts,
-  onDiscardSave,
-  onSafeCosts,
-  images,
-  setImages,
-}) {
+import Button from '../Button/Button'
+import axios from 'axios'
+const cloudname = 'du5gyoj7r'
+const preset = 'xuusbzps'
+
+export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
+  const imageURLs = []
   return (
     <BlurContainer>
       <Form
@@ -26,6 +25,21 @@ export default function ResultForm({
             required
           />
         </Keynotes>
+        <span>Und Foto´s?</span>
+        <Upload>
+          <Icon
+            glyph="photo"
+            width={'45'}
+            height={'45'}
+            viewBox="1.5 1.5 30 30"
+          />
+          <Input
+            type="file"
+            name="file"
+            onChange={upload}
+            accept=".png, .jpg, .jpeg"
+          />
+        </Upload>
         <ButtonSafe data-testid="safebutton">Speichern</ButtonSafe>
         <ButtonBack
           data-testid="backbutton"
@@ -33,24 +47,44 @@ export default function ResultForm({
         >
           Zurück
         </ButtonBack>
-        <Uploader images={images} setImages={setImages} />
       </Form>
     </BlurContainer>
   )
+  function upload(event) {
+    const url = `https://api.cloudinary.com/v1_1/${cloudname}/image/upload`
+
+    const formData = new FormData()
+    formData.append('file', event.target.files[0])
+    formData.append('upload_preset', preset)
+    axios
+      .post(url, formData, {
+        headers: {
+          'Content-type': 'multipart/form-data',
+        },
+      })
+      .then(onImageSave)
+      .catch(err => console.error(err))
+  }
+
+  function onImageSave(response) {
+    const url = { url: response.data.url }
+    imageURLs.push(url)
+  }
+
   function handleClickOnSafe(event) {
     event.preventDefault()
     const formElement = event.target.elements
     const finalCosts = formElement.endresult.value
     const keynote = formElement.keynote.value
     const currentDate = new Date().toLocaleDateString('de')
-    const URL = images[0].url
     const data = {
       date: currentDate,
       costs: finalCosts,
       keynote,
-      URL,
+      url: imageURLs,
     }
     onSafeCosts(data)
+    console.log(imageURLs)
   }
 }
 
@@ -92,4 +126,17 @@ const ButtonBack = styled(Button)`
 const Keynotes = styled.label`
   display: grid;
   gap: 10px;
+  margin-bottom: 10px;
+`
+const Upload = styled.label`
+  display: flex;
+  padding: 10px;
+  margin: 0 auto;
+  border: 2px dotted black;
+  border-radius: 50px;
+  margin-bottom: 10px;
+`
+
+const Input = styled.input`
+  display: none;
 `

@@ -13,7 +13,7 @@ export default function History({
       <MenuButton toggleSlideMenu={toggleSlideMenu} />
       <Header title="Historypage" />
       <Content>
-        {lastCalculations.map(({ id, date, costs, keynote, URL }, index) => (
+        {lastCalculations.map(({ id, date, costs, keynote, url }, index) => (
           <HistoryEntry
             key={id}
             id={id}
@@ -21,7 +21,7 @@ export default function History({
             date={date}
             costs={costs}
             keynote={keynote}
-            url={URL}
+            url={url}
             lastCalculations={lastCalculations}
             onDeleteHistoryEntry={onDeleteHistoryEntry}
           />

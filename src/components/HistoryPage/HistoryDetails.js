@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro'
 import Icon from 'supercons'
+import Images from '../Uploader/Images'
 
 export default function HistoryDetails({ toggleDetails, url }) {
   return (
@@ -12,8 +13,11 @@ export default function HistoryDetails({ toggleDetails, url }) {
           viewBox="6 6 20 20"
           onClick={() => toggleDetails(true)}
         />
-        Hier kommen die history details
-        <img src={url} alt="" />
+        <ImageWrapper>
+          {url.map(({ url }) => (
+            <Images id={url} url={url} />
+          ))}
+        </ImageWrapper>
       </DetailsWrapper>
     </>
   )
@@ -26,5 +30,18 @@ const DetailsWrapper = styled.section`
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 1;
 `
-const CloseButton = styled(Icon)``
+const CloseButton = styled(Icon)`
+  display: block;
+`
+
+const ImageWrapper = styled.div`
+  width: auto;
+  height: auto;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x;
+  scroll-behavior: smooth;
+  border: 5px solid white;
+`
