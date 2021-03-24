@@ -7,6 +7,7 @@ import SlideMenu from '../SlideMenu/SlideMenu'
 import History from '../HistoryPage/History'
 import CalculationPage from '../CalcPage/CalculationPage'
 import SafeResultForm from '../FormComponents/SafeResultForm'
+import Uploader from '../Uploader/Uploader'
 
 import useToggle from '../../hooks/useToggle'
 import useLocalStorage from '../../hooks/useLocalStorage'
@@ -53,6 +54,9 @@ export default function App() {
               lastCalculations={lastCalculations}
               onDeleteHistoryEntry={deleteHistoryEntry}
             />
+          </Route>
+          <Route path="/uploader">
+            <Uploader />
           </Route>
         </AppLayout>
       </Switch>
