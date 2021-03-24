@@ -3,8 +3,9 @@ import Icon from 'supercons'
 
 import Button from '../Button/Button'
 import axios from 'axios'
-const cloudname = 'du5gyoj7r'
-const preset = 'xuusbzps'
+
+const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME
+const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET
 
 export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
   const imageURLs = []
@@ -51,11 +52,11 @@ export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
     </BlurContainer>
   )
   function upload(event) {
-    const url = `https://api.cloudinary.com/v1_1/${cloudname}/image/upload`
+    const url = `https://api.cloudinary.com/v1_1/${CLOUDNAME}/image/upload`
 
     const formData = new FormData()
     formData.append('file', event.target.files[0])
-    formData.append('upload_preset', preset)
+    formData.append('upload_preset', PRESET)
     axios
       .post(url, formData, {
         headers: {

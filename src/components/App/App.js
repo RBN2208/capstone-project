@@ -102,6 +102,7 @@ export default function App() {
   function handlePlus(costs, hours, index) {
     add(setFinalCosts, finalCosts, costs)
     updatePlusTime(services, setServices, hours, index)
+    console.log(process.env)
   }
 
   function handleMinus(costs, hours, index) {
