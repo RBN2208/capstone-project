@@ -11,6 +11,13 @@ import SafeResultForm from '../FormComponents/SafeResultForm'
 import useToggle from '../../hooks/useToggle'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import { deleteEntry } from '../../services/deleteEntry'
+import {
+  add,
+  substrate,
+  updatePlusTime,
+  updateMinusTime,
+  updateTimeValue,
+} from '../../services/math'
 
 export default function App() {
   const [services, setServices] = useLocalStorage('services', [])
@@ -86,33 +93,18 @@ export default function App() {
     currentCostsPerHour,
     hours
   ) {
-    const currentService = services[index]
-    setServices([
-      ...services.slice(0, index),
-      { ...currentService, costs: newCostsPerHour },
-      ...services.slice(index + 1),
-    ])
+    updateTimeValue(services, setServices, index, newCostsPerHour)
     setFinalCosts(finalCosts - (currentCostsPerHour - newCostsPerHour) * hours)
   }
 
   function handlePlus(costs, hours, index) {
-    setFinalCosts(finalCosts + costs)
-    const currentService = services[index]
-    setServices([
-      ...services.slice(0, index),
-      { ...currentService, hours: hours + 1 },
-      ...services.slice(index + 1),
-    ])
+    add(setFinalCosts, finalCosts, costs)
+    updatePlusTime(services, setServices, hours, index)
   }
 
   function handleMinus(costs, hours, index) {
-    setFinalCosts(finalCosts - costs)
-    const currentService = services[index]
-    setServices([
-      ...services.slice(0, index),
-      { ...currentService, hours: hours - 1 },
-      ...services.slice(index + 1),
-    ])
+    substrate(setFinalCosts, finalCosts, costs)
+    updateMinusTime(services, setServices, hours, index)
   }
 
   function deleteServiceEntry(currentId) {

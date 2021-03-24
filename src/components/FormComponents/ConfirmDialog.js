@@ -1,13 +1,7 @@
 import styled from 'styled-components/macro'
 import Button from '../Button/Button'
 
-export default function HistoryConfirm({
-  id,
-  deleteEntry,
-  toggle,
-  right,
-  top,
-}) {
+export default function ConfirmDialog({ id, deleteEntry, toggle, right, top }) {
   const state = () => toggle()
 
   return (
