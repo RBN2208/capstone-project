@@ -7,7 +7,7 @@ import SlideMenu from '../SlideMenu/SlideMenu'
 import History from '../HistoryPage/History'
 import CalculationPage from '../CalcPage/CalculationPage'
 import SafeResultForm from '../FormComponents/SafeResultForm'
-import Uploader from '../Uploader/Uploader'
+import ImagePage from '../Uploader/ImagePage'
 
 import useToggle from '../../hooks/useToggle'
 import useLocalStorage from '../../hooks/useLocalStorage'
@@ -26,6 +26,8 @@ export default function App() {
     'lastCalculations',
     []
   )
+  const [images, setImages] = useState([])
+
   const [finalCosts, setFinalCosts] = useState(0)
   const [toggleSlideMenu, setToggleSlideMenu] = useToggle(false)
   const [openSafeResult, setOpenSafeResult] = useState('')
@@ -56,7 +58,7 @@ export default function App() {
             />
           </Route>
           <Route path="/uploader">
-            <Uploader />
+            <ImagePage images={images} setImages={setImages} />
           </Route>
         </AppLayout>
       </Switch>
