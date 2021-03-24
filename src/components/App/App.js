@@ -25,7 +25,6 @@ export default function App() {
     'lastCalculations',
     []
   )
-  const [images, setImages] = useState([])
 
   const [finalCosts, setFinalCosts] = useState(0)
   const [toggleSlideMenu, setToggleSlideMenu] = useToggle(false)
@@ -67,8 +66,6 @@ export default function App() {
           finalCosts={finalCosts}
           onDiscardSave={setOpenSafeResult}
           onSafeCosts={safeCostsToHistory}
-          images={images}
-          setImages={setImages}
         />
       )}
     </>
