@@ -34,12 +34,7 @@ export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
             height={'45'}
             viewBox="1.5 1.5 30 30"
           />
-          <Input
-            type="file"
-            name="file"
-            onChange={upload}
-            accept=".png, .jpg, .jpeg"
-          />
+          <Input type="file" name="file" onChange={upload} />
         </Upload>
         <ButtonSafe data-testid="safebutton">Speichern</ButtonSafe>
         <ButtonBack
