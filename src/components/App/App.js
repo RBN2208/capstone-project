@@ -20,11 +20,35 @@ import {
 } from '../../services/math'
 
 export default function App() {
-  const [services, setServices] = useLocalStorage('services', [])
+  const [services, setServices] = useLocalStorage('services', [
+    {
+      id: '1',
+      name: 'Bohren',
+      costs: 24,
+      notes: 'Helfertätigkeit',
+      hours: 0,
+    },
+    {
+      id: '2',
+      name: 'Laminat verlegen',
+      costs: 38,
+      notes: 'Lange Bahnen, benötigt 2 Personen',
+      hours: 0,
+    },
+    {
+      id: '3',
+      name: 'Verspachteln',
+      costs: 64,
+      notes: 'ca. 3m2 pro Stunde',
+      hours: 0,
+    },
+  ])
+
   const [lastCalculations, setLastCalculations] = useLocalStorage(
     'lastCalculations',
     []
   )
+
   const [finalCosts, setFinalCosts] = useState(0)
   const [toggleSlideMenu, setToggleSlideMenu] = useToggle(false)
   const [openSafeResult, setOpenSafeResult] = useState('')
@@ -70,12 +94,13 @@ export default function App() {
     </>
   )
 
-  function safeCostsToHistory({ date, costs, keynote }) {
+  function safeCostsToHistory({ date, costs, keynote, urls }) {
     const newCalculation = {
       id: uuidv4(),
       date,
       costs,
       keynote,
+      urls,
     }
     setLastCalculations([...lastCalculations, newCalculation])
     setOpenSafeResult('home')

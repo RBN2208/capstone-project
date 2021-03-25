@@ -1,7 +1,14 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+import Icon from 'supercons'
+
 import Button from '../Button/Button'
+import sendImageData from '../../services/sendImageData'
+import { useState } from 'react'
 
 export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
+  const [isLoading, setIsLoading] = useState(false)
+  const [imageURLs, setImageURLs] = useState([])
+
   return (
     <BlurContainer>
       <Form
@@ -19,6 +26,16 @@ export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
             required
           />
         </Keynotes>
+        <span>Und Foto´s?</span>
+        <Upload isLoading={isLoading}>
+          <Icon
+            glyph="photo"
+            width={'45'}
+            height={'45'}
+            viewBox="1.5 1.5 30 30"
+          />
+          <Input type="file" name="file" onChange={upload} />
+        </Upload>
         <ButtonSafe data-testid="safebutton">Speichern</ButtonSafe>
         <ButtonBack
           data-testid="backbutton"
@@ -29,17 +46,29 @@ export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
       </Form>
     </BlurContainer>
   )
+
+  function upload(event) {
+    sendImageData(onImageSave, event)
+    setIsLoading(true)
+  }
+
+  function onImageSave(response) {
+    const url = { url: response.data.url }
+    setImageURLs([...imageURLs, url])
+    setIsLoading(false)
+  }
+
   function handleClickOnSafe(event) {
     event.preventDefault()
     const formElement = event.target.elements
-    const finalCosts = formElement.endresult.value
-    const keynote = formElement.keynote.value
     const currentDate = new Date().toLocaleDateString('de')
     const data = {
       date: currentDate,
-      costs: finalCosts,
-      keynote,
+      costs: formElement.endresult.value,
+      keynote: formElement.keynote.value,
+      urls: imageURLs,
     }
+    console.log(imageURLs)
     onSafeCosts(data)
   }
 }
@@ -82,4 +111,50 @@ const ButtonBack = styled(Button)`
 const Keynotes = styled.label`
   display: grid;
   gap: 10px;
+  margin-bottom: 10px;
 `
+
+const loadingSpinner = keyframes`
+  from {
+    transform: rotate(0deg)
+    }
+  to {
+    transform: rotate(360deg)
+    }
+`
+
+const Upload = styled.label`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  animation-name: ${loadingSpinner};
+  ${props =>
+    props.isLoading
+      ? 'border: 5px solid var(--color-green)'
+      : 'border: 5px solid transparent'};
+  ${props =>
+    props.isLoading
+      ? 'border-top: 5px solid var(--color-dark);'
+      : 'border: 5px solid transparent'};
+  ${props => (props.isLoading ? 'animation-duration: 0.5s' : '')};
+  ${props => (props.isLoading ? 'animation-iteration-count: infinite' : '')};
+  ${props => (props.isLoading ? 'animation-timing-function: linear' : '')};
+`
+
+const Input = styled.input`
+  display: none;
+`
+/*
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+*/

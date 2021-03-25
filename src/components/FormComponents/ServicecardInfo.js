@@ -1,9 +1,9 @@
 import styled from 'styled-components/macro'
+import useToggle from '../../hooks/useToggle'
 import Button from '../Button/Button'
 import CostInput from '../Inputs/CostInput'
 import ConfirmDialog from './ConfirmDialog'
 import Icon from 'supercons'
-import { useState } from 'react'
 
 export default function ServicecardInfo({
   id,
@@ -16,7 +16,7 @@ export default function ServicecardInfo({
   onDeleteEntry,
 }) {
   const handlePropagation = event => event.stopPropagation()
-  const [openConfirm, setOpenConfirm] = useState(false)
+  const [openConfirm, toggleConfirm] = useToggle(false)
 
   return (
     <InfoWrapper>
@@ -44,7 +44,9 @@ export default function ServicecardInfo({
             width={'25'}
             height={'25'}
             viewBox="4 4 25 25"
-            onClick={event => event.stopPropagation() & setOpenConfirm(true)}
+            onClick={event =>
+              event.stopPropagation() & toggleConfirm(!openConfirm)
+            }
           />
         </DeleteIcon>
 
@@ -52,7 +54,7 @@ export default function ServicecardInfo({
           <ConfirmDialog
             id={id}
             deleteEntry={onDeleteEntry}
-            toggle={setOpenConfirm}
+            toggle={toggleConfirm}
             right={'30px'}
             top={'5px'}
           />

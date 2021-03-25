@@ -8,6 +8,7 @@ import NewService from '../FormComponents/NewService'
 import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import Searchbar from '../Searchbar/Searchbar'
+import Icon from 'supercons'
 
 export default function Calculation({
   services,
@@ -60,7 +61,12 @@ export default function Calculation({
           data-testid="plusbutton"
           onClick={() => setOpenNewServiceForm('newService')}
         >
-          New
+          <Icon
+            glyph="view-close-small"
+            width={'25'}
+            height={'25'}
+            viewBox="6 6 20 20"
+          />
         </NewServiceButton>
         <ResultField finalCosts={finalCosts} onSafeResult={onSafeResult} />
       </ButtonBox>
@@ -95,8 +101,13 @@ const Content = styled.div`
 `
 
 const NewServiceButton = styled(Button)`
+  display: grid;
+  place-content: center;
   width: 25%;
   border-radius: 0;
+  svg {
+    rotate: 45deg;
+  }
 `
 
 const ButtonBox = styled.div`
