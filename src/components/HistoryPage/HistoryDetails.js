@@ -26,22 +26,17 @@ const DetailsWrapper = styled.section`
   width: 100%;
   padding: 10px;
   background-color: lightgray;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
 `
 const CloseButton = styled(Icon)`
   display: block;
 `
 
 const ImageWrapper = styled.div`
-  width: 320px;
+  width: 300px;
   height: auto;
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  border: 5px solid white;
   margin: 0 auto;
 `
