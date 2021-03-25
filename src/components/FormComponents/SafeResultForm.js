@@ -2,10 +2,7 @@ import styled from 'styled-components'
 import Icon from 'supercons'
 
 import Button from '../Button/Button'
-import axios from 'axios'
-
-const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME
-const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET
+import sendImageData from '../../services/sendImageData'
 
 export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
   const imageURLs = []
@@ -46,20 +43,9 @@ export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
       </Form>
     </BlurContainer>
   )
-  function upload(event) {
-    const url = `https://api.cloudinary.com/v1_1/${CLOUDNAME}/image/upload`
 
-    const formData = new FormData()
-    formData.append('file', event.target.files[0])
-    formData.append('upload_preset', PRESET)
-    axios
-      .post(url, formData, {
-        headers: {
-          'Content-type': 'multipart/form-data',
-        },
-      })
-      .then(onImageSave)
-      .catch(err => console.error(err))
+  function upload(event) {
+    sendImageData(onImageSave, event)
   }
 
   function onImageSave(response) {
@@ -70,17 +56,14 @@ export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
   function handleClickOnSafe(event) {
     event.preventDefault()
     const formElement = event.target.elements
-    const finalCosts = formElement.endresult.value
-    const keynote = formElement.keynote.value
     const currentDate = new Date().toLocaleDateString('de')
     const data = {
       date: currentDate,
-      costs: finalCosts,
-      keynote,
-      url: imageURLs,
+      costs: formElement.endresult.value,
+      keynote: formElement.keynote.value,
+      urls: imageURLs,
     }
     onSafeCosts(data)
-    console.log(imageURLs)
   }
 }
 

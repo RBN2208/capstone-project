@@ -1,8 +1,8 @@
 import styled from 'styled-components/macro'
 import Icon from 'supercons'
-import Images from '../Uploader/Images'
+import Images from '../Images/Images'
 
-export default function HistoryDetails({ toggleDetails, url }) {
+export default function HistoryDetails({ toggleDetails, id, urls }) {
   return (
     <>
       <DetailsWrapper>
@@ -11,11 +11,11 @@ export default function HistoryDetails({ toggleDetails, url }) {
           width={'25'}
           height={'25'}
           viewBox="6 6 20 20"
-          onClick={() => toggleDetails(true)}
+          onClick={() => toggleDetails(!toggleDetails)}
         />
         <ImageWrapper>
-          {url.map(({ url }) => (
-            <Images id={url} url={url} />
+          {urls.map(({ url }) => (
+            <Images key={id} url={url} />
           ))}
         </ImageWrapper>
       </DetailsWrapper>

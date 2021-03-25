@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
-export default function Images({ id, url }) {
-  return <IMG src={url} alt="" key={id} />
+export default function Images({ url }) {
+  return <IMG src={url} alt="" />
 }
 const IMG = styled.img`
   max-width: 100%;

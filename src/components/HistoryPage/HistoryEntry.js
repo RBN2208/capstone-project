@@ -9,7 +9,7 @@ export default function HistoryEntry({
   date,
   costs,
   keynote,
-  url,
+  urls,
   onDeleteHistoryEntry,
 }) {
   const [openConfirm, toggleConfirm] = useToggle(false)
@@ -26,14 +26,14 @@ export default function HistoryEntry({
               width={'25'}
               height={'25'}
               viewBox="4 4 25 25"
-              onClick={() => toggleConfirm(true)}
+              onClick={() => toggleConfirm(!openConfirm)}
             />
             <IconBox
               glyph="view"
               width={'25'}
               height={'25'}
               viewBox="6 6 20 20"
-              onClick={() => toggleDetails(true)}
+              onClick={() => toggleDetails(!openConfirm)}
             />
           </ButtonWrapper>
         </TopWrapper>
@@ -51,7 +51,7 @@ export default function HistoryEntry({
           />
         )}
         {openDetails === true && (
-          <HistoryDetails toggleDetails={toggleDetails} id={id} url={url} />
+          <HistoryDetails toggleDetails={toggleDetails} id={id} urls={urls} />
         )}
       </EntryWrapper>
     </>
