@@ -37,4 +37,5 @@ const ImageWrapper = styled.div`
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   margin: 0 auto;
+  display: flex;
 `
