@@ -33,7 +33,6 @@ const CloseButton = styled(Icon)`
 
 const ImageWrapper = styled.div`
   width: 300px;
-  display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
