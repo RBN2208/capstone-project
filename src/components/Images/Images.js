@@ -6,6 +6,5 @@ export default function Images({ url }) {
 const IMG = styled.img`
   max-width: 100% !important;
   min-width: 300px !important;
-  height: auto;
   scroll-snap-align: start;
 `
