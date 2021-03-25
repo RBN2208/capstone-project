@@ -5,6 +5,8 @@ export default function Images({ url }) {
 }
 const IMG = styled.img`
   object-fit: cover;
+  width: 100%;
   height: auto;
+  border: 2px solid white;
   scroll-snap-align: start;
 `

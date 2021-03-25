@@ -25,17 +25,16 @@ export default function HistoryDetails({ toggleDetails, id, urls }) {
 const DetailsWrapper = styled.section`
   width: 100%;
   padding: 10px;
-  background-color: lightgray;
+  background-color: var(--color-dark);
 `
 const CloseButton = styled(Icon)`
   display: block;
+  color: white;
 `
 
 const ImageWrapper = styled.div`
   width: 300px;
-  overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   margin: 0 auto;
-  display: flex;
 `
