@@ -1,40 +1,31 @@
 import styled from 'styled-components/macro'
-import Icon from 'supercons'
-import Images from '../Images/Images'
+import { v4 as uuidv4 } from 'uuid'
+import DetailedServices from './DetailedServices'
 
-export default function HistoryDetails({ toggleDetails, id, urls }) {
+export default function HistoryDetails({ toggleDetails, usedServices }) {
   return (
     <>
-      <DetailsWrapper>
-        <CloseButton
-          glyph="view-close"
-          width={'25'}
-          height={'25'}
-          viewBox="6 6 20 20"
-          onClick={() => toggleDetails(!toggleDetails)}
-        />
-        <ImageWrapper>
-          {urls.map(({ url }) => (
-            <Images key={id} url={url} />
-          ))}
-        </ImageWrapper>
-      </DetailsWrapper>
+      <Wrapper>
+        {usedServices.map(({ name, hours, costs }) => (
+          <DetailedServices
+            key={uuidv4()}
+            id={uuidv4()}
+            name={name}
+            hours={hours}
+            costs={costs}
+          />
+        ))}
+      </Wrapper>
     </>
   )
 }
-const DetailsWrapper = styled.section`
+const Wrapper = styled.section`
+  display: grid;
+  justify-items: flex-start;
   width: 100%;
   padding: 10px;
-  background-color: var(--color-dark);
-`
-const CloseButton = styled(Icon)`
-  display: block;
-  color: white;
-`
-
-const ImageWrapper = styled.div`
-  width: 300px;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  margin: 0 auto;
+  background: white;
+  box-shadow: 0 0 10px var(--color-dark);
+  border-radius: 5px;
+  color: var(--color-dark);
 `

@@ -13,19 +13,22 @@ export default function History({
       <MenuButton toggleSlideMenu={toggleSlideMenu} />
       <Header title="Historypage" />
       <Content>
-        {lastCalculations.map(({ id, date, costs, keynote, urls }, index) => (
-          <HistoryEntry
-            key={id}
-            id={id}
-            index={index}
-            date={date}
-            costs={costs}
-            keynote={keynote}
-            urls={urls}
-            lastCalculations={lastCalculations}
-            onDeleteHistoryEntry={onDeleteHistoryEntry}
-          />
-        ))}
+        {lastCalculations.map(
+          ({ id, date, costs, keynote, urls, usedServices }, index) => (
+            <HistoryEntry
+              key={id}
+              id={id}
+              index={index}
+              date={date}
+              costs={costs}
+              keynote={keynote}
+              urls={urls}
+              usedServices={usedServices}
+              lastCalculations={lastCalculations}
+              onDeleteHistoryEntry={onDeleteHistoryEntry}
+            />
+          )
+        )}
       </Content>
     </>
   )

@@ -68,7 +68,6 @@ export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
       keynote: formElement.keynote.value,
       urls: imageURLs,
     }
-    console.log(imageURLs)
     onSafeCosts(data)
   }
 }
