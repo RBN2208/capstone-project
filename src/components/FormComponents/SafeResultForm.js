@@ -5,14 +5,14 @@ import Button from '../Button/Button'
 import sendImageData from '../../services/sendImageData'
 import { useState } from 'react'
 
-export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
+export default function ResultForm({ finalCosts, onDiscardSave, onSaveCosts }) {
   const [isLoading, setIsLoading] = useState(false)
   const [imageURLs, setImageURLs] = useState([])
 
   return (
     <BlurContainer>
       <Form
-        onSubmit={event => handleClickOnSafe(event)}
+        onSubmit={event => handleClickOnSave(event)}
         data-testid="safeResultForm"
       >
         <p>Die aktuell geschätzten Kosten betragen:</p>
@@ -58,7 +58,7 @@ export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
     setIsLoading(false)
   }
 
-  function handleClickOnSafe(event) {
+  function handleClickOnSave(event) {
     event.preventDefault()
     const formElement = event.target.elements
     const currentDate = new Date().toLocaleDateString('de')
@@ -68,7 +68,7 @@ export default function ResultForm({ finalCosts, onDiscardSave, onSafeCosts }) {
       keynote: formElement.keynote.value,
       urls: imageURLs,
     }
-    onSafeCosts(data)
+    onSaveCosts(data)
   }
 }
 

@@ -73,7 +73,6 @@ export default function App() {
 
           <Route path="/history">
             <History
-              services={services}
               toggleSlideMenu={setToggleSlideMenu}
               lastCalculations={lastCalculations}
               onDeleteHistoryEntry={deleteHistoryEntry}
@@ -89,14 +88,14 @@ export default function App() {
         <SafeResultForm
           finalCosts={finalCosts}
           onDiscardSave={setOpenSafeResult}
-          onSafeCosts={safeCostsToHistory}
+          onSaveCosts={saveToHistory}
         />
       )}
     </>
   )
 
-  function safeCostsToHistory({ date, costs, keynote, urls }) {
-    const usedServices = services.filter(service => service.hours >= 1)
+  function saveToHistory({ date, costs, keynote, urls }) {
+    const usedServices = services.filter(service => service.hours > 0)
     const newCalculation = {
       id: uuidv4(),
       date,
