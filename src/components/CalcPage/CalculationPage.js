@@ -92,7 +92,7 @@ export default function Calculation({
   }
 }
 
-const Content = styled.div`
+const Content = styled.main`
   display: grid;
   gap: 12px;
   grid-template-rows: 40px auto;
@@ -118,7 +118,7 @@ const ButtonBox = styled.div`
   box-shadow: 0 -20px 10px white;
 `
 
-const ServiceCardWrapper = styled.div`
+const ServiceCardWrapper = styled.section`
   display: grid;
   gap: 10px;
   grid-auto-rows: min-content;

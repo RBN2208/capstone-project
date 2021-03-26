@@ -37,7 +37,7 @@ export default function ServicecardInfo({
         </NewCostsBox>
       </ServiceInfoForm>
       <NoteWrapper>{notes}</NoteWrapper>
-      <DeleteButton>
+      <IconBox>
         <DeleteIcon>
           <Icon
             glyph="delete"
@@ -59,7 +59,7 @@ export default function ServicecardInfo({
             top={'5px'}
           />
         )}
-      </DeleteButton>
+      </IconBox>
     </InfoWrapper>
   )
   function handleSettingNewCosts(event) {
@@ -71,6 +71,12 @@ export default function ServicecardInfo({
     onAddingNewCosts(index, newCostsPerHour, currentCostsPerHour, hours)
   }
 }
+
+const InfoWrapper = styled.section`
+  display: grid;
+  gap: 15px;
+  position: relative;
+`
 
 const ServiceInfoForm = styled.form`
   display: grid;
@@ -88,20 +94,16 @@ const NewCostsBox = styled.div`
   align-items: center;
 `
 
-const InfoWrapper = styled.div`
-  display: grid;
-  gap: 15px;
-  position: relative;
-`
-
-const DeleteButton = styled.div`
+const IconBox = styled.div`
   position: absolute;
   top: -11px;
   right: 0px;
 `
+
 const DeleteIcon = styled.div`
   rotate: 180deg;
 `
+
 const NoteWrapper = styled.div`
   font-style: italic;
   font-size: medium;

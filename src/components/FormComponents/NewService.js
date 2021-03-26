@@ -57,14 +57,6 @@ export default function NewService({ onAddNewService, onOpenNewServiceForm }) {
   }
 }
 
-const Form = styled.form`
-  display: grid;
-  gap: 10px;
-  padding: 20px;
-  background: white;
-  box-shadow: 0 0 10px var(--color-dark);
-  border-radius: 5px;
-`
 const BlurContainer = styled.div`
   position: absolute;
   background: var(--color-blur);
@@ -74,10 +66,21 @@ const BlurContainer = styled.div`
   display: grid;
   place-content: center;
 `
+
+const Form = styled.form`
+  display: grid;
+  gap: 10px;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 0 10px var(--color-dark);
+  border-radius: 5px;
+`
+
 const NewServiceButton = styled(Button)`
   background-color: var(--color-green);
   color: var(--color-dark);
 `
+
 const ButtonBack = styled(Button)`
   background-color: var(--color-dark);
   color: var(--color-light);

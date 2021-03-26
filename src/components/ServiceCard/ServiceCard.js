@@ -75,7 +75,7 @@ export default function ServiceCard({
   }
 }
 
-const CardContainer = styled.div`
+const CardContainer = styled.section`
   display: grid;
   gap: 5px;
   background-color: var(--color-lighter);

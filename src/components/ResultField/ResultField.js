@@ -17,7 +17,7 @@ export default function ResultField({ finalCosts, onSafeResult }) {
   )
 }
 
-const Resultbox = styled.div`
+const Resultbox = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;

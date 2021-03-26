@@ -19,7 +19,7 @@ export default function ConfirmDialog({ id, deleteEntry, toggle, right, top }) {
   }
 }
 
-const ConfirmBox = styled.div`
+const ConfirmBox = styled.section`
   display: grid;
   gap: 10px;
   text-align: center;

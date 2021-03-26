@@ -94,12 +94,12 @@ const CostValue = styled.p`
   font-size: 1.2em;
 `
 
-const TopWrapper = styled.section`
+const TopWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 `
 
-const BottomWrapper = styled.section`
+const BottomWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;

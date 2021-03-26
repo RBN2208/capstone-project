@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes } from 'styled-components/macro'
 import Icon from 'supercons'
 
 import Button from '../Button/Button'
@@ -26,16 +26,20 @@ export default function ResultForm({ finalCosts, onDiscardSave, onSaveCosts }) {
             required
           />
         </Keynotes>
+
         <span>Und Foto´s?</span>
-        <Upload isLoading={isLoading}>
-          <Icon
+        <LoadingBox>
+          <Upload isLoading={isLoading}>
+            <Input type="file" name="file" onChange={upload} />
+          </Upload>
+          <UploadIcon
             glyph="photo"
             width={'45'}
             height={'45'}
             viewBox="1.5 1.5 30 30"
           />
-          <Input type="file" name="file" onChange={upload} />
-        </Upload>
+        </LoadingBox>
+
         <ButtonSafe data-testid="safebutton">Speichern</ButtonSafe>
         <ButtonBack
           data-testid="backbutton"
@@ -72,15 +76,6 @@ export default function ResultForm({ finalCosts, onDiscardSave, onSaveCosts }) {
   }
 }
 
-const Form = styled.form`
-  display: grid;
-  gap: 10px;
-  padding: 20px;
-  background: white;
-  box-shadow: 0 0 10px var(--color-dark);
-  border-radius: 5px;
-  text-align: center;
-`
 const BlurContainer = styled.div`
   position: absolute;
   top: 0;
@@ -91,15 +86,28 @@ const BlurContainer = styled.div`
   display: grid;
   place-content: center;
 `
+
+const Form = styled.form`
+  display: grid;
+  gap: 10px;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 0 10px var(--color-dark);
+  border-radius: 5px;
+  text-align: center;
+`
+
 const FinalCosts = styled.output`
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 20px;
 `
+
 const ButtonSafe = styled(Button)`
   background-color: var(--color-green);
   color: var(--color-dark);
 `
+
 const ButtonBack = styled(Button)`
   background-color: var(--color-dark);
   color: var(--color-light);
@@ -107,6 +115,7 @@ const ButtonBack = styled(Button)`
   border-radius: 3px;
   font-size: 1.2rem;
 `
+
 const Keynotes = styled.label`
   display: grid;
   gap: 10px;
@@ -122,26 +131,34 @@ const loadingSpinner = keyframes`
     }
 `
 
+const LoadingBox = styled.div`
+  position: relative;
+  width: 75%;
+  margin: 0 auto;
+`
+
+const UploadIcon = styled(Icon)`
+  position: absolute;
+  top: 17%;
+  left: 39.5%;
+`
+
 const Upload = styled.label`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
+  width: 70px;
+  height: 70px;
   padding: 10px;
   margin: 0 auto;
   margin-bottom: 10px;
   border-radius: 50%;
+  border: ${props =>
+    props.isLoading ? '5px solid var(--color-green)' : '5px solid transparent'};
+  border-top: ${props =>
+    props.isLoading ? '5px solid var(--color-dark)' : '5px solid transparent'};
   animation-name: ${loadingSpinner};
-  ${props =>
-    props.isLoading
-      ? 'border: 5px solid var(--color-green)'
-      : 'border: 5px solid transparent'};
-  ${props =>
-    props.isLoading
-      ? 'border-top: 5px solid var(--color-dark);'
-      : 'border: 5px solid transparent'};
-  ${props => (props.isLoading ? 'animation-duration: 0.5s' : '')};
-  ${props => (props.isLoading ? 'animation-iteration-count: infinite' : '')};
-  ${props => (props.isLoading ? 'animation-timing-function: linear' : '')};
+  animation-duration: ${props => (props.isLoading ? '0.5s' : '')};
+  animation-iteration-count: ${props => (props.isLoading ? 'infinite' : '')};
+  animation-timing-function: ${props => (props.isLoading ? 'linear' : '')};
 `
 
 const Input = styled.input`
