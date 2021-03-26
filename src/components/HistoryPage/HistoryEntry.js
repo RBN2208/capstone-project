@@ -23,25 +23,23 @@ export default function HistoryEntry({
       <EntryWrapper>
         <TopWrapper>
           <h3>{keynote}</h3>
-          <ButtonWrapper>
+
+          <ButtonWrapper isactive={openDetails}>
             <IconBox
-              active={openImages}
               glyph="photo"
               width={'30'}
               height={'30'}
               viewBox="2 2 27 27"
-              onClick={() => toggleImages(!openConfirm)}
+              onClick={() => toggleImages(!openImages)}
             />
             <IconBox
-              active={openDetails}
               glyph="more-fill"
               width={'30'}
               height={'30'}
               viewBox="2 2 28 28"
-              onClick={() => toggleDetails(!openConfirm)}
+              onClick={() => toggleDetails(!openDetails)}
             />
             <DeleteIcon
-              delete
               glyph="delete"
               width={'30'}
               height={'30'}
@@ -115,7 +113,6 @@ const IconBox = styled(Icon)`
   padding: 3px;
   border-radius: 2px;
   margin: 0 5px;
-  ${props => (props.active ? 'color: var(--color-darkgreen)' : 'color: black;')}
 `
 const DeleteIcon = styled(Icon)`
   color: var(--color-light);
