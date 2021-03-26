@@ -2,6 +2,7 @@ import useToggle from '../../hooks/useToggle'
 import styled from 'styled-components/macro'
 import Icon from 'supercons'
 import ConfirmDialog from '../FormComponents/ConfirmDialog'
+import HistoryImages from './HistoryImages'
 import HistoryDetails from './HistoryDetails'
 
 export default function HistoryEntry({
@@ -10,9 +11,11 @@ export default function HistoryEntry({
   costs,
   keynote,
   urls,
+  usedServices,
   onDeleteHistoryEntry,
 }) {
   const [openConfirm, toggleConfirm] = useToggle(false)
+  const [openImages, toggleImages] = useToggle(false)
   const [openDetails, toggleDetails] = useToggle(false)
 
   return (
@@ -20,20 +23,28 @@ export default function HistoryEntry({
       <EntryWrapper>
         <TopWrapper>
           <h3>{keynote}</h3>
-          <ButtonWrapper>
+
+          <ButtonWrapper isactive={openDetails}>
             <IconBox
-              glyph="delete"
-              width={'25'}
-              height={'25'}
-              viewBox="4 4 25 25"
-              onClick={() => toggleConfirm(!openConfirm)}
+              glyph="photo"
+              width={'30'}
+              height={'30'}
+              viewBox="2 2 27 27"
+              onClick={() => toggleImages(!openImages)}
             />
             <IconBox
-              glyph="view"
-              width={'25'}
-              height={'25'}
-              viewBox="6 6 20 20"
-              onClick={() => toggleDetails(!openConfirm)}
+              glyph="more-fill"
+              width={'30'}
+              height={'30'}
+              viewBox="2 2 28 28"
+              onClick={() => toggleDetails(!openDetails)}
+            />
+            <DeleteIcon
+              glyph="delete"
+              width={'30'}
+              height={'30'}
+              viewBox="4 4 25 25"
+              onClick={() => toggleConfirm(!openConfirm)}
             />
           </ButtonWrapper>
         </TopWrapper>
@@ -51,7 +62,14 @@ export default function HistoryEntry({
           />
         )}
         {openDetails === true && (
-          <HistoryDetails toggleDetails={toggleDetails} id={id} urls={urls} />
+          <HistoryDetails
+            toggleDetails={toggleDetails}
+            id={id}
+            usedServices={usedServices}
+          />
+        )}
+        {openImages === true && (
+          <HistoryImages toggleImages={toggleImages} id={id} urls={urls} />
         )}
       </EntryWrapper>
     </>
@@ -91,6 +109,14 @@ const ButtonWrapper = styled.div`
   display: flex;
 `
 const IconBox = styled(Icon)`
+  border: 1px solid grey;
+  padding: 3px;
+  border-radius: 2px;
+  margin: 0 5px;
+`
+const DeleteIcon = styled(Icon)`
+  color: var(--color-light);
+  background-color: var(--color-red);
   border: 1px solid grey;
   padding: 3px;
   border-radius: 2px;

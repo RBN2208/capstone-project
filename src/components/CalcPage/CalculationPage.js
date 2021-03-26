@@ -101,9 +101,11 @@ const Content = styled.div`
 `
 
 const NewServiceButton = styled(Button)`
-  display: grid;
-  place-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 25%;
+  height: 50px;
   border-radius: 0;
   svg {
     rotate: 45deg;

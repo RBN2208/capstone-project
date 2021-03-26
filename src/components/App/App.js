@@ -95,19 +95,21 @@ export default function App() {
         <SafeResultForm
           finalCosts={finalCosts}
           onDiscardSave={setOpenSafeResult}
-          onSafeCosts={safeCostsToHistory}
+          onSaveCosts={saveToHistory}
         />
       )}
     </>
   )
 
-  function safeCostsToHistory({ date, costs, keynote, urls }) {
+  function saveToHistory({ date, costs, keynote, urls }) {
+    const usedServices = services.filter(service => service.hours > 0)
     const newCalculation = {
       id: uuidv4(),
       date,
       costs,
       keynote,
       urls,
+      usedServices,
     }
     setLastCalculations([...lastCalculations, newCalculation])
     setOpenSafeResult('home')
