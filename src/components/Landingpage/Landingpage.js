@@ -6,7 +6,7 @@ export default function Landingpage({ isLoaded }) {
 
   setTimeout(() => {
     setHidePage(true)
-  }, 6500)
+  }, 3500)
 
   return (
     <Page
@@ -69,5 +69,5 @@ const Loader = styled.div`
   width: 0%;
   height: 100%;
   z-index: 1;
-  animation: ${loadingAnimation} 5s;
+  animation: ${loadingAnimation} 2s;
 `

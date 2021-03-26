@@ -57,7 +57,7 @@ export default function App() {
   const [isLoaded, setIsLoaded] = useState(false)
   window.setTimeout(() => {
     setIsLoaded(true)
-  }, 5000)
+  }, 2000)
 
   return (
     <>

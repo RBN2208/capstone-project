@@ -141,6 +141,7 @@ const UploadIcon = styled(Icon)`
   position: absolute;
   top: 17%;
   left: 39.5%;
+  pointer-events: none;
 `
 
 const Upload = styled.label`

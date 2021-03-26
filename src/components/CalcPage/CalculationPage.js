@@ -61,12 +61,7 @@ export default function Calculation({
           data-testid="plusbutton"
           onClick={() => setOpenNewServiceForm('newService')}
         >
-          <Icon
-            glyph="view-close-small"
-            width={'25'}
-            height={'25'}
-            viewBox="6 6 20 20"
-          />
+          <Icon glyph="plus" width={'40'} height={'40'} viewBox="2 2 28 28" />
         </NewServiceButton>
         <ResultField finalCosts={finalCosts} onSafeResult={onSafeResult} />
       </ButtonBox>
@@ -107,9 +102,6 @@ const NewServiceButton = styled(Button)`
   width: 25%;
   height: 50px;
   border-radius: 0;
-  svg {
-    rotate: 45deg;
-  }
 `
 
 const ButtonBox = styled.div`
