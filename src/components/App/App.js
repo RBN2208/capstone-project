@@ -7,6 +7,7 @@ import SlideMenu from '../SlideMenu/SlideMenu'
 import History from '../HistoryPage/History'
 import CalculationPage from '../CalcPage/CalculationPage'
 import SafeResultForm from '../FormComponents/SafeResultForm'
+import Landingpage from '../Landingpage/Landingpage'
 
 import useToggle from '../../hooks/useToggle'
 import useLocalStorage from '../../hooks/useLocalStorage'
@@ -53,10 +54,16 @@ export default function App() {
   const [toggleSlideMenu, setToggleSlideMenu] = useToggle(false)
   const [openSafeResult, setOpenSafeResult] = useState('')
 
+  const [isLoaded, setIsLoaded] = useState(false)
+  window.setTimeout(() => {
+    setIsLoaded(true)
+  }, 5000)
+
   return (
     <>
       <Switch>
         <AppLayout openMenu={toggleSlideMenu}>
+          <Landingpage isLoaded={isLoaded} />
           <Route exact path="/">
             <CalculationPage
               services={services}
