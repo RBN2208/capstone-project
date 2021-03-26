@@ -42,5 +42,5 @@ const Content = styled.main`
   margin: 0 auto;
   overflow-y: scroll;
   width: 100%;
-  height: 109%;
+  height: 108%;
 `
