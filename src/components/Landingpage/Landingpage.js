@@ -9,21 +9,21 @@ export default function Landingpage({ isLoaded }) {
   }, 6500)
 
   return (
-    <FullWrapper
+    <Page
       finishedLoading={isLoaded}
       hidePage={hidePage}
       className={isLoaded && 'fadeOut'}
     >
-      <Textbox>caluFix</Textbox>
+      <Textbox>calcuFix</Textbox>
       <Loadingbar>
         <Loader></Loader>
       </Loadingbar>
-    </FullWrapper>
+    </Page>
   )
 }
 
-const FullWrapper = styled.div`
-  ${props => (props.hidePage ? 'display:none;' : 'display: flex;')}
+const Page = styled.main`
+  display: ${props => (props.hidePage ? 'none' : 'flex')};
   justify-content: center;
   align-items: center;
   position: absolute;
