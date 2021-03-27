@@ -1,18 +1,18 @@
-import { useState } from 'react'
 import styled, { keyframes } from 'styled-components/macro'
+import { useState } from 'react'
 
-export default function Landingpage({ isLoaded }) {
-  const [hidePage, setHidePage] = useState(false)
+export default function Landingpage({ loadingPage }) {
+  const [hideLandingPage, setHideLandingPage] = useState(false)
 
   setTimeout(() => {
-    setHidePage(true)
+    setHideLandingPage(true)
   }, 3500)
 
   return (
     <Page
-      finishedLoading={isLoaded}
-      hidePage={hidePage}
-      className={isLoaded && 'fadeOut'}
+      hidePage={hideLandingPage}
+      finishedLoading={loadingPage}
+      className={loadingPage && 'fadeOut'}
     >
       <Textbox>calcuFix</Textbox>
       <Loadingbar>
@@ -44,10 +44,10 @@ const Page = styled.main`
 
 const Textbox = styled.span`
   color: white;
+  font-size: 1.5rem;
   padding: 20px 40px;
   border: 1px solid white;
   border-radius: 5px;
-  font-size: 1.5rem;
 `
 const Loadingbar = styled.div`
   position: absolute;
@@ -55,9 +55,9 @@ const Loadingbar = styled.div`
   width: 200px;
   height: 10px;
   border-radius: 50px;
-  background-color: var(--color-green);
   overflow: hidden;
   box-shadow: 0 0 10px white;
+  background-color: var(--color-green);
 `
 const loadingAnimation = keyframes`
   0% { width: 0%}
@@ -65,9 +65,9 @@ const loadingAnimation = keyframes`
   100% { width: 100%}
 `
 const Loader = styled.div`
-  background-color: var(--color-dark);
   width: 0%;
   height: 100%;
   z-index: 1;
   animation: ${loadingAnimation} 2s;
+  background-color: var(--color-dark);
 `

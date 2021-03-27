@@ -1,12 +1,12 @@
 import styled, { keyframes } from 'styled-components/macro'
+import { useState } from 'react'
+import sendImageData from '../../services/sendImageData'
 import Icon from 'supercons'
 
 import Button from '../Button/Button'
-import sendImageData from '../../services/sendImageData'
-import { useState } from 'react'
 
 export default function ResultForm({ finalCosts, onDiscardSave, onSaveCosts }) {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isUpLoading, setIsUpLoading] = useState(false)
   const [imageURLs, setImageURLs] = useState([])
 
   return (
@@ -20,17 +20,23 @@ export default function ResultForm({ finalCosts, onDiscardSave, onSaveCosts }) {
         <Keynotes>
           Füge noch ein Stichwort hinzu!
           <input
+            required
+            max="20"
             name="keynote"
             placeholder="z.B. Herr Müller"
-            max="20"
-            required
+            aria-label="keynote for saved calculation"
           />
         </Keynotes>
 
-        <span>Und Foto´s?</span>
+        <span>Und Fotos?</span>
         <LoadingBox>
-          <Upload isLoading={isLoading}>
-            <Input type="file" name="file" onChange={upload} />
+          <Upload uploading={isUpLoading}>
+            <Input
+              type="file"
+              name="fileupload"
+              aria-label="File upload"
+              onChange={upload}
+            />
           </Upload>
           <UploadIcon
             glyph="photo"
@@ -40,34 +46,34 @@ export default function ResultForm({ finalCosts, onDiscardSave, onSaveCosts }) {
           />
         </LoadingBox>
 
-        <ButtonSafe data-testid="safebutton">Speichern</ButtonSafe>
-        <ButtonBack
-          data-testid="backbutton"
+        <SafeButton aria-label="safebutton">Speichern</SafeButton>
+        <AbortButton
+          aria-label="abortbutton"
           onClick={() => onDiscardSave('home')}
         >
           Zurück
-        </ButtonBack>
+        </AbortButton>
       </Form>
     </BlurContainer>
   )
 
   function upload(event) {
     sendImageData(onImageSave, event)
-    setIsLoading(true)
+    setIsUpLoading(true)
   }
 
   function onImageSave(response) {
     const url = { url: response.data.url }
     setImageURLs([...imageURLs, url])
-    setIsLoading(false)
+    setIsUpLoading(false)
   }
 
   function handleClickOnSave(event) {
     event.preventDefault()
     const formElement = event.target.elements
-    const currentDate = new Date().toLocaleDateString('de')
+    const dateOnSave = new Date().toLocaleDateString('de')
     const data = {
-      date: currentDate,
+      date: dateOnSave,
       costs: formElement.endresult.value,
       keynote: formElement.keynote.value,
       urls: imageURLs,
@@ -77,24 +83,24 @@ export default function ResultForm({ finalCosts, onDiscardSave, onSaveCosts }) {
 }
 
 const BlurContainer = styled.div`
-  position: absolute;
-  top: 0;
-  background: var(--color-blur);
+  display: grid;
+  place-content: center;
   width: 100%;
   height: 100%;
   padding: 30px;
-  display: grid;
-  place-content: center;
+  position: absolute;
+  top: 0;
+  background-color: var(--color-blur);
 `
 
 const Form = styled.form`
   display: grid;
   gap: 10px;
   padding: 20px;
-  background: white;
-  box-shadow: 0 0 10px var(--color-dark);
   border-radius: 5px;
   text-align: center;
+  box-shadow: 0 0 10px var(--color-dark);
+  background-color: white;
 `
 
 const FinalCosts = styled.output`
@@ -103,17 +109,17 @@ const FinalCosts = styled.output`
   margin-bottom: 20px;
 `
 
-const ButtonSafe = styled(Button)`
-  background-color: var(--color-green);
+const SafeButton = styled(Button)`
   color: var(--color-dark);
+  background-color: var(--color-green);
 `
 
-const ButtonBack = styled(Button)`
-  background-color: var(--color-dark);
-  color: var(--color-light);
+const AbortButton = styled(Button)`
   padding: 0.2em 0.6em;
-  border-radius: 3px;
   font-size: 1.2rem;
+  border-radius: 3px;
+  color: var(--color-light);
+  background-color: var(--color-dark);
 `
 
 const Keynotes = styled.label`
@@ -153,25 +159,15 @@ const Upload = styled.label`
   margin-bottom: 10px;
   border-radius: 50%;
   border: ${props =>
-    props.isLoading ? '5px solid var(--color-green)' : '5px solid transparent'};
+    props.uploading ? '5px solid var(--color-green)' : '5px solid transparent'};
   border-top: ${props =>
-    props.isLoading ? '5px solid var(--color-dark)' : '5px solid transparent'};
+    props.uploading ? '5px solid var(--color-dark)' : '5px solid transparent'};
   animation-name: ${loadingSpinner};
-  animation-duration: ${props => (props.isLoading ? '0.5s' : '')};
-  animation-iteration-count: ${props => (props.isLoading ? 'infinite' : '')};
-  animation-timing-function: ${props => (props.isLoading ? 'linear' : '')};
+  animation-duration: ${props => (props.uploading ? '0.5s' : '')};
+  animation-iteration-count: ${props => (props.uploading ? 'infinite' : '')};
+  animation-timing-function: ${props => (props.uploading ? 'linear' : '')};
 `
 
 const Input = styled.input`
   display: none;
 `
-/*
-.loader {
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #3498db;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
-}
-*/

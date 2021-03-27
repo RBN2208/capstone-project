@@ -1,25 +1,27 @@
 import styled from 'styled-components/macro'
+import { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
+import Icon from 'supercons'
+
 import ServiceCard from '../ServiceCard/ServiceCard'
 import Header from '../Header/Header'
 import MenuButton from '../MenuButton/MenuButton'
 import Button from '../Button/Button'
-import ResultField from '../ResultField/ResultField'
+import Endresult from '../Endresult/Endresult'
 import NewService from '../FormComponents/NewService'
-import { useState } from 'react'
-import { v4 as uuidv4 } from 'uuid'
 import Searchbar from '../Searchbar/Searchbar'
-import Icon from 'supercons'
 
 export default function Calculation({
   services,
   setServices,
+  finalCosts,
   onPlus,
   onMinus,
-  finalCosts,
   onAddingNewCosts,
-  onSafeResult,
-  toggleSlideMenu,
+  onSaveResult,
   onDeleteEntry,
+  closeSlideMenu,
+  toggleSlideMenu,
 }) {
   const [openNewServiceForm, setOpenNewServiceForm] = useState('home')
   const [searchInput, setSearchInput] = useState('')
@@ -27,28 +29,28 @@ export default function Calculation({
   return (
     <>
       <MenuButton toggleSlideMenu={toggleSlideMenu} />
-      <Header title={'QuickQalc'} />
-      <Content>
+      <Header title={'calcuFix'} />
+      <Content onClick={() => closeSlideMenu()}>
         <SearchbarWrapper>
           <Searchbar searchInput={searchInput} onTypeSearch={setSearchInput} />
         </SearchbarWrapper>
         <ServiceCardWrapper>
           {services
-            .filter(character =>
-              character.name.toLowerCase().includes(searchInput.toLowerCase())
+            .filter(service =>
+              service.name.toLowerCase().includes(searchInput.toLowerCase())
             )
-            .map(({ id, name, costs, notes, hours }, index) => (
+            .map(({ id, name, costs, hours, notes }, index) => (
               <ServiceCard
                 key={id}
                 id={id}
                 index={index}
                 name={name}
                 costs={costs}
-                notes={notes}
                 hours={hours}
+                notes={notes}
+                services={services}
                 onPlus={onPlus}
                 onMinus={onMinus}
-                services={services}
                 onAddingNewCosts={onAddingNewCosts}
                 onDeleteEntry={onDeleteEntry}
               />
@@ -58,12 +60,12 @@ export default function Calculation({
 
       <ButtonBox>
         <NewServiceButton
-          data-testid="plusbutton"
+          aria-label="add a new service"
           onClick={() => setOpenNewServiceForm('newService')}
         >
           <Icon glyph="plus" width={'40'} height={'40'} viewBox="2 2 28 28" />
         </NewServiceButton>
-        <ResultField finalCosts={finalCosts} onSafeResult={onSafeResult} />
+        <Endresult finalCosts={finalCosts} onSaveResult={onSaveResult} />
       </ButtonBox>
 
       {openNewServiceForm === 'newService' && (

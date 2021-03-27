@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro'
 import Icon from 'supercons'
 
-export default function ResultField({ finalCosts, onSafeResult }) {
+export default function ResultField({ finalCosts, onSaveResult }) {
   return (
     <Resultbox>
       <span>Endpreis: {finalCosts} €</span>
@@ -11,7 +11,7 @@ export default function ResultField({ finalCosts, onSafeResult }) {
         width={'40'}
         height={'40'}
         viewBox="5 4 24 24"
-        onClick={() => onSafeResult('openSafeResult')}
+        onClick={() => onSaveResult('openSafeResult')}
       />
     </Resultbox>
   )
