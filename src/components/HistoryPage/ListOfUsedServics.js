@@ -1,9 +1,9 @@
 import styled from 'styled-components/macro'
 
-export default function DetailedServices({ id, name, hours, costs }) {
+export default function ListOfUsedServics({ name, hours, costs }) {
   return (
     <>
-      <EntryWrapper key={id}>
+      <EntryWrapper>
         <span>{name}</span>{' '}
         <DetailsInfoBox>
           <span>{hours}/h</span>

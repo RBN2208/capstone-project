@@ -1,17 +1,11 @@
-import { useState } from 'react'
 import styled from 'styled-components/macro'
+import { useState } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 
-import SlideMenu from '../SlideMenu/SlideMenu'
-import History from '../HistoryPage/History'
-import CalculationPage from '../CalcPage/CalculationPage'
-import SafeResultForm from '../FormComponents/SafeResultForm'
-import Landingpage from '../Landingpage/Landingpage'
-
+import { deleteEntry } from '../../services/deleteEntry'
 import useToggle from '../../hooks/useToggle'
 import useLocalStorage from '../../hooks/useLocalStorage'
-import { deleteEntry } from '../../services/deleteEntry'
 import {
   add,
   substrate,
@@ -19,6 +13,12 @@ import {
   updateMinusTime,
   updateTimeValue,
 } from '../../services/math'
+
+import Landingpage from '../Landingpage/Landingpage'
+import CalculationPage from '../CalcPage/CalculationPage'
+import HistoryPage from '../HistoryPage/HistoryPage'
+import SlideMenu from '../SlideMenu/SlideMenu'
+import SaveResultForm from '../FormComponents/SaveResultForm'
 
 export default function App() {
   const [services, setServices] = useLocalStorage('services', [
@@ -51,50 +51,49 @@ export default function App() {
   )
 
   const [finalCosts, setFinalCosts] = useState(0)
-  const [toggleSlideMenu, setToggleSlideMenu] = useToggle(false)
-  const [openSafeResult, setOpenSafeResult] = useState('')
+  const [slideMenu, toggleSlideMenu, closeSlideMenu] = useToggle(false)
+  const [openSaveResult, setOpenSaveResult] = useState('')
 
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [loadingLandingPage, setIsLoadingLandingPage] = useState(false)
   window.setTimeout(() => {
-    setIsLoaded(true)
-  }, 5000)
+    setIsLoadingLandingPage(true)
+  }, 2000)
 
   return (
     <>
       <Switch>
-        <AppLayout openMenu={toggleSlideMenu}>
-          <Landingpage isLoaded={isLoaded} />
+        <AppLayout openMenu={slideMenu}>
+          <Landingpage loadingPage={loadingLandingPage} />
           <Route exact path="/">
             <CalculationPage
               services={services}
               setServices={setServices}
+              finalCosts={finalCosts}
               onPlus={handlePlus}
               onMinus={handleMinus}
-              finalCosts={finalCosts}
               onAddingNewCosts={updateCostsPerHours}
-              toggleSlideMenu={setToggleSlideMenu}
+              onSaveResult={setOpenSaveResult}
               onDeleteEntry={deleteServiceEntry}
-              onSafeResult={setOpenSafeResult}
+              closeSlideMenu={closeSlideMenu}
+              toggleSlideMenu={toggleSlideMenu}
             />
           </Route>
 
           <Route path="/history">
-            <History
-              toggleSlideMenu={setToggleSlideMenu}
+            <HistoryPage
+              closeSlideMenu={closeSlideMenu}
+              toggleSlideMenu={toggleSlideMenu}
               lastCalculations={lastCalculations}
               onDeleteHistoryEntry={deleteHistoryEntry}
             />
           </Route>
         </AppLayout>
       </Switch>
-      <SlideMenu
-        toggleSlideMenu={toggleSlideMenu}
-        onToggleSlideMenu={setToggleSlideMenu}
-      />
-      {openSafeResult === 'openSafeResult' && (
-        <SafeResultForm
+      <SlideMenu slideMenuState={slideMenu} toggleSlideMenu={toggleSlideMenu} />
+      {openSaveResult === 'openSaveResult' && (
+        <SaveResultForm
           finalCosts={finalCosts}
-          onDiscardSave={setOpenSafeResult}
+          onDiscardSave={setOpenSaveResult}
           onSaveCosts={saveToHistory}
         />
       )}
@@ -112,11 +111,11 @@ export default function App() {
       usedServices,
     }
     setLastCalculations([...lastCalculations, newCalculation])
-    setOpenSafeResult('home')
-    resetValues()
+    setOpenSaveResult('')
+    resetValuesOnSave()
   }
 
-  function resetValues() {
+  function resetValuesOnSave() {
     setServices(services.map(service => ({ ...service, hours: 0 })))
     setFinalCosts(0)
   }

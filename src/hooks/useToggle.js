@@ -6,5 +6,9 @@ export default function useToggle(startValue) {
   function toggle() {
     setState(!state)
   }
-  return [state, toggle]
+
+  function toggleFalse() {
+    setState(false)
+  }
+  return [state, toggle, toggleFalse]
 }

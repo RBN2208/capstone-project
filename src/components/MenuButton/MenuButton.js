@@ -1,5 +1,5 @@
-import Icon from 'supercons'
 import styled from 'styled-components/macro'
+import Icon from 'supercons'
 
 export default function MenuButton({ toggleSlideMenu }) {
   return (

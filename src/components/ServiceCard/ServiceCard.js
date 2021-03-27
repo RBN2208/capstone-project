@@ -1,30 +1,30 @@
 import { useState } from 'react'
 import styled from 'styled-components/macro'
+import Icon from 'supercons'
+import useToggle from '../../hooks/useToggle'
+
 import Button from '../Button/Button'
 import ServicecardInfo from '../FormComponents/ServicecardInfo'
-import useToggle from '../../hooks/useToggle'
-import Icon from 'supercons'
 
 export default function ServiceCard({
   id,
   index,
   name,
   costs,
-  notes,
   hours,
+  notes,
   onPlus,
   onMinus,
   onAddingNewCosts,
-  adjustCurrentCosts,
   onDeleteEntry,
 }) {
-  const [isVisible, setIsVisible] = useToggle(false)
-  const [usedCosts, setUsedCosts] = useState(costs)
+  const [detailsVisible, setDetailsVisible] = useToggle(false)
+  const [currentUsedCosts, setCurrentUsedCosts] = useState(costs)
 
   return (
     <CardContainer
-      onClick={() => setIsVisible(!isVisible)}
-      isVisible={isVisible}
+      onClick={() => setDetailsVisible(!detailsVisible)}
+      openDetails={detailsVisible}
       data-testid="cardcontainer"
     >
       <Servicebox>
@@ -46,17 +46,16 @@ export default function ServiceCard({
         </ButtonBox>
       </Servicebox>
 
-      {isVisible && (
+      {detailsVisible && (
         <CardInfo>
           <ServicecardInfo
+            id={id}
+            index={index}
             hours={hours}
             notes={notes}
-            index={index}
-            id={id}
-            currentCostsPerHour={usedCosts}
-            setUsedCosts={setUsedCosts}
+            currentCostsPerHour={currentUsedCosts}
+            setUsedCosts={setCurrentUsedCosts}
             onAddingNewCosts={onAddingNewCosts}
-            adjustCurrentCosts={adjustCurrentCosts}
             onDeleteEntry={onDeleteEntry}
           />
         </CardInfo>
@@ -66,16 +65,16 @@ export default function ServiceCard({
 
   function handleClickPlus(event) {
     event.stopPropagation()
-    onPlus(usedCosts, hours, index)
+    onPlus(currentUsedCosts, hours, index)
   }
 
   function handleClickMinus(event) {
     event.stopPropagation()
-    onMinus(usedCosts, hours, index)
+    onMinus(currentUsedCosts, hours, index)
   }
 }
 
-const CardContainer = styled.div`
+const CardContainer = styled.section`
   display: grid;
   gap: 5px;
   background-color: var(--color-lighter);
@@ -85,7 +84,7 @@ const CardContainer = styled.div`
   border-radius: 7px;
   overflow: hidden;
   svg {
-    rotate: ${props => (props.isVisible ? '180deg' : '0deg')};
+    rotate: ${props => (props.openDetails ? '180deg' : '0deg')};
   }
 `
 const CardInfo = styled.div`
@@ -103,11 +102,11 @@ const ButtonBox = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 10px;
 `
 
 const ButtonMinus = styled(Button)`
   background-color: var(--color-red);
+  margin-right: 5px;
 `
 
 const ButtonPlus = styled(Button)`

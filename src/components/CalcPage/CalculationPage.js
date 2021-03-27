@@ -1,54 +1,55 @@
 import styled from 'styled-components/macro'
+import { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
+import Icon from 'supercons'
+
 import ServiceCard from '../ServiceCard/ServiceCard'
 import Header from '../Header/Header'
 import MenuButton from '../MenuButton/MenuButton'
 import Button from '../Button/Button'
-import ResultField from '../ResultField/ResultField'
+import Endresult from '../Endresult/Endresult'
 import NewService from '../FormComponents/NewService'
-import { useState } from 'react'
-import { v4 as uuidv4 } from 'uuid'
 import Searchbar from '../Searchbar/Searchbar'
-import Icon from 'supercons'
 
 export default function Calculation({
   services,
   setServices,
+  finalCosts,
   onPlus,
   onMinus,
-  finalCosts,
   onAddingNewCosts,
-  onSafeResult,
-  toggleSlideMenu,
+  onSaveResult,
   onDeleteEntry,
+  closeSlideMenu,
+  toggleSlideMenu,
 }) {
-  const [openNewServiceForm, setOpenNewServiceForm] = useState('home')
+  const [openNewServiceForm, setOpenNewServiceForm] = useState('')
   const [searchInput, setSearchInput] = useState('')
 
   return (
     <>
       <MenuButton toggleSlideMenu={toggleSlideMenu} />
-      <Header title={'QuickQalc'} />
-      <Content>
+      <Header title={'calcuFix'} />
+      <Content onClick={() => closeSlideMenu()}>
         <SearchbarWrapper>
           <Searchbar searchInput={searchInput} onTypeSearch={setSearchInput} />
         </SearchbarWrapper>
         <ServiceCardWrapper>
           {services
-            .filter(character =>
-              character.name.toLowerCase().includes(searchInput.toLowerCase())
+            .filter(service =>
+              service.name.toLowerCase().includes(searchInput.toLowerCase())
             )
-            .map(({ id, name, costs, notes, hours }, index) => (
+            .map(({ id, name, costs, hours, notes }, index) => (
               <ServiceCard
                 key={id}
                 id={id}
                 index={index}
                 name={name}
                 costs={costs}
-                notes={notes}
                 hours={hours}
+                notes={notes}
                 onPlus={onPlus}
                 onMinus={onMinus}
-                services={services}
                 onAddingNewCosts={onAddingNewCosts}
                 onDeleteEntry={onDeleteEntry}
               />
@@ -58,23 +59,18 @@ export default function Calculation({
 
       <ButtonBox>
         <NewServiceButton
-          data-testid="plusbutton"
+          aria-label="add a new service"
           onClick={() => setOpenNewServiceForm('newService')}
         >
-          <Icon
-            glyph="view-close-small"
-            width={'25'}
-            height={'25'}
-            viewBox="6 6 20 20"
-          />
+          <Icon glyph="plus" width={'40'} height={'40'} viewBox="2 2 28 28" />
         </NewServiceButton>
-        <ResultField finalCosts={finalCosts} onSafeResult={onSafeResult} />
+        <Endresult finalCosts={finalCosts} onSaveResult={onSaveResult} />
       </ButtonBox>
 
       {openNewServiceForm === 'newService' && (
         <NewService
           onAddNewService={addNewService}
-          onOpenNewServiceForm={setOpenNewServiceForm}
+          onAbort={setOpenNewServiceForm}
         />
       )}
     </>
@@ -88,11 +84,11 @@ export default function Calculation({
       hours: 0,
     }
     setServices([newService, ...services])
-    setOpenNewServiceForm('home')
+    setOpenNewServiceForm('')
   }
 }
 
-const Content = styled.div`
+const Content = styled.main`
   display: grid;
   gap: 12px;
   grid-template-rows: 40px auto;
@@ -107,9 +103,6 @@ const NewServiceButton = styled(Button)`
   width: 25%;
   height: 50px;
   border-radius: 0;
-  svg {
-    rotate: 45deg;
-  }
 `
 
 const ButtonBox = styled.div`
@@ -118,7 +111,7 @@ const ButtonBox = styled.div`
   box-shadow: 0 -20px 10px white;
 `
 
-const ServiceCardWrapper = styled.div`
+const ServiceCardWrapper = styled.section`
   display: grid;
   gap: 10px;
   grid-auto-rows: min-content;

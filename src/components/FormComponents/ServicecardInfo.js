@@ -1,17 +1,18 @@
 import styled from 'styled-components/macro'
+import Icon from 'supercons'
 import useToggle from '../../hooks/useToggle'
+
 import Button from '../Button/Button'
 import CostInput from '../Inputs/CostInput'
 import ConfirmDialog from './ConfirmDialog'
-import Icon from 'supercons'
 
 export default function ServicecardInfo({
   id,
   index,
   hours,
   notes,
-  currentCostsPerHour,
   setUsedCosts,
+  currentCostsPerHour,
   onAddingNewCosts,
   onDeleteEntry,
 }) {
@@ -28,16 +29,13 @@ export default function ServicecardInfo({
         <NewCostsBox>
           <label>
             Stundensatz:
-            <CostInput
-              currentCostsPerHour={currentCostsPerHour}
-              onClick={handlePropagation}
-            />
+            <CostInput displayedCosts={currentCostsPerHour} />
           </label>
           <Button onClick={handlePropagation}>Set</Button>
         </NewCostsBox>
       </ServiceInfoForm>
       <NoteWrapper>{notes}</NoteWrapper>
-      <DeleteButton>
+      <IconBox>
         <DeleteIcon>
           <Icon
             glyph="delete"
@@ -53,13 +51,13 @@ export default function ServicecardInfo({
         {openConfirm === true && (
           <ConfirmDialog
             id={id}
-            deleteEntry={onDeleteEntry}
-            toggle={toggleConfirm}
-            right={'30px'}
             top={'5px'}
+            right={'30px'}
+            toggle={toggleConfirm}
+            onDeleteEntry={onDeleteEntry}
           />
         )}
-      </DeleteButton>
+      </IconBox>
     </InfoWrapper>
   )
   function handleSettingNewCosts(event) {
@@ -71,6 +69,12 @@ export default function ServicecardInfo({
     onAddingNewCosts(index, newCostsPerHour, currentCostsPerHour, hours)
   }
 }
+
+const InfoWrapper = styled.section`
+  display: grid;
+  gap: 15px;
+  position: relative;
+`
 
 const ServiceInfoForm = styled.form`
   display: grid;
@@ -88,20 +92,16 @@ const NewCostsBox = styled.div`
   align-items: center;
 `
 
-const InfoWrapper = styled.div`
-  display: grid;
-  gap: 15px;
-  position: relative;
-`
-
-const DeleteButton = styled.div`
+const IconBox = styled.div`
   position: absolute;
   top: -11px;
   right: 0px;
 `
+
 const DeleteIcon = styled.div`
   rotate: 180deg;
 `
+
 const NoteWrapper = styled.div`
   font-style: italic;
   font-size: medium;

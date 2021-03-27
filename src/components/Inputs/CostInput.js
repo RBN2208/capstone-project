@@ -1,14 +1,14 @@
 import styled from 'styled-components'
 
-export default function Costinput({ currentCostsPerHour }) {
+export default function Costinput({ displayedCosts }) {
   return (
     <CostInput
-      data-testid="costInput"
       id="setcosts"
       name="costs"
       type="number"
       step="0.05"
-      placeholder={currentCostsPerHour + '€'}
+      data-testid="costInput"
+      placeholder={displayedCosts + '€'}
       onClick={event => event.stopPropagation()}
     />
   )

@@ -3,7 +3,7 @@ import styled from 'styled-components/macro'
 export default function Searchbar({ searchInput, onTypeSearch }) {
   return (
     <SearchInput
-      data-testid="searchbar"
+      aria-label="searchbar"
       placeholder="Dienstleistungen..."
       value={searchInput}
       onChange={event => onTypeSearch(event.target.value)}

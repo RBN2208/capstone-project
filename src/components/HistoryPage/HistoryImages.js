@@ -1,24 +1,23 @@
 import styled from 'styled-components/macro'
-import { v4 as uuidv4 } from 'uuid'
 
-export default function HistoryImages({ toggleImages, urls }) {
+export default function HistoryImages({ urls }) {
   const NO_IMAGES = urls.length === 0 ? true : false
   return (
     <>
-      <Wrapper>
+      <ContentWrapper>
         <ImageWrapper>
-          {urls.map(({ url }) => (
-            <Images key={uuidv4()} src={url} alt="" width="300" />
+          {urls.map(({ url }, index) => (
+            <Images key={index} src={url} alt="" width="300" />
           ))}
         </ImageWrapper>
         <ReplacedWrapper>
           <Replaced empty={NO_IMAGES}>Keine Bilder vorhanden.</Replaced>
         </ReplacedWrapper>
-      </Wrapper>
+      </ContentWrapper>
     </>
   )
 }
-const Wrapper = styled.section`
+const ContentWrapper = styled.section`
   width: 100%;
   padding: 10px;
   background: white;
