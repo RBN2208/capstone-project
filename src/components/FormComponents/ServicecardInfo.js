@@ -1,17 +1,18 @@
 import styled from 'styled-components/macro'
+import Icon from 'supercons'
 import useToggle from '../../hooks/useToggle'
+
 import Button from '../Button/Button'
 import CostInput from '../Inputs/CostInput'
 import ConfirmDialog from './ConfirmDialog'
-import Icon from 'supercons'
 
 export default function ServicecardInfo({
   id,
   index,
   hours,
   notes,
-  currentCostsPerHour,
   setUsedCosts,
+  currentCostsPerHour,
   onAddingNewCosts,
   onDeleteEntry,
 }) {
@@ -28,10 +29,7 @@ export default function ServicecardInfo({
         <NewCostsBox>
           <label>
             Stundensatz:
-            <CostInput
-              currentCostsPerHour={currentCostsPerHour}
-              onClick={handlePropagation}
-            />
+            <CostInput displayedCosts={currentCostsPerHour} />
           </label>
           <Button onClick={handlePropagation}>Set</Button>
         </NewCostsBox>
@@ -53,10 +51,10 @@ export default function ServicecardInfo({
         {openConfirm === true && (
           <ConfirmDialog
             id={id}
-            deleteEntry={onDeleteEntry}
-            toggle={toggleConfirm}
-            right={'30px'}
             top={'5px'}
+            right={'30px'}
+            toggle={toggleConfirm}
+            onDeleteEntry={onDeleteEntry}
           />
         )}
       </IconBox>

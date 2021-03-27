@@ -18,7 +18,7 @@ import Landingpage from '../Landingpage/Landingpage'
 import CalculationPage from '../CalcPage/CalculationPage'
 import HistoryPage from '../HistoryPage/HistoryPage'
 import SlideMenu from '../SlideMenu/SlideMenu'
-import SafeResultForm from '../FormComponents/SafeResultForm'
+import SaveResultForm from '../FormComponents/SaveResultForm'
 
 export default function App() {
   const [services, setServices] = useLocalStorage('services', [
@@ -52,7 +52,7 @@ export default function App() {
 
   const [finalCosts, setFinalCosts] = useState(0)
   const [slideMenu, toggleSlideMenu, closeSlideMenu] = useToggle(false)
-  const [openSaveResult, setOpenSaveResult] = useToggle(false)
+  const [openSaveResult, setOpenSaveResult] = useState('')
 
   const [loadingLandingPage, setIsLoadingLandingPage] = useState(false)
   window.setTimeout(() => {
@@ -90,8 +90,8 @@ export default function App() {
         </AppLayout>
       </Switch>
       <SlideMenu slideMenuState={slideMenu} toggleSlideMenu={toggleSlideMenu} />
-      {openSaveResult === true && (
-        <SafeResultForm
+      {openSaveResult === 'openSaveResult' && (
+        <SaveResultForm
           finalCosts={finalCosts}
           onDiscardSave={setOpenSaveResult}
           onSaveCosts={saveToHistory}
@@ -111,7 +111,7 @@ export default function App() {
       usedServices,
     }
     setLastCalculations([...lastCalculations, newCalculation])
-    setOpenSaveResult('home')
+    setOpenSaveResult('')
     resetValuesOnSave()
   }
 

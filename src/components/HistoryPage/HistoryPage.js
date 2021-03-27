@@ -4,16 +4,16 @@ import MenuButton from '../MenuButton/MenuButton'
 import HistoryEntry from './HistoryEntry'
 
 export default function HistoryPage({
+  closeSlideMenu,
   toggleSlideMenu,
   lastCalculations,
   onDeleteHistoryEntry,
-  closeSlide,
 }) {
   return (
     <>
       <MenuButton toggleSlideMenu={toggleSlideMenu} />
-      <Header title="Historypage" />
-      <Content onClick={() => closeSlide()}>
+      <Header title="Letzte Kalkulationen" />
+      <Content onClick={() => closeSlideMenu()}>
         {lastCalculations.map(
           ({ id, date, costs, keynote, urls, usedServices }, index) => (
             <HistoryEntry
@@ -25,7 +25,6 @@ export default function HistoryPage({
               keynote={keynote}
               urls={urls}
               usedServices={usedServices}
-              lastCalculations={lastCalculations}
               onDeleteHistoryEntry={onDeleteHistoryEntry}
             />
           )

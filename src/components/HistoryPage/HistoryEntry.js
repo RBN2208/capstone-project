@@ -1,6 +1,7 @@
-import useToggle from '../../hooks/useToggle'
 import styled from 'styled-components/macro'
 import Icon from 'supercons'
+import useToggle from '../../hooks/useToggle'
+
 import ConfirmDialog from '../FormComponents/ConfirmDialog'
 import HistoryImages from './HistoryImages'
 import HistoryDetails from './HistoryDetails'
@@ -24,7 +25,7 @@ export default function HistoryEntry({
         <TopWrapper>
           <h3>{keynote}</h3>
 
-          <ButtonWrapper isactive={openDetails}>
+          <ButtonWrapper>
             <IconBox
               glyph="photo"
               width={'30'}
@@ -55,22 +56,14 @@ export default function HistoryEntry({
         {openConfirm === true && (
           <ConfirmDialog
             id={id}
-            deleteEntry={onDeleteHistoryEntry}
-            toggle={toggleConfirm}
-            right={'70px'}
             top={'10px'}
+            right={'70px'}
+            toggle={toggleConfirm}
+            onDeleteEntry={onDeleteHistoryEntry}
           />
         )}
-        {openDetails === true && (
-          <HistoryDetails
-            toggleDetails={toggleDetails}
-            id={id}
-            usedServices={usedServices}
-          />
-        )}
-        {openImages === true && (
-          <HistoryImages toggleImages={toggleImages} id={id} urls={urls} />
-        )}
+        {openDetails === true && <HistoryDetails usedServices={usedServices} />}
+        {openImages === true && <HistoryImages urls={urls} />}
       </EntryWrapper>
     </>
   )

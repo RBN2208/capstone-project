@@ -5,7 +5,11 @@ import Icon from 'supercons'
 
 import Button from '../Button/Button'
 
-export default function ResultForm({ finalCosts, onDiscardSave, onSaveCosts }) {
+export default function SaveResultForm({
+  finalCosts,
+  onDiscardSave,
+  onSaveCosts,
+}) {
   const [isUpLoading, setIsUpLoading] = useState(false)
   const [imageURLs, setImageURLs] = useState([])
 
@@ -47,10 +51,7 @@ export default function ResultForm({ finalCosts, onDiscardSave, onSaveCosts }) {
         </LoadingBox>
 
         <SafeButton aria-label="safebutton">Speichern</SafeButton>
-        <AbortButton
-          aria-label="abortbutton"
-          onClick={() => onDiscardSave('home')}
-        >
+        <AbortButton aria-label="abortbutton" onClick={() => onDiscardSave('')}>
           Zurück
         </AbortButton>
       </Form>

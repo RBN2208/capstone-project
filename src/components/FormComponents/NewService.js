@@ -1,8 +1,9 @@
 import styled from 'styled-components/macro'
+
 import Button from '../Button/Button'
 import Costinput from '../Inputs/CostInput'
 
-export default function NewService({ onAddNewService, onOpenNewServiceForm }) {
+export default function NewService({ onAddNewService, onAbort }) {
   return (
     <BlurContainer>
       <Form
@@ -12,12 +13,11 @@ export default function NewService({ onAddNewService, onOpenNewServiceForm }) {
         <label>
           Name der Dienstleistung
           <input
-            aria-label="dienstleistung"
-            data-testid="newServiceInput"
-            maxLength="20"
-            name="service"
-            placeholder="Dienstleistung"
             required
+            name="service"
+            maxLength="20"
+            aria-label="service name"
+            placeholder="Dienstleistung"
           />
         </label>
         <label>
@@ -27,17 +27,14 @@ export default function NewService({ onAddNewService, onOpenNewServiceForm }) {
         <label>
           Notiz(Optional):
           <ServiceNote
-            aria-label="notes"
-            data-testid="servicenote"
             name="notes"
+            aria-label="notes for service"
+            data-testid="servicenote"
             placeholder="Für Notizen zur Dienstleistung."
           ></ServiceNote>
         </label>
         <NewServiceButton>Hinzufügen</NewServiceButton>
-        <ButtonBack
-          data-testid="backbutton"
-          onClick={() => onOpenNewServiceForm('home')}
-        >
+        <ButtonBack aria-label="abort button" onClick={() => onAbort('')}>
           Zurück
         </ButtonBack>
       </Form>
@@ -58,13 +55,13 @@ export default function NewService({ onAddNewService, onOpenNewServiceForm }) {
 }
 
 const BlurContainer = styled.div`
-  position: absolute;
-  background: var(--color-blur);
-  width: 100%;
-  height: 100%;
-  padding: 30px;
   display: grid;
   place-content: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding: 30px;
+  background-color: var(--color-blur);
 `
 
 const Form = styled.form`
@@ -77,16 +74,16 @@ const Form = styled.form`
 `
 
 const NewServiceButton = styled(Button)`
-  background-color: var(--color-green);
   color: var(--color-dark);
+  background-color: var(--color-green);
 `
 
 const ButtonBack = styled(Button)`
-  background-color: var(--color-dark);
-  color: var(--color-light);
+  font-size: 1.2rem;
   padding: 0.2em 0.6em;
   border-radius: 3px;
-  font-size: 1.2rem;
+  color: var(--color-light);
+  background-color: var(--color-dark);
 `
 
 const ServiceNote = styled.textarea`

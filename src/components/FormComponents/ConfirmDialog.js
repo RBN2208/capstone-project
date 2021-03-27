@@ -1,14 +1,20 @@
 import styled from 'styled-components/macro'
 import Button from '../Button/Button'
 
-export default function ConfirmDialog({ id, deleteEntry, toggle, right, top }) {
+export default function ConfirmDialog({
+  id,
+  top,
+  right,
+  toggle,
+  onDeleteEntry,
+}) {
   const state = () => toggle()
 
   return (
     <ConfirmBox right={right} top={top}>
       <p>Eintrag löschen?</p>
       <ButtonWrapper>
-        <ButtonGreen onClick={() => deleteEntry(id)}>Ja</ButtonGreen>
+        <ButtonGreen onClick={() => onDeleteEntry(id)}>Ja</ButtonGreen>
         <Button onClick={event => handleClick(event)}>Nein</Button>
       </ButtonWrapper>
     </ConfirmBox>

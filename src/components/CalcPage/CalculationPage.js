@@ -23,7 +23,7 @@ export default function Calculation({
   closeSlideMenu,
   toggleSlideMenu,
 }) {
-  const [openNewServiceForm, setOpenNewServiceForm] = useState('home')
+  const [openNewServiceForm, setOpenNewServiceForm] = useState('')
   const [searchInput, setSearchInput] = useState('')
 
   return (
@@ -48,7 +48,6 @@ export default function Calculation({
                 costs={costs}
                 hours={hours}
                 notes={notes}
-                services={services}
                 onPlus={onPlus}
                 onMinus={onMinus}
                 onAddingNewCosts={onAddingNewCosts}
@@ -71,7 +70,7 @@ export default function Calculation({
       {openNewServiceForm === 'newService' && (
         <NewService
           onAddNewService={addNewService}
-          onOpenNewServiceForm={setOpenNewServiceForm}
+          onAbort={setOpenNewServiceForm}
         />
       )}
     </>
@@ -85,7 +84,7 @@ export default function Calculation({
       hours: 0,
     }
     setServices([newService, ...services])
-    setOpenNewServiceForm('home')
+    setOpenNewServiceForm('')
   }
 }
 

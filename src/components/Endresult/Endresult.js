@@ -6,12 +6,12 @@ export default function ResultField({ finalCosts, onSaveResult }) {
     <Resultbox>
       <span>Endpreis: {finalCosts} €</span>
       <Checkmark
-        data-testid="saveResultButton"
+        aria-label="save result"
         glyph="checkmark"
         width={'40'}
         height={'40'}
         viewBox="5 4 24 24"
-        onClick={() => onSaveResult('openSafeResult')}
+        onClick={() => onSaveResult('openSaveResult')}
       />
     </Resultbox>
   )
@@ -22,8 +22,8 @@ const Resultbox = styled.section`
   justify-content: space-between;
   align-items: center;
   width: 75%;
-  background-color: var(--color-green);
   padding: 20px;
+  background-color: var(--color-green);
 `
 const Checkmark = styled(Icon)`
   color: var(--color-darkgreen);
