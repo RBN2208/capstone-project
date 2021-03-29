@@ -33,8 +33,7 @@ const Template = args => <HistoryEntry {...events} {...args} />
 export const Primary = Template.bind({})
 Primary.args = {
   keynote: 'Herr Müller',
-  hours: 50,
-  costs: 1584,
+  costs: 1584 + '€',
   urls: urlList,
   usedServices: usedData,
 }

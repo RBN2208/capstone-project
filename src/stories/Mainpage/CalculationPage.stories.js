@@ -24,6 +24,7 @@ const events = actions({
   onOpenNewServiceForm: 'open new Serivce',
   toggleSlideMenu: 'toggle open/close',
   closeSlideMenu: 'closed slide menu',
+  onDeleteEntry: 'delete the entry',
 })
 
 const Template = args => (
