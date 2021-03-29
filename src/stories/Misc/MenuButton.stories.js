@@ -1,10 +1,10 @@
 import React from 'react'
 import { actions } from '@storybook/addon-actions'
 
-import MenuButton from '../components/MenuButton/MenuButton'
+import MenuButton from '../../components/MenuButton/MenuButton'
 
 export default {
-  title: 'MenuButton',
+  title: 'Misc/MenuButton',
   component: MenuButton,
 }
 

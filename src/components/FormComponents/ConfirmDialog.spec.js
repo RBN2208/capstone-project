@@ -10,4 +10,5 @@ describe('ConfirmDialog', () => {
     expect(screen.getByRole('button', { name: /ja/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /nein/i })).toBeInTheDocument()
   })
+  it.todo('calls a function on click')
 })

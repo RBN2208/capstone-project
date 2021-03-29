@@ -2,10 +2,10 @@ import React from 'react'
 import { actions } from '@storybook/addon-actions'
 import styled from 'styled-components'
 
-import ServicecardInfo from '../components/FormComponents/ServicecardInfo'
+import ServicecardInfo from '../../components/FormComponents/ServicecardInfo'
 
 export default {
-  title: 'ServicecardInfo',
+  title: 'Mainpage/ServicecardInfo',
   component: ServicecardInfo,
   argTypes: { onClick: { action: 'submitted' } },
 }

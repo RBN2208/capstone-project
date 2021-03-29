@@ -1,12 +1,11 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
 
-import ServiceCard from '../components/ServiceCard/ServiceCard'
+import ServiceCard from '../../components/ServiceCard/ServiceCard'
 
 export default {
-  title: 'Servicecard',
+  title: 'Mainpage/Servicecard',
   component: ServiceCard,
-  argTypes: { onClick: { action: 'clicked' } },
 }
 
 const services = [

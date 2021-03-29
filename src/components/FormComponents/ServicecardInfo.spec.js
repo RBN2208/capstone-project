@@ -26,4 +26,5 @@ describe('ServicecardInfo', () => {
     userEvent.click(screen.getByRole('button'))
     expect(setCostChange).toHaveBeenCalledTimes(1)
   })
+  it.todo('rerender and check if value is changed')
 })

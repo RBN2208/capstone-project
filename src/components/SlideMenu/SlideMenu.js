@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 export default function SlideMenu({ slideMenuState, toggleSlideMenu }) {
   return (
     <MenuBox position={slideMenuState}>
-      <Nav>
+      <Nav data-testid="slidenavigation">
         <NavLinkStyled to="/" onClick={toggleSlideMenu}>
           Home
         </NavLinkStyled>

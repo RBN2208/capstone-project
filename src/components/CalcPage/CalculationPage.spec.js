@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import CalculationPage from './CalculationPage'
 import '@testing-library/jest-dom'
-import userEvent from '@testing-library/user-event'
 
 const services = [
   { id: 1, name: 'one', costs: 50 },
@@ -11,16 +10,19 @@ const services = [
 
 describe('CalculationPage', () => {
   it('renders a servicecard with text', () => {
-    render(<CalculationPage name={services[0].name} services={services} />)
+    render(<CalculationPage name={services.name} services={services} />)
     expect(screen.getByText('one')).toBeInTheDocument()
+    expect(screen.getByText('two')).toBeInTheDocument()
+    expect(screen.getByText('three')).toBeInTheDocument()
   })
   it('has a menubutton for a slide menu', () => {
     render(<CalculationPage services={services} />)
     expect(screen.getByLabelText('menu')).toBeInTheDocument()
   })
+  it.todo('it opens the slide menu on click')
   it('renders a header', () => {
     render(<CalculationPage services={services} />)
-    expect(screen.getByText('QuickQalc')).toBeInTheDocument()
+    expect(screen.getByText('calcuFix')).toBeInTheDocument()
   })
   it('renders the finalCosts coming from state', () => {
     const { rerender } = render(
@@ -30,4 +32,5 @@ describe('CalculationPage', () => {
     rerender(<CalculationPage services={services} finalCosts={333} />)
     expect(screen.getByText('Endpreis: 333 €')).toBeInTheDocument()
   })
+  it.todo('adds the value of a card costs to the finalCosts')
 })

@@ -1,15 +1,15 @@
 import React from 'react'
 import { actions } from '@storybook/addon-actions'
 
-import SlideMenu from '../components/SlideMenu/SlideMenu'
+import SlideMenu from '../../components/SlideMenu/SlideMenu'
 
 export default {
-  title: 'SlideMenu',
+  title: 'Misc/SlideMenu',
   component: SlideMenu,
 }
 
 const events = actions({
-  onToggleSlideMenu: 'close/open',
+  slideMenuState: 'close/open',
   toggleSlideMenu: 'open and close',
 })
 

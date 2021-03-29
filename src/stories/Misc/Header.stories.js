@@ -1,8 +1,8 @@
 import React from 'react'
-import Header from '../components/Header/Header'
+import Header from '../../components/Header/Header'
 
 export default {
-  title: 'Header',
+  title: 'Misc/Header',
   component: Header,
 }
 

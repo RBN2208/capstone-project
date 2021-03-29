@@ -1,10 +1,10 @@
 import React from 'react'
 import { actions } from '@storybook/addon-actions'
 
-import Searchbar from '../components/Searchbar/Searchbar'
+import Searchbar from '../../components/Searchbar/Searchbar'
 
 export default {
-  title: 'Searchbar',
+  title: 'Mainpage/Searchbar',
   component: Searchbar,
 }
 
