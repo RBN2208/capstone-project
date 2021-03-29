@@ -1,24 +1,19 @@
 import React from 'react'
 import { actions } from '@storybook/addon-actions'
 
-import NewService from '../components/FormComponents/NewService'
+import NewService from '../../components/FormComponents/NewService'
 
 export default {
-  title: 'NewService',
+  title: 'FormComponents/NewService',
   component: NewService,
   argTypes: { onClick: { action: 'submitted' } },
 }
 
 const events = actions({
   onAddNewService: '"home" = close, data is used for new card',
-  onSubmit: 'Name und Costs aus Submit',
-  onOpenNewServiceForm: 'only close form',
+  onAbort: 'only close form',
 })
 
-const Template = args => <NewService {...events} {...args} />
+const Template = args => <NewService {...events} />
 
 export const Primary = Template.bind({})
-Primary.args = {
-  counter: 5,
-  currentCosts: 200,
-}

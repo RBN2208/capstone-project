@@ -2,12 +2,11 @@ import React from 'react'
 import { actions } from '@storybook/addon-actions'
 import styled from 'styled-components'
 
-import CalculationPage from '../components/CalcPage/CalculationPage'
+import CalculationPage from '../../components/CalcPage/CalculationPage'
 
 export default {
-  title: 'CalculationPage',
+  title: 'Mainpage/CalculationPage',
   component: CalculationPage,
-  argTypes: { onClick: { action: 'submitted' } },
 }
 
 const services = [
@@ -24,6 +23,7 @@ const events = actions({
   onSafeResult: 'Safe result value',
   onOpenNewServiceForm: 'open new Serivce',
   toggleSlideMenu: 'toggle open/close',
+  closeSlideMenu: 'closed slide menu',
 })
 
 const Template = args => (

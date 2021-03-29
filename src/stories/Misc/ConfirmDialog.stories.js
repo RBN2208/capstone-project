@@ -1,10 +1,10 @@
 import React from 'react'
 import { actions } from '@storybook/addon-actions'
 
-import ConfirmDialog from '../components/FormComponents/ConfirmDialog'
+import ConfirmDialog from '../../components/FormComponents/ConfirmDialog'
 
 export default {
-  title: 'ConfirmDialog',
+  title: 'Misc/ConfirmDialog',
   component: ConfirmDialog,
   argTypes: { onClick: { action: 'submitted' } },
 }

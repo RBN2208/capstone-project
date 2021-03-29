@@ -5,11 +5,7 @@ import Icon from 'supercons'
 
 import Button from '../Button/Button'
 
-export default function SaveResultForm({
-  finalCosts,
-  onDiscardSave,
-  onSaveCosts,
-}) {
+export default function SaveResultForm({ finalCosts, onDiscardSave, onSave }) {
   const [isUpLoading, setIsUpLoading] = useState(false)
   const [urlData, setUrlData] = useState([])
 
@@ -79,7 +75,7 @@ export default function SaveResultForm({
       keynote: formElement.keynote.value,
       urls: urlData,
     }
-    onSaveCosts(data)
+    onSave(data)
   }
 }
 

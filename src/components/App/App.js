@@ -96,7 +96,7 @@ export default function App() {
         <SaveResultForm
           finalCosts={finalCosts}
           onDiscardSave={setOpenSaveResult}
-          onSaveCosts={saveToHistory}
+          onSave={saveToHistory}
         />
       )}
     </>
