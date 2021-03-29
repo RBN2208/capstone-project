@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import HistoryPage from './HistoryPage'
 import '@testing-library/jest-dom'
-import userEvent from '@testing-library/user-event'
 
 const savedCosts = [
   { id: 1, date: '01.01.2021', costs: 50 },
@@ -19,4 +18,5 @@ describe('HistoryPage', () => {
     expect(screen.getByText('150')).toBeInTheDocument()
     expect(screen.getByText('250')).toBeInTheDocument()
   })
+  it.todo('calls a function on click')
 })

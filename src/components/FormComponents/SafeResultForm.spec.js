@@ -38,4 +38,5 @@ describe('SaveResultForm', () => {
     userEvent.click(screen.getByLabelText('abortbutton'))
     expect(onDiscardSave).toHaveBeenCalledTimes(1)
   })
+  it.todo('has a image upload function')
 })

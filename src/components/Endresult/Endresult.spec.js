@@ -14,4 +14,5 @@ describe('Endresult', () => {
     userEvent.click(screen.getByLabelText('save result'))
     expect(open).toHaveBeenCalledTimes(1)
   })
+  it.todo('rerender and check if form is visible')
 })

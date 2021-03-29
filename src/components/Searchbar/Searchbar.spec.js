@@ -4,7 +4,7 @@ import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 
 describe('Searchbar', () => {
-  it('an input', () => {
+  it('is an input', () => {
     render(<Searchbar />)
     expect(
       screen.getByPlaceholderText('Dienstleistungen...')
