@@ -72,11 +72,12 @@ export default function HistoryEntry({
 const EntryWrapper = styled.section`
   position: relative;
   display: grid;
+  gap: 10px;
   align-items: center;
   padding: 10px 0;
   border-bottom: 1px solid var(--color-midgrey);
   h3 {
-    margin-top: 0;
+    margin: 0;
   }
   p {
     margin: 10px 0;
@@ -90,6 +91,7 @@ const CostValue = styled.p`
 const TopWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `
 
 const BottomWrapper = styled.div`

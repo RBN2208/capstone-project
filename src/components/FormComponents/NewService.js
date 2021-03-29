@@ -1,9 +1,12 @@
+import { useState } from 'react'
 import styled from 'styled-components/macro'
 
 import Button from '../Button/Button'
 import Costinput from '../Inputs/CostInput'
 
 export default function NewService({ onAddNewService, onAbort }) {
+  const [nameLength, setNameLength] = useState(0)
+
   return (
     <BlurContainer>
       <Form
@@ -11,29 +14,34 @@ export default function NewService({ onAddNewService, onAbort }) {
         data-testid="newServiceForm"
       >
         <label>
-          Name der Dienstleistung
+          Name der Dienstleistung:
           <input
             required
             name="service"
             maxLength="20"
             aria-label="service name"
-            placeholder="Dienstleistung"
+            placeholder="z.B. Verspachteln"
+            onChange={event => setNameLength(event.target.value.length)}
           />
+          <CountedLetters>{nameLength}/20</CountedLetters>
         </label>
         <label>
-          Stundensatz
-          <Costinput currentCostsPerHour="default: 50" />
+          Stundensatz:
+          <Costinput displayedCosts="z.B. 1€/1.50€, default: 50" />
         </label>
         <label>
           Notiz(Optional):
           <ServiceNote
             name="notes"
+            maxLength="100"
             aria-label="notes for service"
             data-testid="servicenote"
             placeholder="Für Notizen zur Dienstleistung."
           ></ServiceNote>
         </label>
-        <NewServiceButton>Hinzufügen</NewServiceButton>
+        <NewServiceButton aria-label="add new service button">
+          Hinzufügen
+        </NewServiceButton>
         <ButtonBack aria-label="abort button" onClick={() => onAbort('')}>
           Zurück
         </ButtonBack>
@@ -66,11 +74,20 @@ const BlurContainer = styled.div`
 
 const Form = styled.form`
   display: grid;
-  gap: 10px;
+  gap: 20px;
   padding: 20px;
   background: white;
   box-shadow: 0 0 10px var(--color-dark);
   border-radius: 5px;
+  width: 275px;
+  label {
+    position: relative;
+    display: grid;
+    gap: 3px;
+    input {
+      font-size: 90%;
+    }
+  }
 `
 
 const NewServiceButton = styled(Button)`
@@ -93,4 +110,11 @@ const ServiceNote = styled.textarea`
   resize: none;
   font-family: sans-serif;
   padding: 10px 8px;
+`
+const CountedLetters = styled.span`
+  position: absolute;
+  top: 41px;
+  right: 3px;
+  font-size: 0.8rem;
+  color: var(--color-midgrey);
 `

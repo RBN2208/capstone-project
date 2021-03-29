@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 
-export default function Costinput({ displayedCosts }) {
+export default function Costinput({ displayedCosts, required }) {
   return (
     <CostInput
+      required={required}
       id="setcosts"
       name="costs"
       type="number"

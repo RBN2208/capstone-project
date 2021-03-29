@@ -29,7 +29,7 @@ export default function ServicecardInfo({
         <NewCostsBox>
           <label>
             Stundensatz:
-            <CostInput displayedCosts={currentCostsPerHour} />
+            <CostInput required displayedCosts={currentCostsPerHour} />
           </label>
           <Button onClick={handlePropagation}>Set</Button>
         </NewCostsBox>
