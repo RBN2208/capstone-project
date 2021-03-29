@@ -10,8 +10,8 @@ describe('Endresult', () => {
   })
   it('opens the save result form', () => {
     const open = jest.fn()
-    render(<Endresult finalCosts={500} onSafeResult={open} />)
-    userEvent.click(screen.getByTestId('saveResultButton'))
+    render(<Endresult finalCosts={500} onSaveResult={open} />)
+    userEvent.click(screen.getByLabelText('save result'))
     expect(open).toHaveBeenCalledTimes(1)
   })
 })

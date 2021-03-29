@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import CalculationPage from './CalculationPage'
 import '@testing-library/jest-dom'
-import userEvent from '@testing-library/user-event'
 
 const services = [
   { id: 1, name: 'one', costs: 50 },
@@ -20,7 +19,7 @@ describe('CalculationPage', () => {
   })
   it('renders a header', () => {
     render(<CalculationPage services={services} />)
-    expect(screen.getByText('QuickQalc')).toBeInTheDocument()
+    expect(screen.getByText('calcuFix')).toBeInTheDocument()
   })
   it('renders the finalCosts coming from state', () => {
     const { rerender } = render(

@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import History from './History'
+import HistoryPage from './HistoryPage'
 import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 
@@ -9,9 +9,9 @@ const savedCosts = [
   { id: 3, date: '03.03.2021', costs: 250 },
 ]
 
-describe('History', () => {
+describe('HistoryPage', () => {
   it('renders a history entry with given values', () => {
-    render(<History lastCalculations={savedCosts} />)
+    render(<HistoryPage lastCalculations={savedCosts} />)
     expect(screen.getByText('Kalkulation vom 01.01.2021 :')).toBeInTheDocument()
     expect(screen.getByText('Kalkulation vom 02.02.2021 :')).toBeInTheDocument()
     expect(screen.getByText('Kalkulation vom 03.03.2021 :')).toBeInTheDocument()

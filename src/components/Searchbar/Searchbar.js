@@ -3,6 +3,7 @@ import styled from 'styled-components/macro'
 export default function Searchbar({ searchInput, onTypeSearch }) {
   return (
     <SearchInput
+      role="input"
       aria-label="searchbar"
       placeholder="Dienstleistungen..."
       value={searchInput}

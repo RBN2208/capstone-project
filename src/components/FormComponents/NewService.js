@@ -43,7 +43,7 @@ export default function NewService({ onAddNewService, onAbort }) {
           Hinzufügen
         </NewServiceButton>
         <ButtonBack aria-label="abort button" onClick={() => onAbort('')}>
-          Zurück
+          Abbrechen
         </ButtonBack>
       </Form>
     </BlurContainer>
