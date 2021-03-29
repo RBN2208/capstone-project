@@ -29,3 +29,7 @@ $ git clone git@github.com:RBN2208/capstone-project.git
 In the project directory, please run:
 
 npm install
+
+## Preview
+
+![Preview](./public/Apppreview.png)
