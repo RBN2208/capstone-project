@@ -59,6 +59,8 @@ export default function App() {
     setIsLoadingLandingPage(true)
   }, 2000)
 
+  window.onload = resetOnLoad
+
   return (
     <>
       <Switch>
@@ -120,6 +122,10 @@ export default function App() {
     setFinalCosts(0)
   }
 
+  function resetOnLoad() {
+    setServices(services.map(service => ({ ...service, hours: 0 })))
+    setFinalCosts(0)
+  }
   function updateCostsPerHours(
     index,
     newCostsPerHour,
@@ -154,6 +160,6 @@ const AppLayout = styled.div`
   grid-template-rows: 50px auto 50px;
   height: 100vh;
   position: relative;
-  margin-left: ${props => (props.openMenu ? '150px' : '0px')};
+  margin-left: ${props => (props.openMenu ? '135px' : '0px')};
   transition: all 0.5s;
 `

@@ -11,7 +11,7 @@ export default function SaveResultForm({
   onSaveCosts,
 }) {
   const [isUpLoading, setIsUpLoading] = useState(false)
-  const [imageURLs, setImageURLs] = useState([])
+  const [urlData, setUrlData] = useState([])
 
   return (
     <BlurContainer>
@@ -65,7 +65,7 @@ export default function SaveResultForm({
 
   function onImageSave(response) {
     const url = { url: response.data.url }
-    setImageURLs([...imageURLs, url])
+    setUrlData([...urlData, url])
     setIsUpLoading(false)
   }
 
@@ -77,7 +77,7 @@ export default function SaveResultForm({
       date: dateOnSave,
       costs: formElement.endresult.value,
       keynote: formElement.keynote.value,
-      urls: imageURLs,
+      urls: urlData,
     }
     onSaveCosts(data)
   }
