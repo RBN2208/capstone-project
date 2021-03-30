@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro'
+import PropTypes from 'prop-types'
 
 export default function Searchbar({ searchInput, onTypeSearch }) {
   return (
@@ -11,7 +12,10 @@ export default function Searchbar({ searchInput, onTypeSearch }) {
     />
   )
 }
-
+Searchbar.propTypes = {
+  searchInput: PropTypes.string,
+  onTypeSearch: PropTypes.func.isRequired,
+}
 const SearchInput = styled.input`
   padding: 8px 10px;
   border: 1px solid var(--color-midgrey);

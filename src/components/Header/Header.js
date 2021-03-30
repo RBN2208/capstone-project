@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro'
+import PropTypes from 'prop-types'
 
 export default function Appheader({ title }) {
   return <Header>{title}</Header>
@@ -13,3 +14,6 @@ const Header = styled.header`
   box-shadow: 0 0 10px black;
   height: 100%;
 `
+Appheader.propTypes = {
+  title: PropTypes.string,
+}

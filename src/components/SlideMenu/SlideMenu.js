@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro'
 import { NavLink } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 export default function SlideMenu({ slideMenuState, toggleSlideMenu }) {
   return (
@@ -14,6 +15,10 @@ export default function SlideMenu({ slideMenuState, toggleSlideMenu }) {
       </Nav>
     </MenuBox>
   )
+}
+SlideMenu.propTypes = {
+  slideMenuState: PropTypes.bool.isRequired,
+  toggleSlideMenu: PropTypes.func.isRequired,
 }
 
 const MenuBox = styled.div`

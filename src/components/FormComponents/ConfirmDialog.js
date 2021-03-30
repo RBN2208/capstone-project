@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro'
 import Button from '../Button/Button'
+import PropTypes from 'prop-types'
 
 export default function ConfirmDialog({
   id,
@@ -23,6 +24,14 @@ export default function ConfirmDialog({
     event.stopPropagation()
     state(false)
   }
+}
+
+ConfirmDialog.propTypes = {
+  id: PropTypes.string.isRequired,
+  top: PropTypes.string.isRequired,
+  right: PropTypes.string.isRequired,
+  toggle: PropTypes.func.isRequired,
+  onDeleteEntry: PropTypes.func.isRequired,
 }
 
 const ConfirmBox = styled.section`

@@ -1,5 +1,6 @@
 import styled, { keyframes, css } from 'styled-components/macro'
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 import sendImageData from '../../services/sendImageData'
 import Icon from 'supercons'
 
@@ -77,6 +78,12 @@ export default function SaveResultForm({ finalCosts, onDiscardSave, onSave }) {
     }
     onSave(data)
   }
+}
+
+SaveResultForm.propTypes = {
+  finalCosts: PropTypes.number.isRequired,
+  onSave: PropTypes.func.isRequired,
+  onDiscardSave: PropTypes.func.isRequired,
 }
 
 const BlurContainer = styled.div`

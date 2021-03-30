@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro'
 import Icon from 'supercons'
 import useToggle from '../../hooks/useToggle'
+import PropTypes from 'prop-types'
 
 import ConfirmDialog from '../FormComponents/ConfirmDialog'
 import HistoryImages from './HistoryImages'
@@ -67,6 +68,16 @@ export default function HistoryEntry({
       </EntryWrapper>
     </>
   )
+}
+
+HistoryEntry.propTypes = {
+  id: PropTypes.string,
+  date: PropTypes.string,
+  costs: PropTypes.string,
+  keynote: PropTypes.string,
+  urls: PropTypes.array,
+  usedServices: PropTypes.array,
+  onDeleteHistoryEntry: PropTypes.func,
 }
 
 const EntryWrapper = styled.section`

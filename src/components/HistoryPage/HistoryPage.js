@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro'
+import PropTypes from 'prop-types'
 import Header from '../Header/Header'
 import MenuButton from '../MenuButton/MenuButton'
 import HistoryEntry from './HistoryEntry'
@@ -32,6 +33,13 @@ export default function HistoryPage({
       </Content>
     </>
   )
+}
+
+HistoryPage.propTypes = {
+  closeSlideMenu: PropTypes.func,
+  toggleSlideMenu: PropTypes.func,
+  lastCalculations: PropTypes.array,
+  onDeleteHistoryEntry: PropTypes.func,
 }
 
 const Content = styled.main`
