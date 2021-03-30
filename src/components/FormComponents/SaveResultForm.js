@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components/macro'
+import styled, { keyframes, css } from 'styled-components/macro'
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 import sendImageData from '../../services/sendImageData'
@@ -132,11 +132,6 @@ const Keynotes = styled.label`
   margin-bottom: 10px;
 `
 
-const loadingSpinner = keyframes`
-  0% { transform: rotate(0deg)}
-  100% { transform: rotate(360deg)}
-`
-
 const LoadingBox = styled.div`
   position: relative;
   width: 75%;
@@ -148,6 +143,11 @@ const UploadIcon = styled(Icon)`
   top: 17%;
   left: 39.5%;
   pointer-events: none;
+`
+
+const loadingSpinner = keyframes`
+  0% { transform: rotate(0deg)}
+  100% {transform: rotate(360deg) }
 `
 
 const Upload = styled.label`
@@ -162,10 +162,11 @@ const Upload = styled.label`
     props.uploading ? '5px solid var(--color-green)' : '5px solid transparent'};
   border-top: ${props =>
     props.uploading ? '5px solid var(--color-dark)' : '5px solid transparent'};
-  animation-name: ${loadingSpinner};
-  animation-duration: ${props => (props.uploading ? '0.5s' : '')};
-  animation-iteration-count: ${props => (props.uploading ? 'infinite' : '')};
-  animation-timing-function: ${props => (props.uploading ? 'linear' : '')};
+  animation: ${props =>
+    props.uploading &&
+    css`
+      ${loadingSpinner} 0.5s infinite linear
+    `};
 `
 
 const Input = styled.input`
