@@ -3,8 +3,10 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 import requestImageUrl from '../../services/requestImageUrl'
 import Icon from 'supercons'
+import { sliceDelete } from '../../services/deleteEntry'
 
 import Button from '../Button/Button'
+import Preview from '../ImagePreview/Preview'
 
 export default function SaveResultForm({ finalCosts, onDiscardSave, onSave }) {
   const [isUpLoading, setIsUpLoading] = useState(false)
@@ -47,7 +49,11 @@ export default function SaveResultForm({ finalCosts, onDiscardSave, onSave }) {
             viewBox="1.5 1.5 30 30"
           />
         </LoadingBox>
-
+        <PreviewBox>
+          {urlData.map(({ url }, index) => (
+            <Preview index={index} url={url} onDeleteImage={deleteImage} />
+          ))}
+        </PreviewBox>
         <SafeButton aria-label="savebutton" data-testid="save-result">
           Speichern
         </SafeButton>
@@ -81,6 +87,10 @@ export default function SaveResultForm({ finalCosts, onDiscardSave, onSave }) {
     }
     onSave(data)
   }
+
+  function deleteImage(index) {
+    sliceDelete(urlData, setUrlData, index)
+  }
 }
 
 SaveResultForm.propTypes = {
@@ -88,6 +98,15 @@ SaveResultForm.propTypes = {
   onSave: PropTypes.func.isRequired,
   onDiscardSave: PropTypes.func.isRequired,
 }
+
+const PreviewBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  img {
+    margin: 5px;
+  }
+`
 
 const BlurContainer = styled.div`
   display: grid;
