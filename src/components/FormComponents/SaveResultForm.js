@@ -1,5 +1,6 @@
 import styled, { keyframes } from 'styled-components/macro'
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 import sendImageData from '../../services/sendImageData'
 import Icon from 'supercons'
 
@@ -79,6 +80,12 @@ export default function SaveResultForm({ finalCosts, onDiscardSave, onSave }) {
   }
 }
 
+SaveResultForm.propTypes = {
+  finalCosts: PropTypes.number.isRequired,
+  onSave: PropTypes.func.isRequired,
+  onDiscardSave: PropTypes.func.isRequired,
+}
+
 const BlurContainer = styled.div`
   display: grid;
   place-content: center;
@@ -126,12 +133,8 @@ const Keynotes = styled.label`
 `
 
 const loadingSpinner = keyframes`
-  from {
-    transform: rotate(0deg)
-    }
-  to {
-    transform: rotate(360deg)
-    }
+  0% { transform: rotate(0deg)}
+  100% { transform: rotate(360deg)}
 `
 
 const LoadingBox = styled.div`

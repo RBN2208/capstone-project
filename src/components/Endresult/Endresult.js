@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro'
 import Icon from 'supercons'
+import PropTypes from 'prop-types'
 
 export default function ResultField({ finalCosts, onSaveResult }) {
   return (
@@ -15,6 +16,11 @@ export default function ResultField({ finalCosts, onSaveResult }) {
       />
     </Resultbox>
   )
+}
+
+ResultField.propTypes = {
+  finalCosts: PropTypes.number.isRequired,
+  onSaveResult: PropTypes.func.isRequired,
 }
 
 const Resultbox = styled.section`

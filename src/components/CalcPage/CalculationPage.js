@@ -2,6 +2,7 @@ import styled from 'styled-components/macro'
 import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import Icon from 'supercons'
+import PropTypes from 'prop-types'
 
 import ServiceCard from '../ServiceCard/ServiceCard'
 import Header from '../Header/Header'
@@ -86,6 +87,19 @@ export default function Calculation({
     setServices([newService, ...services])
     setOpenNewServiceForm('')
   }
+}
+
+Calculation.propTypes = {
+  services: PropTypes.array.isRequired,
+  setServices: PropTypes.func.isRequired,
+  finalCosts: PropTypes.number,
+  onPlus: PropTypes.func,
+  onMinus: PropTypes.func,
+  onAddingNewCosts: PropTypes.func,
+  onSaveResult: PropTypes.func,
+  onDeleteEntry: PropTypes.func,
+  closeSlideMenu: PropTypes.func,
+  toggleSlideMenu: PropTypes.func,
 }
 
 const Content = styled.main`

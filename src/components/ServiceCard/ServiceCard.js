@@ -1,5 +1,6 @@
-import { useState } from 'react'
 import styled from 'styled-components/macro'
+import { useState } from 'react'
+import PropTypes from 'prop-types'
 import Icon from 'supercons'
 import useToggle from '../../hooks/useToggle'
 
@@ -72,6 +73,18 @@ export default function ServiceCard({
     event.stopPropagation()
     onMinus(currentUsedCosts, hours, index)
   }
+}
+
+ServiceCard.propTypes = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+  costs: PropTypes.number,
+  hours: PropTypes.number,
+  notes: PropTypes.string,
+  onPlus: PropTypes.func,
+  onMinus: PropTypes.func,
+  onAddingNewCosts: PropTypes.func,
+  onDeleteEntry: PropTypes.func,
 }
 
 const CardContainer = styled.section`
