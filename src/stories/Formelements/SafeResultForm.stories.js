@@ -11,6 +11,7 @@ export default {
 const events = actions({
   onSave: 'Handle data submit on save',
   onDiscardSave: 'closes this form without action',
+  upload: 'opens images',
 })
 
 const Template = args => <SaveResultForm {...events} {...args} />
@@ -18,4 +19,5 @@ const Template = args => <SaveResultForm {...events} {...args} />
 export const Primary = Template.bind({})
 Primary.args = {
   keynote: 'Herr Müller',
+  finalCosts: 43,
 }
