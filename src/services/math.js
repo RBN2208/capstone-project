@@ -2,7 +2,7 @@ export function add(setState, value, newvalue) {
   setState(value + newvalue)
 }
 
-export function substrate(setState, value, newvalue) {
+export function subtract(setState, value, newvalue) {
   setState(value - newvalue)
 }
 

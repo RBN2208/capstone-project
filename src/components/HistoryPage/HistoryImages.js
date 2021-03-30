@@ -5,7 +5,7 @@ export default function HistoryImages({ urls }) {
   const NO_IMAGES = urls.length === 0 ? true : false
   return (
     <>
-      <ContentWrapper>
+      <ContentWrapper data-testid="saved-images">
         <ImageWrapper>
           {urls.map(({ url }, index) => (
             <Images key={index} src={url} alt="" width="300" />

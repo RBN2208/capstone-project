@@ -6,6 +6,8 @@ export default function MenuButton({ toggleSlideMenu }) {
     <Container>
       <Icon
         arial-label="button for slide menu"
+        data-testid="slidemenubutton"
+        name="slidemenubutton"
         role="button"
         glyph="menu"
         viewBox="8 7 16 16"

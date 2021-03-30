@@ -37,11 +37,16 @@ export default function ServiceCard({
           <ButtonMinus
             disabled={hours === 0}
             aria-label="button-minus"
+            data-testid="minus-button"
             onClick={handleClickMinus}
           >
             -
           </ButtonMinus>
-          <ButtonPlus aria-label="button-plus" onClick={handleClickPlus}>
+          <ButtonPlus
+            aria-label="button-plus"
+            data-testid="add-button"
+            onClick={handleClickPlus}
+          >
             +
           </ButtonPlus>
         </ButtonBox>

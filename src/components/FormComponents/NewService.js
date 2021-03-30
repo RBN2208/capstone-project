@@ -19,6 +19,7 @@ export default function NewService({ onAddNewService, onAbort }) {
             required
             name="service"
             maxLength="20"
+            data-testid="new-service-name"
             aria-label="service name"
             placeholder="z.B. Verspachteln"
             onChange={event => setNameLength(event.target.value.length)}
@@ -39,7 +40,11 @@ export default function NewService({ onAddNewService, onAbort }) {
             placeholder="Für Notizen zur Dienstleistung."
           ></ServiceNote>
         </label>
-        <NewServiceButton aria-label="add new service button">
+
+        <NewServiceButton
+          data-testid="add-new-service"
+          aria-label="add new service button"
+        >
           Hinzufügen
         </NewServiceButton>
         <ButtonBack aria-label="abort button" onClick={() => onAbort('')}>

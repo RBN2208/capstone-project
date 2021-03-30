@@ -23,12 +23,13 @@ export default function HistoryEntry({
   return (
     <>
       <EntryWrapper>
-        <TopWrapper>
+        <TopWrapper data-testid="keynote">
           <h3>{keynote}</h3>
 
           <ButtonWrapper>
             <IconBox
               glyph="photo"
+              data-testid="image-details"
               width={'30'}
               height={'30'}
               viewBox="2 2 27 27"
@@ -36,6 +37,7 @@ export default function HistoryEntry({
             />
             <IconBox
               glyph="more-fill"
+              data-testid="service-details"
               width={'30'}
               height={'30'}
               viewBox="2 2 28 28"
@@ -43,6 +45,7 @@ export default function HistoryEntry({
             />
             <DeleteIcon
               glyph="delete"
+              data-testid="entry-delete"
               width={'30'}
               height={'30'}
               viewBox="4 4 25 25"
@@ -50,7 +53,7 @@ export default function HistoryEntry({
             />
           </ButtonWrapper>
         </TopWrapper>
-        <BottomWrapper>
+        <BottomWrapper data-testid="info-box">
           <p>Kalkulation vom {date} :</p>
           <CostValue>{costs}</CostValue>
         </BottomWrapper>

@@ -8,7 +8,7 @@ import useToggle from '../../hooks/useToggle'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import {
   add,
-  substrate,
+  subtract,
   updatePlusTime,
   updateMinusTime,
   updateTimeValue,
@@ -142,7 +142,7 @@ export default function App() {
   }
 
   function handleMinus(costs, hours, index) {
-    substrate(setFinalCosts, finalCosts, costs)
+    subtract(setFinalCosts, finalCosts, costs)
     updateMinusTime(services, setServices, hours, index)
   }
 

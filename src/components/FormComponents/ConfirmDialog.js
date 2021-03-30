@@ -15,8 +15,18 @@ export default function ConfirmDialog({
     <ConfirmBox right={right} top={top}>
       <p>Eintrag löschen?</p>
       <ButtonWrapper>
-        <ButtonGreen onClick={() => onDeleteEntry(id)}>Ja</ButtonGreen>
-        <Button onClick={event => handleClick(event)}>Nein</Button>
+        <ButtonGreen
+          data-testid="delete-entry"
+          onClick={() => onDeleteEntry(id)}
+        >
+          Ja
+        </ButtonGreen>
+        <Button
+          data-testid="abort-delete"
+          onClick={event => handleClick(event)}
+        >
+          Nein
+        </Button>
       </ButtonWrapper>
     </ConfirmBox>
   )
