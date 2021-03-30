@@ -1,7 +1,7 @@
 import styled, { keyframes, css } from 'styled-components/macro'
 import { useState } from 'react'
 import PropTypes from 'prop-types'
-import sendImageData from '../../services/sendImageData'
+import requestImageUrl from '../../services/requestImageUrl'
 import Icon from 'supercons'
 
 import Button from '../Button/Button'
@@ -26,6 +26,7 @@ export default function SaveResultForm({ finalCosts, onDiscardSave, onSave }) {
             name="keynote"
             placeholder="z.B. Herr Müller"
             aria-label="keynote for saved calculation"
+            data-testid="saveform-keynote"
           />
         </Keynotes>
 
@@ -47,7 +48,9 @@ export default function SaveResultForm({ finalCosts, onDiscardSave, onSave }) {
           />
         </LoadingBox>
 
-        <SafeButton aria-label="safebutton">Speichern</SafeButton>
+        <SafeButton aria-label="savebutton" data-testid="save-result">
+          Speichern
+        </SafeButton>
         <AbortButton aria-label="abortbutton" onClick={() => onDiscardSave('')}>
           Zurück
         </AbortButton>
@@ -56,7 +59,7 @@ export default function SaveResultForm({ finalCosts, onDiscardSave, onSave }) {
   )
 
   function upload(event) {
-    sendImageData(onImageSave, event)
+    requestImageUrl(onImageSave, event)
     setIsUpLoading(true)
   }
 

@@ -61,6 +61,7 @@ export default function Calculation({
       <ButtonBox>
         <NewServiceButton
           aria-label="add a new service"
+          data-testid="new-service"
           onClick={() => setOpenNewServiceForm('newService')}
         >
           <Icon glyph="plus" width={'40'} height={'40'} viewBox="2 2 28 28" />

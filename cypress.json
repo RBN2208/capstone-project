@@ -4,5 +4,6 @@
   "video": false,
   "fixturesFolder": "tests/e2e/fixtures",
   "viewportWidth": 375,
-  "viewportHeight": 667
+  "viewportHeight": 667,
+  "experimentalStudio": true
 }

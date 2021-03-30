@@ -5,7 +5,7 @@ import ListOfUsedServics from './ListOfUsedServics'
 export default function HistoryDetails({ usedServices }) {
   return (
     <>
-      <Wrapper>
+      <Wrapper data-testid="used-services">
         {usedServices.map(({ name, hours, costs }, index) => (
           <ListOfUsedServics
             key={index}

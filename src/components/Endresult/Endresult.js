@@ -8,6 +8,7 @@ export default function ResultField({ finalCosts, onSaveResult }) {
       <span>Endpreis: {finalCosts} €</span>
       <Checkmark
         aria-label="save result"
+        data-testid="save-result-button"
         glyph="checkmark"
         width={'40'}
         height={'40'}
