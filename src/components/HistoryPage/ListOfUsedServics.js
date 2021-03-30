@@ -6,8 +6,7 @@ export default function ListOfUsedServics({ name, hours, costs }) {
       <EntryWrapper>
         <span>{name}</span>{' '}
         <DetailsInfoBox>
-          <span>{hours}/h</span>
-          <span>{costs}€</span>
+          <span>{hours}/h</span>á<span>{costs}€</span>
         </DetailsInfoBox>
       </EntryWrapper>
     </>

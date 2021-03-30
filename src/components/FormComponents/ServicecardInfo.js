@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro'
 import Icon from 'supercons'
+import PropTypes from 'prop-types'
 import useToggle from '../../hooks/useToggle'
 
 import Button from '../Button/Button'
@@ -68,6 +69,17 @@ export default function ServicecardInfo({
     setUsedCosts(newCostsPerHour)
     onAddingNewCosts(index, newCostsPerHour, currentCostsPerHour, hours)
   }
+}
+
+ServicecardInfo.propTypes = {
+  id: PropTypes.string,
+  index: PropTypes.number.isRequired,
+  hours: PropTypes.number,
+  notes: PropTypes.string,
+  setUsedCosts: PropTypes.func.isRequired,
+  currentCostsPerHour: PropTypes.number.isRequired,
+  onAddingNewCosts: PropTypes.func,
+  onDeleteEntry: PropTypes.func,
 }
 
 const InfoWrapper = styled.section`

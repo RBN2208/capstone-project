@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro'
+import PropTypes from 'prop-types'
 
 export default function HistoryImages({ urls }) {
   const NO_IMAGES = urls.length === 0 ? true : false
@@ -17,6 +18,11 @@ export default function HistoryImages({ urls }) {
     </>
   )
 }
+
+HistoryImages.propTypes = {
+  urls: PropTypes.array,
+}
+
 const ContentWrapper = styled.section`
   width: 100%;
   padding: 10px;

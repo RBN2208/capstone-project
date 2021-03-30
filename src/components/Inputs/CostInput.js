@@ -1,6 +1,7 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
-export default function Costinput({ displayedCosts, required }) {
+export default function Costinput({ defaultValue, displayedCosts, required }) {
   return (
     <CostInput
       required={required}
@@ -9,10 +10,16 @@ export default function Costinput({ displayedCosts, required }) {
       type="number"
       step="0.05"
       data-testid="costInput"
-      placeholder={displayedCosts + '€'}
+      placeholder={defaultValue ?? displayedCosts + '€'}
       onClick={event => event.stopPropagation()}
     />
   )
+}
+
+Costinput.propTypes = {
+  defaultValue: PropTypes.string,
+  displayedCosts: PropTypes.number,
+  required: PropTypes.bool,
 }
 
 const CostInput = styled.input`

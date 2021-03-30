@@ -1,5 +1,5 @@
 import styled from 'styled-components/macro'
-
+import PropTypes from 'prop-types'
 import ListOfUsedServics from './ListOfUsedServics'
 
 export default function HistoryDetails({ usedServices }) {
@@ -18,6 +18,11 @@ export default function HistoryDetails({ usedServices }) {
     </>
   )
 }
+
+HistoryDetails.propTypes = {
+  usedServices: PropTypes.array,
+}
+
 const Wrapper = styled.section`
   display: grid;
   justify-items: flex-start;
