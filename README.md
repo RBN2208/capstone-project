@@ -14,6 +14,7 @@ This project was bootstrapped with Create React App. Further tooling:
     Storybook
     Jest and testing-libary
     Axios
+    Cypress
 
 ## Running the project
 
