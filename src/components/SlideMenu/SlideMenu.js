@@ -6,10 +6,10 @@ export default function SlideMenu({ slideMenuState, toggleSlideMenu }) {
     <MenuBox position={slideMenuState}>
       <Nav data-testid="slidenavigation">
         <NavLinkStyled to="/" onClick={toggleSlideMenu}>
-          Home
+          Kalkulation
         </NavLinkStyled>
         <NavLinkStyled to="/history" onClick={toggleSlideMenu}>
-          History
+          Historie
         </NavLinkStyled>
       </Nav>
     </MenuBox>
@@ -19,10 +19,10 @@ export default function SlideMenu({ slideMenuState, toggleSlideMenu }) {
 const MenuBox = styled.div`
   position: fixed;
   top: 0;
-  left: ${props => (props.position ? '0' : '-135px')};
+  left: ${props => (props.position ? '0' : '-165px')};
   background-color: var(--color-dark);
   color: var(--color-light);
-  width: 135px;
+  width: 165px;
   height: 100vh;
   font-size: 1.5rem;
   padding: 50px 20px;

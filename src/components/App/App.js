@@ -160,6 +160,6 @@ const AppLayout = styled.div`
   grid-template-rows: 50px auto 50px;
   height: 100vh;
   position: relative;
-  margin-left: ${props => (props.openMenu ? '135px' : '0px')};
+  margin-left: ${props => (props.openMenu ? '165px' : '0px')};
   transition: all 0.5s;
 `
