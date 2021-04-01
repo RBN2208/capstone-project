@@ -8,6 +8,11 @@ export default {
   component: SaveResultForm,
 }
 
+const urlData = [
+  { url: 'https://source.unsplash.com/random/200x500' },
+  { url: 'https://source.unsplash.com/random/200x500' },
+]
+
 const events = actions({
   onSave: 'Handle data submit on save',
   onDiscardSave: 'closes this form without action',
@@ -20,4 +25,5 @@ export const Primary = Template.bind({})
 Primary.args = {
   keynote: 'Herr Müller',
   finalCosts: 43,
+  urlData: urlData,
 }

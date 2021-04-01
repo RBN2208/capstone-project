@@ -51,7 +51,12 @@ export default function SaveResultForm({ finalCosts, onDiscardSave, onSave }) {
         </LoadingBox>
         <PreviewBox>
           {urlData.map(({ url }, index) => (
-            <Preview index={index} url={url} onDeleteImage={deleteImage} />
+            <Preview
+              key={url}
+              index={index}
+              url={url}
+              onDeleteImage={deleteImage}
+            />
           ))}
         </PreviewBox>
         <SafeButton aria-label="savebutton" data-testid="save-result">
@@ -97,6 +102,7 @@ SaveResultForm.propTypes = {
   finalCosts: PropTypes.number.isRequired,
   onSave: PropTypes.func.isRequired,
   onDiscardSave: PropTypes.func.isRequired,
+  urlData: PropTypes.array,
 }
 
 const PreviewBox = styled.div`
