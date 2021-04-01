@@ -19,6 +19,7 @@ body {
   font-size: 112.5%;
   margin: 0 auto;
   overflow: hidden;
+  scrollbar-width: none;
 }
 input,
 button,textarea {
