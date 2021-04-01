@@ -109,6 +109,7 @@ const Content = styled.main`
   grid-template-rows: 40px auto;
   padding: 10px;
   overflow-y: scroll;
+  scrollbar-width: none;
 `
 
 const NewServiceButton = styled(Button)`
@@ -133,6 +134,7 @@ const ServiceCardWrapper = styled.section`
   padding: 5px;
   overflow-y: scroll;
   width: 100%;
+  scrollbar-width: none;
   &:last-child::after {
     content: '';
     height: 10px;
