@@ -14,6 +14,10 @@ export default createGlobalStyle`
 * {
   box-sizing: border-box;
 }
+html{
+  overflow: hidden;
+  scrollbar-width: none;
+}
 body {
   font-family: sans-serif;
   font-size: 112.5%;
