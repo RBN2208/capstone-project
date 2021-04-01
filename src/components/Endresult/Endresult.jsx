@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 export default function ResultField({ finalCosts, onSaveResult }) {
   return (
-    <Resultbox>
+    <Resultbox data-testid="resultBox">
       <span>Endpreis: {finalCosts} €</span>
       <Checkmark
         aria-label="save result"
@@ -13,6 +13,7 @@ export default function ResultField({ finalCosts, onSaveResult }) {
         width={'40'}
         height={'40'}
         viewBox="5 4 24 24"
+        role="button"
         onClick={() => onSaveResult('openSaveResult')}
       />
     </Resultbox>

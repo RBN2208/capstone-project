@@ -46,6 +46,7 @@ const Content = styled.main`
   display: grid;
   gap: 10px;
   grid-auto-rows: min-content;
+  scrollbar-width: none;
   padding: 15px;
   margin: 0 auto;
   overflow-y: scroll;

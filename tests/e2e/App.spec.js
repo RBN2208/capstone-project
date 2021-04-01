@@ -15,38 +15,23 @@ describe('<App /> component', () => {
     cy.contains('a', 'Kalkulation').click()
   })
   it('has a searchbar, wich searchs for services and displays them', () => {
-    cy.get('.Searchbar__SearchInput-sc-1jjr24z-0').type('Bohren')
-    cy.get('.CalculationPage__ServiceCardWrapper-tnylrq-3').contains('Bohren')
-    cy.get('.CalculationPage__ServiceCardWrapper-tnylrq-3').not('Verspachteln')
-    cy.get('.CalculationPage__ServiceCardWrapper-tnylrq-3').not(
-      'Laminat verlegen'
-    )
+    cy.get('[data-testid=searchbar]').type('Bohren')
+    cy.get('[data-testid=serviceCardWrapper]').contains('Bohren')
+    cy.get('[data-testid=serviceCardWrapper]').not('Verspachteln')
+    cy.get('[data-testid=serviceCardWrapper]').not('Laminat verlegen')
   })
   it('adds and substrates the values of each card to an endresult and displays it', () => {
     cy.get(
-      ':nth-child(1) > .ServiceCard__Servicebox-gw7fsq-2 > .ServiceCard__ButtonBox-gw7fsq-3 > [data-testid=add-button]'
-    ).click()
-    cy.get(
-      ':nth-child(2) > .ServiceCard__Servicebox-gw7fsq-2 > .ServiceCard__ButtonBox-gw7fsq-3 > [data-testid=add-button]'
-    ).click()
-    cy.get(
-      ':nth-child(3) > .ServiceCard__Servicebox-gw7fsq-2 > .ServiceCard__ButtonBox-gw7fsq-3 > [data-testid=add-button]'
-    ).click()
-    cy.get('.Endresult__Resultbox-sc-1z0tnpv-0 > span').contains(
-      'Endpreis: 126 €'
+      '[data-testid=cardcontainer] > :nth-child(1) > [data-testid=buttonBox] > [data-testid=add-button]:first'
     )
+      .click()
+      .click()
+      .click()
+    cy.get('[data-testid=resultBox] > span').contains('Endpreis: 72 €')
     cy.get(
-      ':nth-child(3) > .ServiceCard__Servicebox-gw7fsq-2 > .ServiceCard__ButtonBox-gw7fsq-3 > [data-testid=add-button]'
+      '[data-testid=cardcontainer] > :nth-child(1) > [data-testid=buttonBox] > [data-testid=add-button]:first'
     ).click()
-    cy.get('.Endresult__Resultbox-sc-1z0tnpv-0 > span').contains(
-      'Endpreis: 190 €'
-    )
-    cy.get(
-      ':nth-child(3) > .ServiceCard__Servicebox-gw7fsq-2 > .ServiceCard__ButtonBox-gw7fsq-3 > [data-testid=minus-button]'
-    ).click()
-    cy.get('.Endresult__Resultbox-sc-1z0tnpv-0 > span').contains(
-      'Endpreis: 126 €'
-    )
+    cy.get('[data-testid=resultBox] > span').contains('Endpreis: 96 €')
   })
   it('adds a new service, adds its value and saves it to the history', () => {
     cy.get('[data-testid="new-service"]').click()
@@ -56,11 +41,9 @@ describe('<App /> component', () => {
       'Hier steht nur ein Text um die App mit Cypress zu testen'
     )
     cy.get('[data-testid=add-new-service]').click()
+    cy.get('[data-testid=serviceCardWrapper] > :nth-child(1)').click()
     cy.get(
-      '.CalculationPage__ServiceCardWrapper-tnylrq-3 > :nth-child(1)'
-    ).click()
-    cy.get(
-      ':nth-child(1) > .ServiceCard__Servicebox-gw7fsq-2 > .ServiceCard__ButtonBox-gw7fsq-3 > [data-testid=add-button]'
+      '[data-testid=cardcontainer] > :nth-child(1) > [data-testid=buttonBox] > [data-testid=add-button]:first'
     ).click()
     cy.get('[data-testid="save-result-button"]').click()
     cy.get('[data-testid=saveform-keynote]').type('Mister Cypress')
@@ -88,8 +71,6 @@ describe('<App /> component', () => {
       'All tests are working, my app is working!'
     )
     cy.get('[data-testid=add-new-service]').click()
-    cy.get(
-      '.CalculationPage__ServiceCardWrapper-tnylrq-3 > :nth-child(1)'
-    ).click()
+    cy.get('[data-testid=serviceCardWrapper] > :nth-child(1)').click()
   })
 })

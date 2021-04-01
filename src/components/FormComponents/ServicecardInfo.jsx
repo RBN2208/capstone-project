@@ -32,13 +32,16 @@ export default function ServicecardInfo({
             Stundensatz:
             <CostInput required displayedCosts={currentCostsPerHour} />
           </label>
-          <Button onClick={handlePropagation}>Set</Button>
+          <Button data-testid="setNewCosts" onClick={handlePropagation}>
+            Set
+          </Button>
         </NewCostsBox>
       </ServiceInfoForm>
       <NoteWrapper>{notes}</NoteWrapper>
       <IconBox>
         <DeleteIcon>
           <Icon
+            data-testid="deleteEntryButton"
             glyph="delete"
             width={'25'}
             height={'25'}

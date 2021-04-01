@@ -28,7 +28,7 @@ export default function NewService({ onAddNewService, onAbort }) {
         </label>
         <label>
           Stundensatz:
-          <Costinput defaultValue="z.B. 1€/1.50€, default: 50" />
+          <Costinput defaultValue="z.B. 1€/1.50€, default: 50€" />
         </label>
         <label>
           Notiz(Optional):
