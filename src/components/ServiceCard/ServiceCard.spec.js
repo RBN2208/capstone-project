@@ -24,8 +24,8 @@ describe('ServiceCard', () => {
     )
     userEvent.click(screen.getByTestId('cardcontainer'))
     expect(screen.getByText('Hey note 1!')).toBeInTheDocument()
-    it.todo('search for more!')
   })
+  it.todo('search for more!')
   it('contains two buttons', () => {
     render(
       <ServiceCard name={services[1].name} costs={500} services={services} />

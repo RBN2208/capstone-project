@@ -16,11 +16,10 @@ export default function HistoryPage({
       <Header title="Letzte Kalkulationen" />
       <Content onClick={() => closeSlideMenu()}>
         {lastCalculations.map(
-          ({ id, date, costs, keynote, urls, usedServices }, index) => (
+          ({ id, date, costs, keynote, urls, usedServices }) => (
             <HistoryEntry
               key={id}
               id={id}
-              index={index}
               date={date}
               costs={costs}
               keynote={keynote}

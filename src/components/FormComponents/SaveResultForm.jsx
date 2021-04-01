@@ -99,9 +99,9 @@ export default function SaveResultForm({ finalCosts, onDiscardSave, onSave }) {
 }
 
 SaveResultForm.propTypes = {
-  finalCosts: PropTypes.number.isRequired,
-  onSave: PropTypes.func.isRequired,
-  onDiscardSave: PropTypes.func.isRequired,
+  finalCosts: PropTypes.number,
+  onSave: PropTypes.func,
+  onDiscardSave: PropTypes.func,
   urlData: PropTypes.array,
 }
 

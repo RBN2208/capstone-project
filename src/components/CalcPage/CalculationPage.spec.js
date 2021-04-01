@@ -3,9 +3,9 @@ import CalculationPage from './CalculationPage'
 import '@testing-library/jest-dom'
 
 const services = [
-  { id: 1, name: 'one', costs: 50 },
-  { id: 2, name: 'two', costs: 150 },
-  { id: 3, name: 'three', costs: 250 },
+  { id: '1', name: 'one', costs: 50 },
+  { id: '2', name: 'two', costs: 150 },
+  { id: '3', name: 'three', costs: 250 },
 ]
 
 describe('CalculationPage', () => {

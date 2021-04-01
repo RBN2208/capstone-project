@@ -2,7 +2,6 @@ import { render, screen } from '@testing-library/react'
 import SlideMenu from './SlideMenu'
 import { MemoryRouter } from 'react-router'
 import '@testing-library/jest-dom'
-import userEvent from '@testing-library/user-event'
 
 describe('ServiceCard', () => {
   it('renders a slide menu with two links', () => {
@@ -11,8 +10,8 @@ describe('ServiceCard', () => {
         <SlideMenu />
       </MemoryRouter>
     )
-    expect(screen.getByText('Home')).toBeInTheDocument()
-    expect(screen.getByText('History')).toBeInTheDocument()
+    expect(screen.getByText('Kalkulation')).toBeInTheDocument()
+    expect(screen.getByText('Historie')).toBeInTheDocument()
   })
   it('links to different pages', () => {
     render(
@@ -20,8 +19,11 @@ describe('ServiceCard', () => {
         <SlideMenu />
       </MemoryRouter>
     )
-    expect(screen.getByText('Home').closest('a')).toHaveAttribute('href', '/')
-    expect(screen.getByText('History').closest('a')).toHaveAttribute(
+    expect(screen.getByText('Kalkulation').closest('a')).toHaveAttribute(
+      'href',
+      '/'
+    )
+    expect(screen.getByText('Historie').closest('a')).toHaveAttribute(
       'href',
       '/history'
     )

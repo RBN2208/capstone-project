@@ -37,11 +37,11 @@ export default function ConfirmDialog({
 }
 
 ConfirmDialog.propTypes = {
-  id: PropTypes.string.isRequired,
-  top: PropTypes.string.isRequired,
-  right: PropTypes.string.isRequired,
-  toggle: PropTypes.func.isRequired,
-  onDeleteEntry: PropTypes.func.isRequired,
+  id: PropTypes.string,
+  top: PropTypes.string,
+  right: PropTypes.string,
+  toggle: PropTypes.func,
+  onDeleteEntry: PropTypes.func,
 }
 
 const ConfirmBox = styled.section`

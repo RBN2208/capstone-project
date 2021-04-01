@@ -19,7 +19,7 @@ describe('SaveResultForm', () => {
         setOpenSafeResult={setOpenSafeResult}
       />
     )
-    userEvent.click(screen.getByLabelText('safebutton'))
+    userEvent.click(screen.getByLabelText('savebutton'))
     expect(onSaveCosts).toHaveBeenCalledTimes(1)
   })
   it('has a button to get back', () => {

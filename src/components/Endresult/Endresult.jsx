@@ -21,8 +21,8 @@ export default function ResultField({ finalCosts, onSaveResult }) {
 }
 
 ResultField.propTypes = {
-  finalCosts: PropTypes.number.isRequired,
-  onSaveResult: PropTypes.func.isRequired,
+  finalCosts: PropTypes.number,
+  onSaveResult: PropTypes.func,
 }
 
 const Resultbox = styled.section`
