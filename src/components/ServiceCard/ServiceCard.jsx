@@ -33,7 +33,7 @@ export default function ServiceCard({
           <Icon glyph="down-caret" />
           {name}
         </TextBox>
-        <ButtonBox>
+        <ButtonBox data-testid="buttonBox">
           <ButtonMinus
             disabled={hours === 0}
             aria-label="button-minus"
@@ -53,7 +53,7 @@ export default function ServiceCard({
       </Servicebox>
 
       {detailsVisible && (
-        <CardInfo>
+        <CardInfo data-testid="cardInfo">
           <ServicecardInfo
             id={id}
             index={index}

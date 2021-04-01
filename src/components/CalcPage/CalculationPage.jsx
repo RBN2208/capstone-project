@@ -35,7 +35,7 @@ export default function Calculation({
         <SearchbarWrapper>
           <Searchbar searchInput={searchInput} onTypeSearch={setSearchInput} />
         </SearchbarWrapper>
-        <ServiceCardWrapper>
+        <ServiceCardWrapper data-testid="serviceCardWrapper">
           {services
             .filter(service =>
               service.name.toLowerCase().includes(searchInput.toLowerCase())
@@ -61,6 +61,7 @@ export default function Calculation({
       <ButtonBox>
         <NewServiceButton
           aria-label="add a new service"
+          role="button"
           data-testid="new-service"
           onClick={() => setOpenNewServiceForm('newService')}
         >

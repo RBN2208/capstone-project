@@ -5,6 +5,7 @@ export default function Searchbar({ searchInput, onTypeSearch }) {
   return (
     <SearchInput
       role="input"
+      data-testid="searchbar"
       aria-label="searchbar"
       placeholder="Dienstleistungen..."
       value={searchInput}
