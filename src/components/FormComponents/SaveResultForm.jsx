@@ -24,6 +24,7 @@ export default function SaveResultForm({ finalCosts, onDiscardSave, onSave }) {
           Füge noch ein Stichwort hinzu!
           <input
             required
+            autoComplete="off"
             max="20"
             name="keynote"
             placeholder="z.B. Herr Müller"

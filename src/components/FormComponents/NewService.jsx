@@ -16,6 +16,7 @@ export default function NewService({ onAddNewService, onAbort }) {
         <label>
           Name der Dienstleistung:
           <input
+            autoComplete="off"
             required
             name="service"
             maxLength="20"
