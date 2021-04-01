@@ -11,11 +11,13 @@ Often it´s hard to figure out at first sight, how much a work will cost. With t
 
 This project was bootstrapped with Create React App. Further tooling:
 
+    React Router
     Styled-components
     Storybook
-    Jest and testing-libary
+    Jest and React-Testing-Library
     Axios
     Cypress
+    Javascript ES6+
 
 ## Running the project
 
