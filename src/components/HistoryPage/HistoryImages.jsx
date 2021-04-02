@@ -8,7 +8,7 @@ export default function HistoryImages({ urls }) {
       <ContentWrapper data-testid="saved-images">
         <ImageWrapper>
           {urls.map(({ url }, index) => (
-            <Images key={index} src={url} alt="" width="300" />
+            <Images key={index} src={url} alt="" width="300" height="400" />
           ))}
         </ImageWrapper>
         <ReplacedWrapper>
@@ -34,15 +34,17 @@ const ContentWrapper = styled.section`
 `
 
 const ImageWrapper = styled.div`
-  width: 300px;
+  width: 320px;
+  height: 400px;
+  display: flex;
+  overflow-x: auto;
   margin: 0 auto;
 `
 
 const Images = styled.img`
   object-fit: cover;
-  width: 100%;
-  height: auto;
   border: 2px solid white;
+  scroll-snap-align: start;
 `
 const ReplacedWrapper = styled.div`
   width: 100%;
