@@ -1,0 +1,40 @@
+{
+  "id": "1",
+  "date": "01.04.2021",
+  "costs": "418€",
+  "keynote": "John Doe",
+  "urls": [
+    {
+      "url": "https://res.cloudinary.com/du5gyoj7r/image/upload/v1617530917/capstone/photo-1526925539332-aa3b66e35444_nvxbgb.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/du5gyoj7r/image/upload/v1617530912/capstone/photo-1523800503107-5bc3ba2a6f81_njdgdm.jpg"
+    },
+    {
+      "url": "https://res.cloudinary.com/du5gyoj7r/image/upload/v1617530904/capstone/photo-1507238691740-187a5b1d37b8_ldwbk6.jpg"
+    }
+  ],
+  "usedServices": [
+    {
+      "id": "1",
+      "name": "Bohren",
+      "costs": "24",
+      "notes": "Helfertätigkeit",
+      "hours": "2"
+    },
+    {
+      "id": "2",
+      "name": "Laminat verlegen",
+      "costs": "38",
+      "notes": "Lange Bahnen, benötigt 2 Personen",
+      "hours": "3"
+    },
+    {
+      "id": "3",
+      "name": "Verspachteln",
+      "costs": "64",
+      "notes": "ca. 3m2 pro Stunde",
+      "hours": "4"
+    }
+  ]
+}
