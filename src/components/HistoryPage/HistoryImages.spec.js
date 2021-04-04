@@ -2,12 +2,11 @@ import { render, screen } from '@testing-library/react'
 import HistoryImages from './HistoryImages'
 import '@testing-library/jest-dom'
 
-const savedCosts = [
-  { id: 1, date: '01.01.2021', costs: 50 },
-  { id: 2, date: '02.02.2021', costs: 150 },
-  { id: 3, date: '03.03.2021', costs: 250 },
-]
+const urls = [{ url: 'https://source.unsplash.com/random' }]
 
-describe('HistoryEntry', () => {
-  it.todo('shows the saved and uploaded images')
+describe('HistoryImages', () => {
+  it('shows shows images from an url', () => {
+    render(<HistoryImages urls={urls} />)
+    expect(screen.getByRole('img')).toBeInTheDocument()
+  })
 })

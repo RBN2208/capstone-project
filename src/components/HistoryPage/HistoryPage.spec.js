@@ -18,5 +18,4 @@ describe('HistoryPage', () => {
     expect(screen.getByText('150')).toBeInTheDocument()
     expect(screen.getByText('250')).toBeInTheDocument()
   })
-  it.todo('calls a function on click')
 })

@@ -13,6 +13,6 @@ describe('Endresult', () => {
     render(<Endresult finalCosts={500} onSaveResult={open} />)
     userEvent.click(screen.getByLabelText('save result'))
     expect(open).toHaveBeenCalledTimes(1)
+    expect(screen.getByTestId('resultBox')).toBeVisible()
   })
-  it.todo('rerender and check if form is visible')
 })
