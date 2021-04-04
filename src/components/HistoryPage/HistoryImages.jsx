@@ -6,7 +6,7 @@ export default function HistoryImages({ urls }) {
   return (
     <>
       <ContentWrapper data-testid="saved-images">
-        <ImageWrapper>
+        <ImageWrapper empty={NO_IMAGES}>
           {urls.map(({ url }, index) => (
             <Images key={index} src={url} alt="" width="300" height="400" />
           ))}
@@ -36,7 +36,7 @@ const ContentWrapper = styled.section`
 const ImageWrapper = styled.div`
   width: 320px;
   height: 400px;
-  display: flex;
+  display: ${props => (props.empty ? 'none' : 'flex')};
   overflow-x: auto;
   margin: 0 auto;
 `

@@ -92,8 +92,8 @@ export default function Calculation({
 }
 
 Calculation.propTypes = {
-  services: PropTypes.array.isRequired,
-  setServices: PropTypes.func.isRequired,
+  services: PropTypes.array,
+  setServices: PropTypes.func,
   finalCosts: PropTypes.number,
   onPlus: PropTypes.func,
   onMinus: PropTypes.func,

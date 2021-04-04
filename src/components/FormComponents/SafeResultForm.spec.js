@@ -19,7 +19,7 @@ describe('SaveResultForm', () => {
         setOpenSafeResult={setOpenSafeResult}
       />
     )
-    userEvent.click(screen.getByLabelText('safebutton'))
+    userEvent.click(screen.getByLabelText('savebutton'))
     expect(onSaveCosts).toHaveBeenCalledTimes(1)
   })
   it('has a button to get back', () => {
@@ -38,5 +38,4 @@ describe('SaveResultForm', () => {
     userEvent.click(screen.getByLabelText('abortbutton'))
     expect(onDiscardSave).toHaveBeenCalledTimes(1)
   })
-  it.todo('has a image upload function')
 })

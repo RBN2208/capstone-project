@@ -15,7 +15,7 @@ export default function Searchbar({ searchInput, onTypeSearch }) {
 }
 Searchbar.propTypes = {
   searchInput: PropTypes.string,
-  onTypeSearch: PropTypes.func.isRequired,
+  onTypeSearch: PropTypes.func,
 }
 const SearchInput = styled.input`
   padding: 8px 10px;

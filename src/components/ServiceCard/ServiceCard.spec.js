@@ -24,7 +24,6 @@ describe('ServiceCard', () => {
     )
     userEvent.click(screen.getByTestId('cardcontainer'))
     expect(screen.getByText('Hey note 1!')).toBeInTheDocument()
-    it.todo('search for more!')
   })
   it('contains two buttons', () => {
     render(
@@ -55,5 +54,4 @@ describe('ServiceCard', () => {
     userEvent.click(screen.getByRole('button', { name: 'button-minus' }))
     expect(callBackMinus).toHaveBeenCalledTimes(1)
   })
-  it.todo('show that a value has changed')
 })

@@ -76,11 +76,11 @@ export default function ServicecardInfo({
 
 ServicecardInfo.propTypes = {
   id: PropTypes.string,
-  index: PropTypes.number.isRequired,
+  index: PropTypes.number,
   hours: PropTypes.number,
   notes: PropTypes.string,
-  setUsedCosts: PropTypes.func.isRequired,
-  currentCostsPerHour: PropTypes.number.isRequired,
+  setUsedCosts: PropTypes.func,
+  currentCostsPerHour: PropTypes.number,
   onAddingNewCosts: PropTypes.func,
   onDeleteEntry: PropTypes.func,
 }

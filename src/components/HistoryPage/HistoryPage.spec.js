@@ -3,9 +3,9 @@ import HistoryPage from './HistoryPage'
 import '@testing-library/jest-dom'
 
 const savedCosts = [
-  { id: 1, date: '01.01.2021', costs: 50 },
-  { id: 2, date: '02.02.2021', costs: 150 },
-  { id: 3, date: '03.03.2021', costs: 250 },
+  { id: '1', date: '01.01.2021', costs: '50' },
+  { id: '2', date: '02.02.2021', costs: '150' },
+  { id: '3', date: '03.03.2021', costs: '250' },
 ]
 
 describe('HistoryPage', () => {
@@ -18,5 +18,4 @@ describe('HistoryPage', () => {
     expect(screen.getByText('150')).toBeInTheDocument()
     expect(screen.getByText('250')).toBeInTheDocument()
   })
-  it.todo('calls a function on click')
 })

@@ -1,11 +1,13 @@
-import { render, screen } from '@testing-library/react'
+import { getByTestId, render, screen } from '@testing-library/react'
 import CalculationPage from './CalculationPage'
 import '@testing-library/jest-dom'
+import userEvent from '@testing-library/user-event'
+import Calculation from './CalculationPage'
 
 const services = [
-  { id: 1, name: 'one', costs: 50 },
-  { id: 2, name: 'two', costs: 150 },
-  { id: 3, name: 'three', costs: 250 },
+  { id: '1', name: 'one', costs: 50 },
+  { id: '2', name: 'two', costs: 150 },
+  { id: '3', name: 'three', costs: 250 },
 ]
 
 describe('CalculationPage', () => {
@@ -19,7 +21,6 @@ describe('CalculationPage', () => {
     render(<CalculationPage services={services} />)
     expect(screen.getByLabelText('menu')).toBeInTheDocument()
   })
-  it.todo('it opens the slide menu on click')
   it('renders a header', () => {
     render(<CalculationPage services={services} />)
     expect(screen.getByText('calcuFix')).toBeInTheDocument()
@@ -32,5 +33,4 @@ describe('CalculationPage', () => {
     rerender(<CalculationPage services={services} finalCosts={333} />)
     expect(screen.getByText('Endpreis: 333 €')).toBeInTheDocument()
   })
-  it.todo('adds the value of a card costs to the finalCosts')
 })

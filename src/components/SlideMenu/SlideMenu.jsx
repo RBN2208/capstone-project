@@ -17,8 +17,8 @@ export default function SlideMenu({ slideMenuState, toggleSlideMenu }) {
   )
 }
 SlideMenu.propTypes = {
-  slideMenuState: PropTypes.bool.isRequired,
-  toggleSlideMenu: PropTypes.func.isRequired,
+  slideMenuState: PropTypes.bool,
+  toggleSlideMenu: PropTypes.func,
 }
 
 const MenuBox = styled.div`

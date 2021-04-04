@@ -2,6 +2,7 @@ import styled from 'styled-components/macro'
 import { useState } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
+import exampleHistory from '../../exampleHistory.json'
 
 import { deleteEntry } from '../../services/deleteEntry'
 import useToggle from '../../hooks/useToggle'
@@ -45,11 +46,10 @@ export default function App() {
     },
   ])
 
-  const [lastCalculations, setLastCalculations] = useLocalStorage(
-    'lastCalculations',
-    []
-  )
-
+  const [
+    lastCalculations,
+    setLastCalculations,
+  ] = useLocalStorage('lastCalculations', [exampleHistory])
   const [finalCosts, setFinalCosts] = useState(0)
   const [slideMenu, toggleSlideMenu, closeSlideMenu] = useToggle(false)
   const [openSaveResult, setOpenSaveResult] = useState('')
@@ -148,6 +148,7 @@ export default function App() {
 
   function deleteServiceEntry(currentId) {
     deleteEntry(services, setServices, currentId)
+    setFinalCosts(0)
   }
 
   function deleteHistoryEntry(currentId) {

@@ -16,6 +16,7 @@ export default function NewService({ onAddNewService, onAbort }) {
         <label>
           Name der Dienstleistung:
           <input
+            autoComplete="off"
             required
             name="service"
             maxLength="20"
@@ -57,7 +58,9 @@ export default function NewService({ onAddNewService, onAbort }) {
   function handleSubmit(event) {
     event.preventDefault()
     const formElements = event.target.elements
-    const costsPerHour = formElements.costs.value.replace(/[^\d]/g, '')
+    const toRound = parseFloat(formElements.setcosts.value)
+    const costsPerHour = Math.round(toRound / 0.5) * 0.5
+
     const data = {
       name: formElements.service.value,
       costs: Number(costsPerHour) || Number(50),
