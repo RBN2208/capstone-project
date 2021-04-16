@@ -5,7 +5,7 @@ Often it´s hard to figure out at first sight, how much a work will cost. With t
 
 [View as mobile dummy](https://display-app-frame.vercel.app/)
 
-[App in Browsersize](capstone-project-zeta.vercel.app)
+[App in Browsersize](https://capstone-project-zeta.vercel.app/)
 
 ## Installation and usage
 
